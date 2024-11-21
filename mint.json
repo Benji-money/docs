@@ -5,6 +5,7 @@
     "dark": "/logo/benji-emblem-purple.svg",
     "light": "/logo/benji-emblem-purple.svg"
   },
+  "layout": "topnav",
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
@@ -15,29 +16,41 @@
       "to": "#07C983"
     }
   },
+  "modeToggle": {
+    "default": "light",
+    "isHidden": true
+  },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@withbenji.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Benji Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Pilot",
+    "url": "https://pilot-staging.withbenji.com/login"
   },
   "tabs": [
     {
+      "name": "Pilot",
+      "url": "pilot"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Essentials",
+      "url": "essentials"
     }
   ],
   
   "navigation": [
     {
-      "group": "Introduction",
+      "group": "Welcome",
       "pages": [
-        "introduction",
-        "authentication"
+        "pilot/overview",
+        "pilot/concepts"
       ]
     },
     {

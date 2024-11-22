@@ -56,8 +56,14 @@
     {
       "group": "Pilot",
       "pages": [
-        "pilot/markdown",
-        "pilot/navigation "
+        {
+          "group": "Partnerships",
+          "pages":[
+            "pilot/partnerships",
+            "pilot/navigation "
+          ]
+        }
+       
       ]
     },
     {

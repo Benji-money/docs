@@ -32,7 +32,7 @@
   },
   "tabs": [
     {
-      "name": "Pilot",
+      "name": "Platform",
       "url": "pilot"
     },
     {
@@ -50,7 +50,20 @@
       "group": "Welcome",
       "pages": [
         "pilot/overview",
-        "pilot/concepts"
+        "pilot/concepts "
+      ]
+    },
+    {
+      "group": "Pilot",
+      "pages": [
+        {
+          "group": "Partnerships",
+          "pages":[
+            "pilot/partnerships",
+            "pilot/navigation "
+          ]
+        }
+       
       ]
     },
     {

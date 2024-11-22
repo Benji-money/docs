@@ -1,0 +1,87 @@
+---
+title: 'Campaign Settings Page'
+description: 'Control all of your campaign settings'
+sidebarTitle: 'Campaign Settings'
+---
+
+The campaign page is where you can control all of your campaign settings. The page consists of 7 configurable sections : 
+
+## Details
+This is where you can configure all of the basc settings of your campaign
+![title](/images/pilot/campaign_details.png)
+
+In this section you can view or configure the following parameters : 
+
+
+| Parameter             | Description             | Possible values | 
+| --------------------- | ----------------------- | --------------- | 
+| <ResponseField name="ID" type="Numeric" required></ResponseField>      | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. |  A system generated number. This value is **Read Only**      | 
+| <ResponseField name="Name" type="string" required></ResponseField> | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign    |       | 
+| <ResponseField name="Description" type="string"></ResponseField> | A description for this campaign.  |  | 
+| <ResponseField name="Start Date/Time" type="date time"></ResponseField> | The start date of the specific campaign  | A valid future date and time to activate this campaign. | 
+| <ResponseField name="End Date/Time" type="date time"></ResponseField>            | The end date for this specific campaign. | A valid future date to automatically end this campaign | 
+| <ResponseField name="Image" type="file"></ResponseField>            | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image  | 
+
+## Campaign Type
+In this section you can configure the distinct campaign type for this campaign. 
+![title](/images/pilot/campaign_type.png)
+
+The Benji Platform supports 3 types of different campaign types :
+- **Earn Points** : A campaign that once triggered, and if the specific conditions are met, will distribute points to the connected user based on the base points distribution amount and any multipliers associated with the specific connected user.
+- **Pay with Points** : A campaign that once triggered, and if the specific conditions are met, will allow the users to redeem points to use to purchase items (or partial items) on the partner's online store. 
+- **Connect Only** : A status sharing only campaign , meant to connect member data between your and your partners accounts. In this campaign type there is no movement of points to or from members.
+
+## Campaign Trigger
+In this section you can configure the the action the trigger to activate the campaign. This action essentially triggers a rule engine, that validates the conditions associated with the campaign, and attaches any configured multipliers to the transaction if the connected member is eligible for a multiplier. 
+![title](/images/pilot/campaign_trigger.png)
+
+The Benji Platform currently supports the following trigger types :
+
+- **Spend Per Dollar** : Triggered on a transaction event on the partner's store.
+- **Registration** : Triggered when a member registers on the partner store and connects their account through the Benji platform to your loyalty program.
+- **Customer Referral** : Triggered when a connected member makes a succesfull referal on the partner store.
+- **Custom Action** : A custom action that can be triggered from anywhere on the partner's store. This is meant for use cases that are not yet natively supported by the platform and provides flexibility to create any type of campaign using Benji's APIs.
+
+<Tip>Triggers are especially useful when used in conjuction with Benji Drop In components. The drop in components can automatically render on the partner's online store based on these triggers and their respective placement</Tip>
+
+- **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Pay with Points type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
+
+## Campaign Conditions
+In this section you can configure the the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met.
+![title](/images/pilot/campaign_conditions.png)
+
+You can configure a limitless amount of conditions per campaign, and configure whether the association between each condition is an OR , meaning just one of the conditions need to be met, or as an AND, meaning all of the conditions need to met to satisfy the condition.
+For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
+
+**Customer Geography**
+<Expandable title="Customer Geography" >
+Will only be valid if the user meets the geographical condition.
+- **Operators** : **Is In** or **Is Not In** 
+- **Values** : Countries, US cities
+</Expandable>
+
+**Customer Total Spend**
+<Expandable title="Customer Spend" >
+Will only be valid if the user has exceeded a total spend amount since they connected their account. For instance, if the campaign distributes a certain amount of reward points after the member has purchased over $1000 in goods.
+- **Operators** : **Greater Than** 
+- **Values** : Numeric amount
+</Expandable>
+
+**Transaction Basket Size**
+<Expandable title="Basket Size" >
+Will only be valid if a member is making a purchase over or under a certain amount.
+- **Operators** : **Greater Than**,  **Less than**
+- **Values** : Numeric amount
+</Expandable>
+
+**Time Elapsed**
+<Expandable title="Basket Size" >
+Will only be valid if a defined amount of time has passed since they connected their accounts.
+- **Operators** : **Greater Than**,  **Less than**
+- **Values** : A time period (e.g. 1 day, 2 weeks, 3 months etc..)
+</Expandable>
+
+
+
+
+

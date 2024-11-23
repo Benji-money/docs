@@ -82,6 +82,54 @@ Will only be valid if a defined amount of time has passed since they connected t
 </Expandable>
 
 
+## Campaign Multipliers
+In this section you can configure certain conditions under which a certain member would get a multiplier boost on their earned or redeemed rewards for a specific transaction. <br/>
+For **Earn** type campaigns, this means the member, if the condition is met, will earn a multiplier on the base Points earned per dollar variable configured in the triggers section.<br/>
+For **Redeem** type campaigns, this means the member will get a multiplier on the conversion rate per dollar defined in the triggers section above.
+![title](/images/pilot/campaign_multipliers.png)
+
+You can configure a limitless amount of multipliers per campaign.
+For each multiplier, you can specify the multiplier amount, a customer attribute to validate (the condition) and the corresponding value of the customer attribute to validate. The following customer attributes are supported :
+
+**Customer Status**
+<Expandable title="Customer Status" >
+Will only be valid if the user is of a certain status.
+- **Operators** : **Is In** or **Is Not In** 
+- **Values** : Any one of your loyalty programs' status tiered configured in the Benji Platform.
+</Expandable>
+
+**Variable Attributes**
+<Expandable title="Customer Spend" >
+You can create multipliers based on any attribute returned as part of the Benji Platform integration with your platform. A typical example example would be Card Member status, # of total rewards earned throughout their membership etc.
+- **Operators** : **Is In** or **Is Not In** 
+- **Values** : Configrable values based on the variable attribute possible values configured in the settings section of the Benji Platform.
+</Expandable>
+
+
+## Campaign Goals
+In this section you can configure goals for the campaign. Benji will track the progress of the campaign and display how you are tracking towards the goals in the partnerships analytics page when you filter by campaign, as well as send out email notifications on how you are tracking towards these goals on a weekly basis, as well as ad hoc emails when you are about to hit the campaign goals.
+
+![title](/images/pilot/campaign_goals.png)
+
+The Benji platform supports settings of the following built in goals :
+
+**Registrations**
+<Expandable title="Registrations" >
+Specifies a goal of reaching or exceeding a certain amount of new registrations as a result of the partnership
+</Expandable>
+
+**Points Earned**
+<Expandable title="Points Earned" >
+Specifies a number representing the total amount of reward points earned throughout the campaign
+</Expandable>
+
+**Points Redeemed**
+<Expandable title="Points Earned" >
+Specifies a number representing the total amount of reward points redeemed throughout the campaign
+</Expandable>
+
+
+
 
 
 

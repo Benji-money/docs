@@ -1,0 +1,22 @@
+---
+title: 'Create a token to initialize the SDK'
+description: 'Create a token to initialize an instance of the Benji Connect SDK.'
+sidebarTitle: "Create Token"
+api: 'POST https://authservice.withbenji.com/verify/token/create'
+---
+
+<ParamField body="user_external_id" type="string" required>
+  A unique identifier associated with the user connecting their loyalty reward program
+</ParamField>
+<ParamField body="display_name" type="string">
+  The name of your store you wish to be displayed in the Benji Connect flow. If this is not passed, the name configured on the Benji platform will be used
+</ParamField>
+<ParamField body="user_ip" type="string">
+  The IP of the user currently connecting. Note that this is required if there are any geo specific conditions applied to the partner campaigns.
+</ParamField>
+<ParamField body="partner_ids" type="string array">
+  For marketplace only scenarios, if you want to filter specific partners, pass an array of their respective identifiers on the Benji Platform. The full list if Benji Partner IDs can be found in the partners page on the Benji dashboard, Pilot.
+</ParamField>
+
+
+

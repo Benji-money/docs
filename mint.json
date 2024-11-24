@@ -16,6 +16,14 @@
       "to": "#07C983"
     }
   },
+  
+    "api": {
+      "baseUrl": ["https://mintlify.com/api", "https://mintlify.com/api2"],
+      "auth": {
+        "method": "bearer" 
+      }
+    
+  },
   "modeToggle": {
     "default": "light",
     "isHidden": true
@@ -36,13 +44,14 @@
       "url": "pilot"
     },
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "Benji Connect",
+      "url": "connect"
     },
     {
-      "name": "Essentials",
-      "url": "essentials"
+      "name": "API Reference",
+      "url": "api-reference"
     }
+    
   ],
   
   "navigation": [
@@ -68,14 +77,14 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Benji Connect",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "connect/introduction",
+        "connect/create_token",
+        "connect/initialization",
+        "connect/settings",
+        "connect/navigation",
+        "connect/reusable-snippets"
       ]
     },
     {

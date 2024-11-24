@@ -82,7 +82,7 @@
         "connect/introduction",
         "connect/create_token",
         "connect/initialization",
-        "connect/settings",
+        "connect/methods",
         "connect/navigation",
         "connect/reusable-snippets"
       ]

@@ -18,5 +18,38 @@ api: 'POST https://authservice.withbenji.com/verify/token/create'
   For marketplace only scenarios, if you want to filter specific partners, pass an array of their respective identifiers on the Benji Platform. The full list if Benji Partner IDs can be found in the partners page on the Benji dashboard, Pilot.
 </ParamField>
 
+### Return values 
+<ResponseField name="token" type="string" required>
+  The created token token to use when initializing the Benji Connect SDK
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02"
+    }
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_partner",
+  "message": "Invalid key, or key is not authorized to make this call"
+}
+```
+
+```json 500
+{
+  "error": "unexpected_error",
+  "message": "An unexpected error has occured"
+}
+```
+</ResponseExample>
+
+
+
+
 
 

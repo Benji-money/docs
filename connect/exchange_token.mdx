@@ -1,0 +1,65 @@
+---
+title: 'Exchange the Connect Token'
+description: 'Exchange the short lived toke returned from the SDK to a long living access token and refresh token using the Benji Platform API'
+sidebarTitle: "Exchange Token"
+api: 'POST https://authservice.withbenji.com/access/token/exchange'
+---
+
+<ParamField body="exchange_token" type="string" required>
+  The [token received](/connect/methods) from the onSuccess callback method specified as part of the [sdk initialization](/connect/initialization) flow
+</ParamField>
+
+
+### Return values 
+<ResponseField name="user_id" type="integer" required>
+  The Benji Platform ID associated with the user.
+</ResponseField>
+<ResponseField name="merchant_id" type="integer" required>
+  Your system ID as specified on the Benji Platform
+</ResponseField>
+<ResponseField name="token_data" type="integer" required>
+  An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
+  ```json
+  {
+    "access_token": "<the access token to use in Benji Platform API calls",
+    "refresh_token": "<the token to use when the access token expires",
+    "access_token-expires_at": "<a datetime string value indicating when the access token will expire"
+  }
+  ```
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "access_token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02",
+        "refresh_token": "05tghegts-aa81-sgte-hgte-u8nhgbvgtio",
+        "access_token_expires_at": "Tue, 22 Oct 2024 21:57:02 GMT"
+    }
+}
+```
+
+```json 401
+{
+  "error": "invalid_exchange_token",
+  "message": "Invalid exchange token"
+}
+```
+
+```json 401
+{
+  "error": "expired_exchange_token",
+  "message": "The exchange token has expired"
+}
+```
+</ResponseExample>
+
+<Tip>Access token are typically valid for 90 days. You can refresh an access token either before it expires proactively, or after calling an API and getting an expired_token 401 status code</Tip>
+<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a succesfull user connect flow. The exchange token is valid for 15 minutes after the succesfull callback flow</Warning>
+
+
+
+
+
+

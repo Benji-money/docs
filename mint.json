@@ -83,8 +83,7 @@
         "connect/create_token",
         "connect/initialization",
         "connect/methods",
-        "connect/navigation",
-        "connect/reusable-snippets"
+        "connect/exchange_token"
       ]
     },
     {

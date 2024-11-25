@@ -1,0 +1,89 @@
+---
+title: 'Get Campaign'
+description: 'Endpoint to retrieve user basic data, as well as their linked partners and merchants'
+sidebarTitle: 'Get Campaign'
+api: 'GET https://campaignservice.withbenji.com/campaigns/{id}'
+---
+
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
+<ParamField path="id" type="integer" required>
+  The Benji Platform ID of the campaign
+</ParamField>
+
+### Return values 
+<ResponseField name="campaign" type="object" >
+  A campaign object property
+  <Expandable title="properties" defaultOpen="true">
+    <ResponseField name="id" type="integer">Benji Platform campaign identifier</ResponseField>
+    <ResponseField name="name" type="string">The campaign display name as configured on the Benji Platform</ResponseField>
+    <ResponseField name="description" type="string">The campaign's description as configured on the Benji platform</ResponseField>
+    <ResponseField name="campaign_logo" type="string">URL of a marketing logo associated with the campaign</ResponseField>
+    <ResponseField name="campaign_type" type="integer">
+    Integer representing an enum of one of the following values : 
+        <Expandable title="possible campaign type values" type="enum">
+            - **EARN** : Indicatgin an earn rewards campaign type <br/>
+            - **REDEEM** : Indicating a redeem rewards campaign type  <br/>
+            - **CONNECT_ONLY** : Indicating a status sharing campaign with no ability to earn or redeem rewards
+        </Expandable>
+    </ResponseField>
+    <ResponseField name="merchant_id" type="integer">The ID of the merchant partner associated with this campaign in the Benji Platform</ResponseField>
+    <ResponseField name="partner_id" type="integer">The ID of the partner associated with this campaign in the Benji Platform</ResponseField>
+    <ResponseField name="base_reward" type="integer">The base reward conversion rate for earn and redeem type campaigns</ResponseField>
+    <ResponseField name="start_date" type="datetime">The date this campaign will go live</ResponseField>
+    <ResponseField name="end_date" type="datetime">The date this campaign will end</ResponseField>
+    <ResponseField name="total_rewards" type="integer">The total amount of rewards earned or redeemed through this campaign</ResponseField>
+    <ResponseField name="is_active" type="integer">Integer indicating if this campaign has been activated, 1 specifying active and 0 specifying not active</ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "campaign": {
+            "base_reward": 1,
+            "campaign_logo": "testcampaign.png",
+            "campaign_type": 1,
+            "created_date": "2024-11-20T00:30:57.256493+00:00",
+            "description": "This is a test campaign",
+            "end_date": null,
+            "id": 1,
+            "is_active": 1,
+            "is_deleted": 0,
+            "merchant_id": 1,
+            "name": "Test Campaign",
+            "owner_id": 5,
+            "partner_id": 3,
+            "start_date": "2024-11-14T03:18:06+00:00",
+            "total_rewards": 100,
+            "trigger_type": 1
+        }
+    }
+}
+```
+
+```json 401
+{
+  "error": "invalid_token",
+  "message": "Invalid token"
+}
+```
+
+```json 404
+{
+  "error": "campaign_does_not_exist",
+  "message": "The campaign does not exist"
+}
+```
+</ResponseExample>
+
+<Tip>Note that you will only receive data that you as a loyalty patner or merchant partner are allowed to see based on the permissions in the access token you provide to the API</Tip>
+
+
+
+
+
+
+

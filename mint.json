@@ -99,6 +99,12 @@
       ]
     },
     {
+      "group": "Campaigns",
+      "pages": [
+        "api-reference/endpoint/campaigns/get"
+      ]
+    },
+    {
       "group": "Earn Rewards",
       "pages": [
         "api-reference/endpoint/get",

@@ -1,12 +1,18 @@
 ---
-title: 'Exchange the Connect Token'
-description: 'Exchange the short lived toke returned from the SDK to a long living access token and refresh token using the Benji Platform API'
-sidebarTitle: "Exchange Token"
-api: 'POST https://authservice.withbenji.com/access/token/exchange'
+title: 'Refresh a user access token'
+description: 'Silently refresh the user access token for a specific user without requiring them to reconnect their account'
+sidebarTitle: "Refresh Token"
+api: 'GET https://authservice.withbenji.com/access/token/refresh'
 ---
 
-<ParamField body="exchange_token" type="string" required>
-  The [token received](/connect/methods) from the onSuccess callback method specified as part of the [sdk initialization](/connect/initialization) flow
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
+<ParamField body="refresh_token" type="string" required>
+  The refresh token received from the [exchange token](/connect/exchange_token) API flow or previsouly received from refreshing an access token form this API
+</ParamField>
+
+<ParamField body="access_token" type="string" required>
+  The current access token you are refreshing
 </ParamField>
 
 
@@ -20,8 +26,8 @@ api: 'POST https://authservice.withbenji.com/access/token/exchange'
 <ResponseField name="token_data" type="object" required>
 An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
     <Expandable title="properties" defaultOpen="true">
-        <ResponseField name="access_token" type="string" required>Access Token to use when making user oriented requests to the Benji Platform APIs </ResponseField>
-        <ResponseField name="refresh_token" type="string" required>Refresh Token to [use](/api-reference/endpoint/authentication/refresh) on order to silently obtain a new access token when it expires </ResponseField>
+        <ResponseField name="access_token" type="string" required>A new access token to use when making user oriented requests to the Benji Platform APIs </ResponseField>
+        <ResponseField name="refresh_token" type="string" required>Refresh Token to use on order to silently obtain a new access token when it expires </ResponseField>
         <ResponseField name="access_token_expires_at" type="string" required>A string representing a datetime of when this access token will expire </ResponseField>
     </Expandable>
 </ResponseField>
@@ -42,23 +48,26 @@ An object representing the access_token, refresh_token to use when using the Ben
 }
 ```
 
-```json 401
+```json 400
 {
-  "error": "invalid_exchange_token",
-  "message": "Invalid exchange token"
+  "error": "invalid_token",
+  "message": "Invalid refresh or access token"
 }
 ```
 
+
 ```json 401
 {
-  "error": "expired_exchange_token",
-  "message": "The exchange token has expired"
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
 }
 ```
+
+
 </ResponseExample>
 
 <Tip>Access token are typically valid for 90 days. You can refresh an access token either before it expires proactively, or after calling an API and getting an expired_token 401 status code</Tip>
-<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a succesfull user connect flow. The exchange token is valid for 15 minutes after the succesfull callback flow</Warning>
+
 
 
 

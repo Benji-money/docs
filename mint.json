@@ -2,11 +2,11 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Benji",
   "logo": {
-    "dark": "/logo/benji-emblem-purple.svg",
-    "light": "/logo/benji-emblem-purple.svg"
+    "dark": "/logo/benji-docs-logo.svg",
+    "light": "/logo/benji-docs-logo.svg"
   },
   "layout": "topnav",
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/benji-emblem-purple.svg",
   "colors": {
     "primary": "#9900ff",
     "light": "#07C983",
@@ -16,6 +16,7 @@
       "to": "#9900ff"
     }
   },
+  
   
     "api": {
       "baseUrl": ["https://mintlify.com/api", "https://mintlify.com/api2"],

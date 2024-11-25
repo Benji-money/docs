@@ -1,0 +1,116 @@
+---
+title: 'Get User Status Data'
+description: 'Endpoint to retrieve user basic data, as well as their linked partners and merchants'
+sidebarTitle: 'Get User Data'
+api: 'GET https://userservice.withbenji.com/users/{id}'
+---
+
+<ParamField path="id" type="integer" required>
+  The Benji Platform ID of the user
+</ParamField>
+
+### Return values 
+<ResponseField name="user" type="User Object" >
+  A user object property
+  <Expandable title="properties">
+    <ResponseField name="id" type="integer">Benji Platform user identifier</ResponseField>
+    <ResponseField name="first_name" type="string">The user's first name</ResponseField>
+    <ResponseField name="last_name" type="string">The user's last name</ResponseField>
+    <ResponseField name="merchants" type="array">
+    An array of merchants that the user is connected to
+        <Expandable title="items">
+            
+                <Expandable title="properties">
+                    <ResponseField name="merchant_id" type="integer">The ID of the merchant partner in the Benji Platform</ResponseField>
+                    <ResponseField name="user_id" type="integer">The ID of the user in the Benji Platform</ResponseField>
+                    <ResponseField name="external_id" type="string">The user's id on the specific merchant</ResponseField>
+                    <ResponseField name="total_rewards_earned" type="integer">The total amount of merchant specific rewards earned on the Benji Platform</ResponseField>
+                    <ResponseField name="total_rewards_redeemed" type="integer">The total amount of merchant specific rewards redeemed on the Benji Platform</ResponseField>
+                    <ResponseField name="created_date" type="datetime">The date this user was associated to the merchant partner on the Benji platform</ResponseField>
+                </Expandable>
+            
+        </Expandable>
+  </ResponseField>
+    <ResponseField name="partner_status_tiers" type="array">
+    An array of user partner status tier objects
+        <Expandable title="items">
+            
+                <Expandable title="properties">
+                    <ResponseField name="partner_id" type="integer">The ID of the partner in the Benji Platform</ResponseField>
+                    <ResponseField name="partner_status_tier_id" type="integer">The ID of the partner status tier in the Benji Platform</ResponseField>
+                    <ResponseField name="user_id" type="integer">The ID of the user in the Benji Platform</ResponseField>
+                    <ResponseField name="external_id" type="string">The user's loyalty program identifier</ResponseField>
+                    <ResponseField name="total_rewards" type="integer">The current rewards amount in the uer's account, regardless of Benji originated transactions</ResponseField>
+                    <ResponseField name="total_rewards_earned" type="integer">The total amount of partner specific rewards earned on the Benji Platform</ResponseField>
+                    <ResponseField name="total_rewards_redeemed" type="integer">The total amount of partner specific rewards redeemed on the Benji Platform</ResponseField>
+                     <ResponseField name="created_date" type="datetime">The date this user was associated to the loyalty partner on the Benji platform</ResponseField>
+                </Expandable>
+            
+        </Expandable>
+  </ResponseField>
+</Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "user": {
+            "created_date": "2024-08-05T16:54:35.804289+00:00",
+            "email": "test@test.com",
+            "first_name": "Test",
+            "last_name": "User",
+            "id": 1,
+            "merchants": [
+                {
+                    "created_date": "2024-08-23T19:46:01.684468+00:00",
+                    "external_id": "7267281436852",
+                    "id": 1,
+                    "merchant_id": 1,
+                    "total_rewards_earned": 266,
+                    "total_rewards_redeemed": 0,
+                    "user_id": 1
+                }
+            ],
+            "partner_status_tiers": [
+                {
+                    "created_date": "2024-08-05T17:31:43.002778+00:00",
+                    "external_id": "123456789",
+                    "id": 1,
+                    "partner_id": 1,
+                    "partner_status_tier_id": 1,
+                    "total_rewards": 19700,
+                    "total_rewards_earned": 0,
+                    "total_rewards_redeemed": 0,
+                    "user_id": 1
+                }
+            ]
+        }
+    }
+}
+```
+
+```json 401
+{
+  "error": "invalid_token",
+  "message": "Invalid token"
+}
+```
+
+```json 404
+{
+  "error": "user_does_not_exist",
+  "message": "The user does not exist"
+}
+```
+</ResponseExample>
+
+<Tip>Noe that you will only receive data that you as a loyalty patner or merchant partner are allowed to see based on the permissions in the access token you provide to the API</Tip>
+
+
+
+
+
+
+

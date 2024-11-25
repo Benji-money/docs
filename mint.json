@@ -93,7 +93,29 @@
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Member Status",
+      "pages": [
+        "api-reference/endpoint/status/get"
+      ]
+    },
+    {
+      "group": "Earn Rewards",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "Redeem Rewards",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "Webhooks",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",

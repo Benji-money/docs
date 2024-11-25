@@ -106,6 +106,12 @@
       ]
     },
     {
+      "group": "Transactions",
+      "pages": [
+        "api-reference/endpoint/transactions/get"
+      ]
+    },
+    {
       "group": "Earn Rewards",
       "pages": [
         "api-reference/endpoint/get",

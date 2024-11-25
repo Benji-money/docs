@@ -94,10 +94,17 @@ api: 'GET https://userservice.withbenji.com/users/{id}'
 }
 ```
 
-```json 401
+```json 400
 {
   "error": "invalid_token",
   "message": "Invalid token"
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
 }
 ```
 

@@ -6,7 +6,7 @@
     "light": "/logo/benji-docs-logo.svg"
   },
   "layout": "topnav",
-  "favicon": "/logo/benji-emblem-purple.svg",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#9900ff",
     "light": "#07C983",

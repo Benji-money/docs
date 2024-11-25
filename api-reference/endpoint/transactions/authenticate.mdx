@@ -1,0 +1,65 @@
+---
+title: 'Create a transaction token'
+description: 'Create a token to authenticate the transaction and use in the create transaction API'
+sidebarTitle: "Authenticate"
+api: 'POST https://rewardservice.withbenji.com/reward_transaction/auth'
+---
+
+<ParamField body="transaction_amount" type="integer" required>
+  The total amount of the transaction.
+</ParamField>
+<ParamField body="external_transaction_id" type="string" required>
+  The unique identifier in your system of the order transaction.
+</ParamField>
+<ParamField body="campaign_id" type="integer">
+  The ID of the [campaign](/api-reference/endpoint/campaigns/get) associated with the transaction. Note that in cases of a single running campaign, this field is optional.
+</ParamField>
+<ParamField body="partner_id" type="integer">
+  For marketplace only scenarios, if the user pre selected a partner to earn or redeem points on. When not passed, the user's default loyalty partner will be used.
+</ParamField>
+
+### Return values 
+<ResponseField name="transaction_token" type="string" required>
+  The transaction token to use when calling the create transaction API
+</ResponseField>
+<ResponseField name="authentication_status" type="integer" required>
+    Integer representing an enum of one of the following transaction authentication status values : 
+        <Expandable title="possible transaction authentication status values" type="enum">
+            - **AUTHENTICATED (1)** : Transaction is authenticated <br/>
+            - **INSUFFICIENT_REWARDS_AMOUNT (2)** : Member does not have sufficient rewards for the transaction  <br/>
+            - **MEMBER_NOT_EXISTS (3)** : The user does not have a valid loyalty account with the partner currently  <br/>
+            - **ERROR (4)** : General error when authenticating the transaction
+        </Expandable>
+    </ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "authentication_id": "016bb1f6-ab4e-11ef-a1a8-0a58a9feac02",
+        "authentication_status": 1
+    }
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_user",
+  "message": "Invalid key, or key is not authorized to make this call"
+}
+```
+
+```json 500
+{
+  "error": "unexpected_error",
+  "message": "An unexpected error has occured"
+}
+```
+</ResponseExample>
+
+
+
+
+
+

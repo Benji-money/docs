@@ -1,0 +1,18 @@
+---
+title: 'Earn reward flow overview'
+description: 'An overview of the earn reward flow on the Benji Platform.'
+sidebarTitle: 'Overview'
+---
+
+## Overview
+
+Creating an **earn** or **redeem** rewards transaction using the Benji Platform APIs involve the following simple steps : 
+- **Obtain a valid access token** for the user creating the transacton by connecting the user to their loyalty reward partner by using the [Benji Connect SDK](/connect/introduction)
+- **Get a short lived transaction token** from the Benji Platform by calling the [authenticate transaction API](/api-reference/endpoint/transactions/authenticate). Note that this token is valid for 10 minutes once created.
+- **Call the create transaction endpoint** using the transaction token received form the previous step.
+- (Optional) **Listen to any webhooks** to receive updates on the transaction lifecycle
+
+<Tip>Checkout the Benji drop in components library for pre defined components that encapsulate this flow on your checkout pages</Tip>
+
+
+

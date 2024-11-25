@@ -1,18 +1,25 @@
 ---
-title: 'Get Campaign'
-description: 'Endpoint to retrieve campaign basic data'
-sidebarTitle: 'Get Campaign'
-api: 'GET https://campaignservice.withbenji.com/campaigns/{id}'
+title: 'List Campaigns'
+description: 'Endpoint to retrieve all campaigns associated with your account'
+sidebarTitle: 'List Campaigns'
+api: 'GET https://campaignservice.withbenji.com/campaigns'
 ---
 
 <Note>The Bearer token to be used on this API is your **partner access token**</Note>
 
-<ParamField path="id" type="integer" required>
-  The Benji Platform ID of the campaign
+<ParamField query="campaign_types" type="string" required>
+ Comma separated list of possible campaign type values : 
+        <Expandable title="possible campaign type values" type="enum">
+            - **EARN (1)** : Indicating an earn rewards campaign type <br/>
+            - **REDEEM (2)** : Indicating a redeem rewards campaign type  <br/>
+            - **CONNECT_ONLY (3)** : Indicating a status sharing campaign with no ability to earn or redeem rewards
+        </Expandable>
 </ParamField>
 
 ### Return values 
-<ResponseField name="campaign" type="object" >
+<ResponseField name="campaigns" type="array" >
+An Array of campaign objects associated with your account
+<Expandable title="items">
   A campaign object property
   <Expandable title="properties" defaultOpen="true">
     <ResponseField name="id" type="integer">Benji Platform campaign identifier</ResponseField>
@@ -20,7 +27,7 @@ api: 'GET https://campaignservice.withbenji.com/campaigns/{id}'
     <ResponseField name="description" type="string">The campaign's description as configured on the Benji platform</ResponseField>
     <ResponseField name="campaign_logo" type="string">URL of a marketing logo associated with the campaign</ResponseField>
     <ResponseField name="campaign_type" type="integer">
-    Integer representing an enum of one of the following campaign type values : 
+    Integer representing an enum of one of the following values : 
         <Expandable title="possible campaign type values" type="enum">
             - **EARN (1)** : Indicating an earn rewards campaign type <br/>
             - **REDEEM (2)** : Indicating a redeem rewards campaign type  <br/>
@@ -43,6 +50,7 @@ api: 'GET https://campaignservice.withbenji.com/campaigns/{id}'
     <ResponseField name="end_date" type="datetime">The date this campaign will end</ResponseField>
     <ResponseField name="total_rewards" type="integer">The total amount of rewards earned or redeemed through this campaign</ResponseField>
     <ResponseField name="is_active" type="integer">Integer indicating if this campaign has been activated, 1 specifying active and 0 specifying not active</ResponseField>
+  </Expandable>
   </Expandable>
 </ResponseField>
 

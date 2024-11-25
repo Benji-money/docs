@@ -101,7 +101,8 @@
     {
       "group": "Campaigns",
       "pages": [
-        "api-reference/endpoint/campaigns/get"
+        "api-reference/endpoint/campaigns/get",
+        "api-reference/endpoint/campaigns/list"
       ]
     },
     {

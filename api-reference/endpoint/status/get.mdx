@@ -23,7 +23,7 @@ api: 'GET https://userservice.withbenji.com/users/{id}'
     An array of merchants that the user is connected to
         <Expandable title="items">
             
-                <Expandable title="properties">
+                <Expandable title="properties" defaultOpen="true">
                     <ResponseField name="merchant_id" type="integer">The ID of the merchant partner in the Benji Platform</ResponseField>
                     <ResponseField name="user_id" type="integer">The ID of the user in the Benji Platform</ResponseField>
                     <ResponseField name="external_id" type="string">The user's id on the specific merchant</ResponseField>
@@ -38,7 +38,7 @@ api: 'GET https://userservice.withbenji.com/users/{id}'
     An array of user partner status tier objects
         <Expandable title="items">
             
-                <Expandable title="properties">
+                <Expandable title="properties" defaultOpen="true">
                     <ResponseField name="partner_id" type="integer">The ID of the partner in the Benji Platform</ResponseField>
                     <ResponseField name="partner_status_tier_id" type="integer">The ID of the partner status tier in the Benji Platform</ResponseField>
                     <ResponseField name="user_id" type="integer">The ID of the user in the Benji Platform</ResponseField>

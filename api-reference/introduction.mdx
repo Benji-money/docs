@@ -11,20 +11,38 @@ description: 'Example section for showcasing API endpoints'
 
 The Benji Platform APIs are REST based APIs, giving you access to trigger Earn and Redeem points campaigns as they are configured on the Benji Platform, get user member loyalty data to display and use on your system and retrieve campaign information to display on your user flow.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+<CardGroup cols={2}>
+  <Card
+    title="Token Endpoints"
+    href="/api-reference/endpoint/authentication/refresh"
+  >
+    Refresh expired access tokens to silently authenticate members
+  </Card>
+  <Card
+    title="Member Status Endpoints"
+    href="/api-reference/endpoint/status/get"
+  >
+    Interact with member data and status
+  </Card>
+  <Card
+    title="Campaign Endpoints"
+    href="/api-reference/endpoint/campaigns/get"
+  >
+    Interact with campaign data
+  </Card>
+  <Card
+    title="Transaction Endpoints"
+    href="/api-reference/endpoint/transactions/overview"
+  >
+    Create and retrieve user transactions
+  </Card>
+  <Card
+    title="Webhooks"
+    href="/api-reference/webhooks/overview"
+  >
+    Subscribe to events to get updated on users, campaigns and transactions in near real time.
+  </Card>
+</CardGroup>
 
-## Authentication
 
-All API endpoints are authenticated using Bearer tokens. There are 2 types of bearer tokens supported :
-- **User based access tokens**, to initiate user based activites such as earn, reddem and get status actions.
-- **Partner tokens**, which you can obtain as part of your onboarding process and can view on your developer settings page on Pilot, for all non user based interactions like retrieving campaign and partner information
 
-<ParamField header="Bearer <token>" type="string" required>
-  Partner or User token
-</ParamField>

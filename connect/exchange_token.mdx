@@ -5,6 +5,8 @@ sidebarTitle: "Exchange Token"
 api: 'POST https://authservice.withbenji.com/access/token/exchange'
 ---
 
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
 <ParamField body="exchange_token" type="string" required>
   The [token received](/connect/methods) from the onSuccess callback method specified as part of the [sdk initialization](/connect/initialization) flow
 </ParamField>

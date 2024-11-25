@@ -1,0 +1,13 @@
+---
+title: 'API Authentication'
+description: 'Authenticating your API requests with the Benji Platform APIs'
+sidebarTitle: 'Authentication'
+---
+
+All API endpoints are authenticated using Bearer tokens. There are 2 types of bearer tokens supported :
+- **User based access tokens**, to initiate user based activites such as earn, reddem and get status actions.
+- **Partner tokens**, which you can obtain as part of your onboarding process and can view on your developer settings page on Pilot, for all non user based interactions like retrieving campaign and partner information
+
+<ParamField header="Bearer <token>" type="string" required>
+  Partner or User token
+</ParamField>

@@ -89,11 +89,12 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/authentication"
       ]
     },
     {
-      "group": "Authentication",
+      "group": "Tokens",
       "pages": [
         "api-reference/endpoint/authentication/refresh"
       ]

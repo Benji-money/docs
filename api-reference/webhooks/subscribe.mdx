@@ -1,0 +1,75 @@
+---
+title: 'Subscribe to a webhook event'
+description: 'Subscribe to a specific event or all entity events on the Benji Platform'
+sidebarTitle: "Subscribe"
+api: 'POST https://notificationservice.withbenji.com/webhooks/subscribe'
+---
+
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
+<ParamField body="endpoint" type="string" required>
+  Your endpoint URL that will receive the event webhooks
+</ParamField>
+<ParamField body="event_name" type="string">
+  The event you are subscribing to. Note that if an event is not specified, all events for the entity type specified will be subscribed to.
+</ParamField>
+<ParamField body="entity_type" type="integer">
+    Integer representing an enum of one of the following entity type values to subscribe to : 
+        <Expandable title="possible entity type values" type="enum">
+            - **USER (1)** : Indicating a user entity <br/>
+            - **CAMPAIGN (2)** : Indicating a campaign entity  <br/>
+            - **TRANSACTION (3)** : Indicating a reward transaction entity
+        </Expandable>
+</ParamField>
+
+<Note>If you do not specify an entity type or an event, you will be subscribing to all webhook events with the provided endpoint</Note>
+
+### Return values 
+<ResponseField name="subscribed" type="boolean" required>
+  A true or false value indicating whether the subscription was succesfull.
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "subscribed": true
+    }
+}
+```
+
+```json 400
+{
+  "error": "invalid_subscription",
+  "message": "Invalid entity or event"
+}
+```
+
+```json 400
+{
+  "error": "subscription_already_exists",
+  "message": "A subscription already exists for this event"
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_partner",
+  "message": "Invalid key, or key is not authorized to make this call"
+}
+```
+
+```json 500
+{
+  "error": "unexpected_error",
+  "message": "An unexpected error has occured"
+}
+```
+</ResponseExample>
+
+
+
+
+
+

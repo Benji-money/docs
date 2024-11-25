@@ -118,7 +118,9 @@
     {
       "group": "Webhooks",
       "pages": [
-        "api-reference/webhooks/overview"
+        "api-reference/webhooks/overview",
+        "api-reference/webhooks/subscribe",
+        "api-reference/webhooks/update"
       ]
     }
   ],

@@ -36,7 +36,7 @@ All webhooks contain the following header value. This header value contains your
 ```
 ### Webhook Flow
 A typical webhook flow requires the following steps :
-- **Subscribe to an event** and register your webhook endpoint. The Benji Platform will send any updates to this event to this endpoint using a **POST** request.
+- **[Subscribe to an event](/api-reference/webhooks/subscribe)** and register your webhook endpoint. The Benji Platform will send any updates to this event to this endpoint using a **POST** request.
 - **Listen to any webhooks** on your registered webhook event endpoint
 - **Call the Benji Platform API** to retrieve additional information on the entity based on the event and the entity_type parameters in the webhook.
 

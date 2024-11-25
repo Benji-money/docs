@@ -17,8 +17,13 @@ api: 'POST https://authservice.withbenji.com/access/token/exchange'
 <ResponseField name="merchant_id" type="integer" required>
   Your system ID as specified on the Benji Platform
 </ResponseField>
-<ResponseField name="token_data" type="integer" required>
-  An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
+<ResponseField name="token_data" type="object" required>
+An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
+    <Expandable title="properties" defaultOpen="true">
+        <ResponseField name="access_token" type="string" required>Access Token to use when making user oriented requests to the Benji Platform APIs </ResponseField>
+        <ResponseField name="refresh_token" type="string" required>Refresh Token to use on order to silently obtain a new access token when it expires </ResponseField>
+        <ResponseField name="access_token_expires_at" type="string" required>A string representing a datetime of when this access token will expire </ResponseField>
+    </Expandable>
 </ResponseField>
 
 <ResponseExample>
@@ -29,9 +34,9 @@ api: 'POST https://authservice.withbenji.com/access/token/exchange'
         "user_id": 1,
         "merchant_id": 1,
         "token_data": {
-        "access_token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02",
-        "refresh_token": "05tghegts-aa81-sgte-hgte-u8nhgbvgtio",
-        "access_token_expires_at": "Tue, 22 Oct 2024 21:57:02 GMT"
+            "access_token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02",
+            "refresh_token": "05tghegts-aa81-sgte-hgte-u8nhgbvgtio",
+            "access_token_expires_at": "Tue, 22 Oct 2024 21:57:02 GMT"
         }
     }
 }

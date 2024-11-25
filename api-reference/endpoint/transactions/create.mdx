@@ -5,6 +5,8 @@ sidebarTitle: "Create Transaction"
 api: 'POST https://rewardservice.withbenji.com/reward_transaction/create'
 ---
 
+<Note>The Bearer token to be used on this API is a **user based access token**</Note>
+
 <ParamField body="reward_authentication_token" type="string" required>
   The token received from the [authenticate reward transaction](/api-reference/endpoint/transactions/authenticate) API call.
 </ParamField>
@@ -92,7 +94,7 @@ An array of reward transaction objects created with this transaction
 
 </ResponseExample>
 
-<Tip>Make sure to store the retruned reward transaction ID. You can use this ID to get the status of the reward transaction when receiving reward_transaction_update webhooks</Tip>
+<Tip>Make sure to store the returned reward transaction ID. You can use this ID to get the status of the reward transaction when receiving reward_transaction_update webhooks</Tip>
 <Warning>The transaction authentication token is valid for 10 minutes.</Warning>
 
 

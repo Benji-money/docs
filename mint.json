@@ -6,14 +6,14 @@
     "light": "/logo/benji-emblem-purple.svg"
   },
   "layout": "topnav",
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "colors": {
-    "primary": "#0D9373",
+    "primary": "#9900ff",
     "light": "#07C983",
     "dark": "#0D9373",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#9900ff",
+      "to": "#9900ff"
     }
   },
   
@@ -35,7 +35,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Pilot",
+    "name": "Go to Pilot",
     "url": "https://pilot-staging.withbenji.com/login"
   },
   "tabs": [

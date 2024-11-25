@@ -1,19 +1,20 @@
 ---
-title: 'Get Reward Transaction'
-description: 'Endpoint to retrieve information regarding a reward transaction'
-sidebarTitle: 'Get Transaction'
-api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
+title: 'Create a transaction'
+description: 'Create a transaction using the [reward transaction authentication token](/api-reference/endpoint/transactions/authenticate) from the previous step.'
+sidebarTitle: "Create Transaction"
+api: 'POST https://rewardservice.withbenji.com/reward_transaction/create'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**</Note>
-
-<ParamField path="id" type="integer" required>
-  The Benji Platform ID of the reward transaction
+<ParamField body="reward_authentication_token" type="string" required>
+  The token received from the [authenticate reward transaction](/api-reference/endpoint/transactions/authenticate) API call.
 </ParamField>
 
+
 ### Return values 
-<ResponseField name="reward_transaction" type="object" >
-  A reward_transaction object property
+<ResponseField name="reward_transactions" type="array" >
+An array of reward transaction objects created with this transaction
+<Expandable title="items" defaultOpen="true">
+  A reward transaction object property
   <Expandable title="properties" defaultOpen="true">
     <ResponseField name="id" type="integer">Benji Platform reward transaction identifier</ResponseField>
     <ResponseField name="partner_id" type="integer">The ID of the partner associated with this transaction in the Benji Platform</ResponseField>
@@ -41,7 +42,7 @@ api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
     <ResponseField name="error_reason" type="string">If status is FAILED, the reason why this transaction was rejected</ResponseField>
     <ResponseField name="last_update_date" type="datetime">Datetime indicating the last status change.For instance, is the status is CONFIRMED, this date will indicate when the transaction was confirmed</ResponseField>
     <ResponseField name="created_date" type="datetime">The transaction date</ResponseField>
-    
+    </Expandable>
   </Expandable>
 </ResponseField>
 
@@ -50,7 +51,7 @@ api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
 {
     "code": "ok",
     "data": {
-        "reward_transaction": {
+        "reward_transactions": [{
             "created_date": "2024-08-23T19:55:12.015047+00:00",
             "last_updated_date": "2024-08-23T19:57:12.015047+00:00",
             "status": 2,
@@ -63,7 +64,7 @@ api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
             "transaction_amount": 885.95,
             "transaction_type": 1,
             "user_id": 1
-        }
+        }]
     }
 }
 ```
@@ -75,6 +76,13 @@ api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
 }
 ```
 
+```json 400
+{
+  "error": "transaction_already_exists",
+  "message": "The transaction has already been created"
+}
+```
+
 ```json 401
 {
   "error": "unauthorized_request",
@@ -82,16 +90,10 @@ api: 'GET https://rewardservice.withbenji.com/reward_transaction/{id}'
 }
 ```
 
-```json 404
-{
-  "error": "transaction_does_not_exist",
-  "message": "The transaction does not exist"
-}
-```
 </ResponseExample>
 
-<Tip>Note that you will only receive data that you as a loyalty patner or merchant partner are allowed to see based on the permissions in the access token you provide to the API</Tip>
-
+<Tip>Make sure to store the retruned reward transaction ID. You can use this ID to get the status of the reward transaction when receiving reward_transaction_update webhooks</Tip>
+<Warning>The transaction authentication token is valid for 10 minutes.</Warning>
 
 
 

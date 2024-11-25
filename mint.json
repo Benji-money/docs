@@ -110,24 +110,9 @@
       "pages": [
         "api-reference/endpoint/transactions/overview",
         "api-reference/endpoint/transactions/authenticate",
+        "api-reference/endpoint/transactions/create",
         "api-reference/endpoint/transactions/get"
        
-      ]
-    },
-    {
-      "group": "Earn Rewards",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ]
-    },
-    {
-      "group": "Redeem Rewards",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
       ]
     },
     {

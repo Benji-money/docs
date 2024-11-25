@@ -19,13 +19,6 @@ api: 'POST https://authservice.withbenji.com/access/token/exchange'
 </ResponseField>
 <ResponseField name="token_data" type="integer" required>
   An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
-  ```json
-  {
-    "access_token": "<the access token to use in Benji Platform API calls",
-    "refresh_token": "<the token to use when the access token expires",
-    "access_token-expires_at": "<a datetime string value indicating when the access token will expire"
-  }
-  ```
 </ResponseField>
 
 <ResponseExample>
@@ -33,9 +26,13 @@ api: 'POST https://authservice.withbenji.com/access/token/exchange'
 {
     "code": "ok",
     "data": {
+        "user_id": 1,
+        "merchant_id": 1,
+        "token_data": {
         "access_token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02",
         "refresh_token": "05tghegts-aa81-sgte-hgte-u8nhgbvgtio",
         "access_token_expires_at": "Tue, 22 Oct 2024 21:57:02 GMT"
+        }
     }
 }
 ```

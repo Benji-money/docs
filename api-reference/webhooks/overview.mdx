@@ -1,0 +1,66 @@
+---
+title: 'Benji Platform Webhooks Overview'
+description: 'An overview of the Benji Platform webhooks, allowing you to receive real time updates on users, campaigns and reward transactions.'
+sidebarTitle: 'Overview'
+---
+
+## Overview
+
+The Benji Platform webhooks allow you to receive updates in near real time on activities in your partnership ecosystem. The following webhook entities are supported:
+-**Users** : Updates on a user's partner connect status and lifecycle on the Benji Platform.
+-**Campaigns** : Updates to relevant campaigns and their lifecycle on the Benji Platform
+-**Transactions** : Updates on reward transaction statuses and lifecycle.
+
+### Webhook Format
+
+All webhooks contain the following JSON body parameters : 
+<ParamField body="event" type="string" required>The name of the event</ParamField>
+<ParamField body="entity_type" type="integer">
+    Integer representing an enum of one of the following entity type values : 
+        <Expandable title="possible entity type values" type="enum">
+            - **USER (1)** : Indicating a user entity <br/>
+            - **CAMPAIGN (2)** : Indicating a campaign entity  <br/>
+            - **TRANSACTION (3)** : Indicating a reward transaction entity
+        </Expandable>
+</ParamField>
+<ParamField body="entity_id" type="integer">The ID of the entity</ParamField>
+
+All webhooks contain the following header value. This header value contains your partner access token, for you to validate with your own stored partner token.
+<ParamField header="x-api-key" type="string">Your public token to validate the request is an authorized event from the Benji Platform</ParamField>
+```json 
+{
+    "event": "reward_transaction_updated",
+    "entity": 3,
+    "entity_id": 243
+}
+```
+### Webhook Flow
+A typical webhook flow requires the following steps :
+- **Subscribe to an event** and register your webhook endpoint. The Benji Platform will send any updates to this event to this endpoint using a **POST** request.
+- **Listen to any webhooks** on your registered webhook event endpoint
+- **Call the Benji Platform API** to retrieve additional information on the entity based on the event and the entity_type parameters in the webhook.
+
+### Supported events
+The following events and their corresponding entity types are supported :
+#### User Events
+<Expandable title="User Events">
+    - user_partner_connected : Indicating a user has succefully connected with a partner through the Benji Platform
+</Expandable>
+<Tip>Typically after receiving a user entity webhook event, you will interact with the [get user status](/api-reference/endpoint/status/get) endpoint using the entity_id from the webhook to receive additional user data</Tip>
+#### Campaign Events
+<Expandable title="Campaign Events">
+    - campaign_updated : Indicating a campaign that you are associated with has been updated
+    - campaign_activated : Indicating a campaign you are associated with has been activated (either manually or by reaching its scheduled date)
+    - campaign_ended : Indicating a campaign has ended (either manually or by surpassing it's end date)
+</Expandable>
+<Tip>Typically after receiving a campaign entity webhook event, you will interact with the [get campaign](/api-reference/endpoint/campaigns/get) endpoint using the entity_id from the webhook to receive additional campaign data</Tip>
+#### Transaction Events
+<Expandable title="Transaction Events">
+    - transaction_authenticated : Indicating a [transaction authentication token](/api-reference/endpoint/transactions/authenticate) has been created
+    - transaction_created : Indicating a [transaction has been created](/api-reference/endpoint/transactions/create)
+    - transaction_status_updated : Indicating a transaction has been updated, typically meaning a status change on the transaction
+</Expandable>
+<Tip>Typically after receiving a transaction entity webhook event, you will interact with the [get reward transaction](/api-reference/endpoint/transactions/get) endpoint using the entity_id from the webhook to receive additional transaction data</Tip>
+
+
+

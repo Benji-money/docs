@@ -59,7 +59,7 @@
       "group": "Welcome",
       "pages": [
         "pilot/overview",
-        "pilot/concepts "
+        "pilot/concepts"
       ]
     },
     {
@@ -67,6 +67,7 @@
       "pages": [
         {
           "group": "Partnerships",
+          "icon": "handshake",
           "pages":[
             "pilot/partnerships",
             "pilot/campaigns",

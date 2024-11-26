@@ -142,5 +142,10 @@
   ],
   "footerSocials": {
     "website": "https://withbenji.com"
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "raiseIssue": true,
+    "suggestEdit": true
   }
 }

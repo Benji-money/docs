@@ -47,6 +47,33 @@ The Benji Platform currently supports the following trigger types :
 
 - **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Pay with Points type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
 
+## Campaign Actions
+In this section you can configure the base actions that will occur when a trigger happens and the relevant conditions are met <br/>
+
+![title](/images/pilot/campaign_actions.png)
+
+You can configure multiple actions per campaign. 
+<Tip>A common example for a campaign with multiple actions is receiving rewards from both partners. For instance - Earn 2 reward points from Partner A and 3 reward points form partner B for every transaction</Tip>
+For each action, you can specify the action itself, which partner controls the action (if applicable), and the **base** conversion rate of the action :
+<Tip>When configuring an action, you will only be able to set your own organization as the owner of the action. If there is another partner they will be able to do the same. The actions owned by the other partner will be visible in read only mode on your account.</Tip>
+**Action**
+<Expandable title="Action" >
+Possible values of actions to perform:
+- **Award Points/Redeem Points** : Dependent on if the canpaign is an Earn or Redeem type campaign
+- **Award Cashback** : If applicable and configured in your settings, enables earning cashback for a trigger on the user's account.
+</Expandable>
+
+**Partner** <br/> <br/>
+The partner owning this action. This will be automatically filled in based on who is editing/creating the campaign. <br/>
+
+**Conversion Rate**
+<Expandable title="Conversion Rate" >
+The base value of conversion of the action : 
+- **Reward Distribution Value** : A number representing the value of the conversion (e.g. **3 reward point per dollar spent**)
+</Expandable>
+
+<Tip>The conversion rate configured in this section is the **base** conversion rate. Any configured multipliers will take affect based on the conversion rates defined in this section.</Tip>
+
 ## Campaign Conditions
 In this section you can configure the the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met.
 ![title](/images/pilot/campaign_conditions.png)

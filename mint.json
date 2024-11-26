@@ -66,15 +66,22 @@
     {
       "group": "Pilot",
       "pages": [
+        "pilot/dashboard",
         {
           "group": "Partnerships",
-          "icon": "handshake",
+          "icon": "circles-overlap",
+          "iconType": "light",
           "pages":[
             "pilot/partnerships",
             "pilot/campaigns",
             "pilot/campaign"
           ]
-        }
+        },
+        "pilot/analytics",
+        "pilot/customer_activity",
+        "pilot/integrations",
+        "pilot/finance",
+        "pilot/settings"
        
       ]
     },

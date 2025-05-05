@@ -127,7 +127,8 @@
         "api-reference/endpoint/transactions/overview",
         "api-reference/endpoint/transactions/authenticate",
         "api-reference/endpoint/transactions/create",
-        "api-reference/endpoint/transactions/get"
+        "api-reference/endpoint/transactions/get",
+        "api-reference/endpoint/transactions/reverse"
        
       ]
     },

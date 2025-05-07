@@ -79,7 +79,6 @@
         },
         "pilot/analytics",
         "pilot/customer_activity",
-        "pilot/integrations",
         "pilot/finance",
         "pilot/settings"
        

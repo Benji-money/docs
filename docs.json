@@ -76,17 +76,16 @@
             ]
           },
           {
-            "group": "Member Status",
+            "group": "Member API",
             "pages": [
               "api-reference/endpoint/status/get"
             ]
           },
           {
-            "group": "Campaigns",
-            "pages": [
-              "api-reference/endpoint/campaigns/get",
-              "api-reference/endpoint/campaigns/list"
-            ]
+            "group": "Campaign API",
+            "openapi": {
+              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/campaignservice/staging/openapi_public.json"
+            }
           },
           {
             "group": "Reward API",

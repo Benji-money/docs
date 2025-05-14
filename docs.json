@@ -1,0 +1,145 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Benji",
+  "colors": {
+    "primary": "#9900ff",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Welcome",
+            "pages": [
+              "pilot/overview",
+              "pilot/concepts"
+            ]
+          },
+          {
+            "group": "Pilot",
+            "pages": [
+              "pilot/dashboard",
+              {
+                "group": "Partnerships",
+                "icon": {
+                  "name": "circles-overlap",
+                  "style": "light"
+                },
+                "pages": [
+                  "pilot/partnerships",
+                  "pilot/campaigns",
+                  "pilot/campaign"
+                ]
+              },
+              "pilot/analytics",
+              "pilot/customer_activity",
+              "pilot/finance",
+              "pilot/settings"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Benji Connect",
+        "groups": [
+          {
+            "group": "Benji Connect",
+            "pages": [
+              "connect/introduction",
+              "connect/create_token",
+              "connect/initialization",
+              "connect/methods",
+              "connect/exchange_token"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/authentication"
+            ]
+          },
+          {
+            "group": "Tokens",
+            "pages": [
+              "api-reference/endpoint/authentication/refresh"
+            ]
+          },
+          {
+            "group": "Member API",
+            "openapi": {
+              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/userservice/staging/openapi_public.json"
+            }
+          },
+          {
+            "group": "Campaign API",
+            "openapi": {
+              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/campaignservice/staging/openapi_public.json"
+            }
+          },
+          {
+            "group": "Reward API",
+            "openapi": {
+              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/rewardservice/staging/openapi_public.json"
+            }
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks/overview",
+              "api-reference/webhooks/subscribe",
+              "api-reference/webhooks/update"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/benji-docs-logo.svg",
+    "dark": "/logo/benji-docs-logo.svg"
+  },
+  "api": {
+    "mdx": {
+      "server": [
+        "https://mintlify.com/api",
+        "https://mintlify.com/api2"
+      ],
+      "auth": {
+        "method": "bearer"
+      }
+    }
+  },
+  "appearance": {
+    "default": "light",
+    "strict": true
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@withbenji.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Go to Pilot",
+      "href": "https://pilot-staging.withbenji.com/login"
+    }
+  },
+  "footer": {
+    "socials": {
+      "website": "https://withbenji.com"
+    }
+  }
+}

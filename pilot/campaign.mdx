@@ -9,18 +9,18 @@ The campaign page is where you can control all of your campaign settings. The pa
 
 ## Details
 
-This is where you can configure all of the basic settings of your campaign 
+This is where you can configure all of the basic settings of your campaign
 
 In this section you can view or configure the following parameters :
 
-| Parameter                                                                    | Description                                                                                                                                                                 | Possible values                                         |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| <ResponseField name="ID" type="Numeric" required>     </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
-| <ResponseField name="Name" type="string" required>     </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
-| <ResponseField name="Description" type="string">     </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
-| <ResponseField name="Start Date/Time" type="date time">     </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
-| <ResponseField name="End Date/Time" type="date time">     </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
-| <ResponseField name="Image" type="file">     </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
+| Parameter                                                                        | Description                                                                                                                                                                 | Possible values                                         |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| <ResponseField name="ID" type="Numeric" required>         </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
+| <ResponseField name="Name" type="string" required>         </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
+| <ResponseField name="Description" type="string">         </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
+| <ResponseField name="Start Date/Time" type="date time">         </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
+| <ResponseField name="End Date/Time" type="date time">         </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
+| <ResponseField name="Image" type="file">         </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
 
 ## Campaign Type
 
@@ -53,21 +53,21 @@ The Benji Platform currently supports the following trigger types :
 
 ## Campaign Actions
 
-In this section you can configure the base actions that will occur when a trigger happens and the relevant conditions are met 
+In this section you can configure the base actions that will occur when a trigger happens and the relevant conditions are met
 
 ![title](/images/pilot/campaign_actions.png)
 
 You can configure multiple actions per campaign.
+
 <Tip>
   A common example for a campaign with multiple actions is receiving rewards from both partners. For instance - Earn 2 reward points from Partner A and 3 reward points form partner B for every transaction
 </Tip>
 
-
 For each action, you can specify the action itself, which partner controls the action (if applicable), and the **base** conversion rate of the action :
+
 <Tip>
   When configuring an action, you will only be able to set your own organization as the owner of the action. If there is another partner they will be able to do the same. The actions owned by the other partner will be visible in read only mode on your account.
 </Tip>
-
 
 **Action**
 
@@ -78,10 +78,9 @@ For each action, you can specify the action itself, which partner controls the a
   - **Award Cashback** : If applicable and configured in your settings, enables earning cashback for a trigger on the user's account.
 </Expandable>
 
-**Partner** \
- \
+**Partner** 
 
-The partner owning this action. This will be automatically filled in based on who is editing/creating the campaign. 
+The partner owning this action. This will be automatically filled in based on who is editing/creating the campaign.
 
 **Conversion Rate**
 
@@ -141,9 +140,9 @@ For each condition, you can specify the attribute the condition is applied to, a
 
 ## Campaign Multipliers
 
-In this section you can configure certain conditions under which a certain member would get a multiplier boost on their earned or redeemed rewards for a specific transaction. \
+In this section you can configure certain conditions under which a certain member would get a multiplier boost on their earned or redeemed rewards for a specific transaction. 
 
-For **Earn** type campaigns, this means the member, if the condition is met, will earn a multiplier on the base Points earned per dollar variable configured in the triggers section.\
+For **Earn** type campaigns, this means the member, if the condition is met, will earn a multiplier on the base Points earned per dollar variable configured in the triggers section.
 
 For **Redeem** type campaigns, this means the member will get a multiplier on the conversion rate per dollar defined in the triggers section above.
 ![title](/images/pilot/campaign_multipliers.png)

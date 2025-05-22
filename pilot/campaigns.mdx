@@ -1,36 +1,58 @@
 ---
-title: 'Campaigns Page'
-description: 'A view of all the campaigns configured for a specific partnership'
-sidebarTitle: 'Campaigns'
-icon: 'rocket'
+title: "Campaigns Page"
+description: "A view of all the campaigns configured for a specific partnership"
+sidebarTitle: "Campaigns"
+icon: "rocket"
 ---
 
 <img
-  style={{ borderRadius: '0.5rem' }}
+  style={{ borderRadius:"0.5rem" }}
   src="/images/pilot/campaigns.png"
 />
 
-
-### Overview
+## Overview
 
 The campaigns page provides a list view of all the currently configured campaigns under a specific partnership. Each campaign line item on the homepage shows you the following information :
 
-
-| Parameter             | Description             | Possible values          |
-| --------------------- | ----------------------- | --------------- |
-| **ID**      | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. |  A system generated number      |
-| **Campaign Name**  | This field shows 2 values : The type of campaign and the descriptive name assigned to this field.       | For campaign type : <br/> **Earn** <br/> **Redeem** <br/> **Connect Only**       |
-| **Trigger** | The trigger action associated with this campaign. | **Spend per Dollar** - for campaigns triggerd by a user transaction <br/> **Registration** - for campaigns triggered by by a user registration <br/> **Customer Referral** - for a campaign triggered by a user referring another user to the partner <br/> **Custom Action** - An action not supported natively by Benji. The partner will own the placement and rendering of the componentes for these action triggers |
-| **Conditions and Multipliers** | All of the conditions and multipliers configured under this campaign | |
-| **Status**            | The running status of the Campaign | **Active** - a campaign that is currently live <br/> **Scheduled** - a campaign scheduled for a future date <br/> **Draft** - a campaign that has not yet been approved. |
-| **Actions**            | A list of actions to perform on the specific campaign | **Edit** - will open up the campaign edit modal <br/> **Duplicate** - duplicates this campaign with all of it's setting to a new campaign in **Draft** mode <br/> **Approve** - initiates the campaign approval flow <br/> **Delete** - will popup a confirmation modal to approve deletion of this campaign.  |
+| Parameter                      | Description                                                                                                                                                                 | Possible values                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ID**                         | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Campaign Name**              | This field shows 2 values : The type of campaign and the descriptive name assigned to this field.                                                                           | For campaign type : <br /> **Earn** <br /> **Redeem** <br /> **Connect Only**                                                                                                                                                                                                                                                                                                                                               |
+| **Trigger**                    | The trigger action associated with this campaign.                                                                                                                           | **Spend per Dollar** - for campaigns triggerd by a user transaction <br /> **Registration** - for campaigns triggered by by a user registration <br /> **Customer Referral** - for a campaign triggered by a user referring another user to the partner <br /> **Custom Action** - An action not supported natively by Benji. The partner will own the placement and rendering of the componentes for these action triggers |
+| **Conditions and Multipliers** | All of the conditions and multipliers configured under this campaign                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Status**                     | The running status of the Campaign                                                                                                                                          | **Active** - a campaign that is currently live <br /> **Scheduled** - a campaign scheduled for a future date <br /> **Draft** - a campaign that has not yet been approved.                                                                                                                                                                                                                                                  |
+| **Actions**                    | A list of actions to perform on the specific campaign                                                                                                                       | **Edit** - will open up the campaign edit modal <br /> **Duplicate** - duplicates this campaign with all of it's setting to a new campaign in **Draft** mode <br /> **Approve** - initiates the campaign approval flow <br /> **Delete** - will popup a confirmation modal to approve deletion of this campaign.                                                                                                            |
 
 ## Navigation
+
 The campaigns page is accessed by clicking on a partnership tile on the [Partnerships Homepage](/pilot/partnerships)
 
-The campaigns page supports the following navigation/actions on the top header : 
+The campaigns page supports the following navigation/actions on the top header :
+
 - Switching between Campaigns and Partner details. The partner details section will display read only basic information about the given partner.
 - CTA to import campaign : Allows you to upload a campaign configuration from a XLSX template
 - New campaign : Opens the new/edit campaign modal
 
+## Campaign Templates
 
+Campaign templates streamline campaign creation by letting you reuse configurations across multiple partnerships and save time on setup.
+
+- **Create campaigns using templates and customize.** When creating a new campaign, click "Import Campaign" to use an existing template that will prepopulate all your campaign settings based on the template configuration. You can modify any settings before saving the campaign to match your specific requirements.
+- **Turn existing campaigns into reusable templates.** After creating a campaign, you can convert it into a template by clicking the "Actions" menu on the campaigns page for that campaign and selecting "Create Template". This template becomes available for use with any partner.
+- **Access all your templates in one place.** View and manage all campaign templates by navigating to "Partner Settings" and clicking "Campaign Templates". 
+
+## Campaign Components
+
+Once you've created a campaign, campaign components are automatically generated to promote across user touchpoints. Navigate to "Components" on the campaign page to access and customize:
+
+- **Landing pages **direct users to your partnership and prompt them to link their reward accounts. You can customize the theme, background image, text, button color, and button text. Additionally, you can select which active campaign(s) to highlight on the landing page.
+- **Connect buttons** can be added directly to a partner experience to direct users to link their accounts using the Benji Connect SDK.
+
+## Transactional Emails
+
+Benji can be configured to send campaign transactional emails to users, or you can listen for webhooks to configure your own transactional email system.
+
+- **Account linking confirmation emails **highlight partnership benefits and showcase active campaigns.
+- **Earn campaign confirmation emails **notify users when an earn transaction has been completed, providing transaction details and driving engagement with your rewards program.
+
+**Use Benji's built-in email system or integrate with your own.** If you prefer to send transactional emails using your own system, [webhooks](/api-reference/webhooks/overview) allow you receive real-time updates on users, campaigns and reward transactions.

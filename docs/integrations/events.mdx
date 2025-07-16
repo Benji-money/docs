@@ -7,6 +7,8 @@ Benji processes several types of events from your payment processor to power loy
 - **Refund**: Triggered when a purchase is refunded.
 - **Order Update**: Triggered when order contents change.
 
+> **Note:** These event types apply to all supported integrations (e.g., Square, Stripe). See [Integration Overview](./overview.mdx) for platform-specific details.
+
 ## Event Payload Examples
 ```json
 {
@@ -21,3 +23,10 @@ Benji processes several types of events from your payment processor to power loy
 
 ## How Events Affect Loyalty
 Events are used to determine eligibility, accrue or redeem points, and handle reversals automatically. 
+
+---
+
+## Related Topics
+- [Webhooks](./webhooks.mdx)
+- [API Reference: Webhooks](../api-reference/webhooks/overview.mdx)
+- [Pilot Concepts](../pilot/concepts.mdx) 

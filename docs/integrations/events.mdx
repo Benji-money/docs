@@ -1,0 +1,23 @@
+# Events
+
+Benji processes several types of events from your payment processor to power loyalty and rewards.
+
+## Event Types
+- **Purchase**: Triggered when a customer makes a purchase.
+- **Refund**: Triggered when a purchase is refunded.
+- **Order Update**: Triggered when order contents change.
+
+## Event Payload Examples
+```json
+{
+  "type": "purchase",
+  "customer_id": "12345",
+  "amount": 100.00,
+  "items": [
+    { "sku": "A1", "qty": 2 }
+  ]
+}
+```
+
+## How Events Affect Loyalty
+Events are used to determine eligibility, accrue or redeem points, and handle reversals automatically. 

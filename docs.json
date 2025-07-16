@@ -60,6 +60,22 @@
         ]
       },
       {
+        "tab": "Benji <> Integrations",
+        "groups": [
+          {
+            "group": "Benji <> Integrations",
+            "pages": [
+              "integrations/introduction",
+              "integrations/overview",
+              "integrations/setup",
+              "integrations/api_usage",
+              "integrations/webhooks",
+              "integrations/troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API Reference",
         "groups": [
           {

@@ -67,10 +67,15 @@
             "pages": [
               "integrations/introduction",
               "integrations/overview",
-              "integrations/setup",
-              "integrations/webhooks",
-              "integrations/api_usage",
-              "integrations/troubleshooting"
+              {
+                "group": "Square",
+                "pages": [
+                  "integrations/setup",
+                  "integrations/webhooks",
+                  "integrations/api_usage",
+                  "integrations/troubleshooting"
+                ]
+              }
             ]
           }
         ]

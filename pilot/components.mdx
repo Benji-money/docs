@@ -13,11 +13,11 @@ The Components page allows you to configure and customize the various UI compone
 
 The Benji Platform currently supports two main types of components:
 
-### Landing Page Component
+## Landing Page Component
 
 The Landing Page component creates a dedicated page on your partner's domain that showcases your loyalty program and allows customers to connect their accounts.
 
-#### Visual Editor Interface
+### Visual Editor Interface
 
 The Landing Page component features a visual editor with a live preview. The interface is divided into two sections:
 
@@ -26,7 +26,7 @@ The Landing Page component features a visual editor with a live preview. The int
 
 The preview updates automatically as you make changes to the configuration, allowing you to see exactly how your landing page will look before publishing.
 
-#### Configuration Options
+### Configuration Options
 
 | Parameter | Description | Possible Values |
 | --------- | ----------- | --------------- |
@@ -39,7 +39,7 @@ The preview updates automatically as you make changes to the configuration, allo
 | **Link to Terms of Service** | URL to your terms of service page | Valid URL or empty |
 | **Custom Domain** | The domain where this landing page will be hosted | Full domain with path (e.g., "sailaway.jetblue.com/goforit") |
 
-#### Domain Setup Requirements
+### Domain Setup Requirements
 
 When configuring a custom domain for your landing page component, you'll need to set up DNS records to properly route traffic to the Benji platform.
 
@@ -76,48 +76,13 @@ Once DNS propagation is complete (can take up to 24-48 hours, depending on your 
   DNS propagation can take up to 48 hours. During this time, you may see error messages or the "This website is pending domain owner verification" message. This is normal and will resolve once propagation is complete.
 </Tip>
 
-### Connect Button Component
+## Connect Button Component
 
 The Connect Button component provides a clickable button that can be embedded anywhere on your partner's website to initiate the account connection process.
 
 #### Configuration Options
 
-| Parameter | Description | Possible Values |
-| --------- | ----------- | --------------- |
-| **Button Text** | The text displayed on the button | Custom text (e.g., "Connect Rewards", "Join Loyalty Program") |
-| **Button Style** | Visual styling of the button | Primary, Secondary, Outline, Custom CSS |
-| **Button Size** | Size of the button | Small, Medium, Large |
-| **Button Color** | Primary color of the button | Brand colors, custom hex codes |
-| **Button Position** | Where the button appears on the page | Fixed position, inline, floating |
-| **Trigger Action** | What happens when the button is clicked | Open modal, redirect to landing page, inline connection |
-| **Target Campaign** | Which campaign this button is associated with | Select from available campaigns |
-
-#### Implementation
-
-The Connect Button component can be implemented in several ways:
-
-**JavaScript Snippet:**
-```javascript
-// Benji Connect Button
-<script>
-  window.benjiConfig = {
-    partnerId: 'your-partner-id',
-    campaignId: 'your-campaign-id',
-    buttonText: 'Connect Rewards',
-    buttonStyle: 'primary'
-  };
-</script>
-<script src="https://cdn.benji.com/connect-button.js"></script>
-```
-
-**HTML Embed:**
-```html
-<div id="benji-connect-button" 
-     data-partner-id="your-partner-id"
-     data-campaign-id="your-campaign-id"
-     data-button-text="Connect Rewards">
-</div>
-```
+Coming soon!
 
 ## Troubleshooting
 

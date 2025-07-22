@@ -1,0 +1,35 @@
+---
+title: API Usage
+---
+
+Benji uses information about loyalty customers, their status, and their payment transactions in order to power the automatic processing and eligibility determination for each transaction.
+
+## API Access
+Not all data is present in webhooks provided by our integrators, so we correlate that information with loyalty customers using their APIs.
+
+Benji uses the following APIs:
+
+- **Payments**: Correlate payments with orders and customers.
+- **Loyalty Customers**: Ensure we can connect the customer to their loyalty accounts for our suite of partners.
+- **Orders**: Analyze the orders placed by customers to determine eligibility for rewards.
+
+> **Note:** This data applies to all supported integrations (e.g., Square, Stripe). See [Integration Overview](./overview) for platform-specific details.
+
+## Event Payload Examples
+```json
+{
+  "type": "purchase",
+  "customer_id": "12345",
+  "amount": 100.00,
+  "items": [
+    { "sku": "A1", "qty": 2 }
+  ]
+}
+```
+
+---
+
+## Related Topics
+- [Webhooks](./webhooks)
+- [API Reference: Webhooks](../api-reference/webhooks/overview)
+- [Pilot Concepts](../pilot/concepts) 

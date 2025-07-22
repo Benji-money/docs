@@ -1,0 +1,215 @@
+---
+title: 'Components'
+description: 'Configure and customize the components available for your partnerships'
+sidebarTitle: 'Components'
+icon: 'puzzle-piece'
+---
+
+## Overview
+
+The Components page allows you to configure and customize the various UI components that can be embedded into your partner's websites. These components provide seamless integration between your loyalty program and your partner's online presence, enabling customers to interact with your rewards system directly on partner sites.
+
+## Available Components
+
+The Benji Platform currently supports two main types of components:
+
+### Landing Page Component
+
+The Landing Page component creates a dedicated page on your partner's domain that showcases your loyalty program and allows customers to connect their accounts.
+
+#### Visual Editor Interface
+
+The Landing Page component features a visual editor with a live preview. The interface is divided into two sections:
+
+- **Left Side - Live Preview**: Shows a real-time preview of how your landing page will appear to customers
+- **Right Side - Configuration Panel**: Contains all the customization options and settings
+
+The preview updates automatically as you make changes to the configuration, allowing you to see exactly how your landing page will look before publishing.
+
+#### Configuration Options
+
+| Parameter | Description | Possible Values |
+| --------- | ----------- | --------------- |
+| **Page Theme** | The visual theme template for the landing page | Theme 1: Background Image, Theme 2: Minimal, etc. |
+| **Introduction Text** | The main text displayed on the landing page | Custom text (e.g., "Link your account") |
+| **Background Image** | An image displayed on the landing page | SVG, PNG, JPG files (max 800x400px) |
+| **Show Campaigns** | Whether to display available campaigns on the landing page | Checkbox (shows campaign count) |
+| **Button Color** | The color of the primary action button | Hex color code (e.g., #9900ff) |
+| **Button Text** | The text displayed on the primary action button | Custom text (e.g., "Link Account") |
+| **Link to Terms of Service** | URL to your terms of service page | Valid URL or empty |
+| **Custom Domain** | The domain where this landing page will be hosted | Full domain with path (e.g., "sailaway.jetblue.com/goforit") |
+
+#### Domain Setup Requirements
+
+When configuring a custom domain for your landing page component, you'll need to set up DNS records to properly route traffic to the Benji platform.
+
+#### Step 1: Configure Custom Domain
+
+In the Landing Page configuration, enter your custom domain in the "Custom Domain (Optional)" field. For example:
+- `burgers.myairline.com`
+- `hotelblaire.bel-air.com`
+- `benefits.partner.com`
+
+
+#### Step 2: Configure DNS with Your Domain Provider
+
+Log into your domain provider's DNS management panel and add the following records:
+
+**CNAME Record Setup:**
+```
+Host/Alias: burgers (or your chosen subdomain for a specific partnership)
+Type: CNAME
+Points to: landingapp.withbenji.com
+```
+
+<Tip>
+  You only need to create a CNAME record. A records are not required for this setup since we're using CNAME redirection to our infrastructure, which handles the IP routing automatically.
+</Tip>
+
+
+
+#### Step 3: DNS Propagation
+
+Once DNS propagation is complete (can take up to 24-48 hours, depending on your provider), you are ready to go!
+
+<Tip>
+  DNS propagation can take up to 48 hours. During this time, you may see error messages or the "This website is pending domain owner verification" message. This is normal and will resolve once propagation is complete.
+</Tip>
+
+### Connect Button Component
+
+The Connect Button component provides a clickable button that can be embedded anywhere on your partner's website to initiate the account connection process.
+
+#### Configuration Options
+
+| Parameter | Description | Possible Values |
+| --------- | ----------- | --------------- |
+| **Button Text** | The text displayed on the button | Custom text (e.g., "Connect Rewards", "Join Loyalty Program") |
+| **Button Style** | Visual styling of the button | Primary, Secondary, Outline, Custom CSS |
+| **Button Size** | Size of the button | Small, Medium, Large |
+| **Button Color** | Primary color of the button | Brand colors, custom hex codes |
+| **Button Position** | Where the button appears on the page | Fixed position, inline, floating |
+| **Trigger Action** | What happens when the button is clicked | Open modal, redirect to landing page, inline connection |
+| **Target Campaign** | Which campaign this button is associated with | Select from available campaigns |
+
+#### Implementation
+
+The Connect Button component can be implemented in several ways:
+
+**JavaScript Snippet:**
+```javascript
+// Benji Connect Button
+<script>
+  window.benjiConfig = {
+    partnerId: 'your-partner-id',
+    campaignId: 'your-campaign-id',
+    buttonText: 'Connect Rewards',
+    buttonStyle: 'primary'
+  };
+</script>
+<script src="https://cdn.benji.com/connect-button.js"></script>
+```
+
+**HTML Embed:**
+```html
+<div id="benji-connect-button" 
+     data-partner-id="your-partner-id"
+     data-campaign-id="your-campaign-id"
+     data-button-text="Connect Rewards">
+</div>
+```
+
+## Component Management
+
+### Creating New Components
+
+1. Navigate to the Components page in your Benji dashboard
+2. Click "Create New Component"
+3. Select the component type (Landing Page or Connect Button)
+4. Configure the component settings using the visual editor
+5. For Landing Page components, set up DNS records as described above
+6. Use the live preview to test how your component will appear
+7. Click "Publish Changes" to deploy the component to production
+
+### Publishing Workflow
+
+When editing a Landing Page component:
+- **Preview Changes**: Use the live preview on the left to see your changes in real-time
+- **Save Draft**: Changes are automatically saved as you work
+- **Publish Changes**: Click the "Publish Changes" button to make your changes live
+- **Close**: Use the "Close" button to exit without publishing changes
+
+### Editing Existing Components
+
+- Click on any existing component to edit its configuration
+- Changes are saved automatically
+- For Landing Page components, DNS changes may require additional setup
+
+### Component Analytics
+
+Each component provides analytics on:
+- **Impressions**: How many times the component was displayed
+- **Clicks**: How many times users interacted with the component
+- **Conversions**: How many users successfully connected their accounts
+- **Performance**: Load times and error rates
+
+## Best Practices
+
+### Landing Page Components
+
+- **Clear Value Proposition**: Make it immediately clear what benefits users will receive
+- **Simple Connection Process**: Minimize the steps required to connect accounts
+- **Mobile Optimization**: Ensure the landing page works well on mobile devices
+- **Brand Consistency**: Match your partner's branding while maintaining your own identity
+
+### Connect Button Components
+
+- **Strategic Placement**: Position buttons where users are most likely to engage
+- **Clear Call-to-Action**: Use compelling button text that explains the benefit
+- **Consistent Styling**: Match the button design to your partner's website
+- **A/B Testing**: Test different button placements and text to optimize conversions
+
+### DNS Configuration
+
+- **Verify Records**: Always verify DNS records are correctly configured
+- **Monitor Propagation**: Check that DNS changes have propagated before testing
+- **SSL Certificates**: Ensure SSL certificates are properly generated
+- **Backup Plans**: Have alternative domains or subdomains ready if needed
+
+## Troubleshooting
+
+### Common DNS Issues
+
+**Domain Not Resolving:**
+- Verify DNS records are correctly entered
+- Check that propagation has completed (wait 24-48 hours)
+- Ensure no conflicting records exist
+
+**SSL Certificate Errors:**
+- Confirm DNS records are properly configured
+- Wait for SSL certificate generation (can take up to 24 hours)
+- Check for any firewall or security restrictions
+
+**Component Not Loading:**
+- Verify the component is properly deployed
+- Check browser console for JavaScript errors
+- Ensure the partner ID and campaign ID are correct
+
+### Support Resources
+
+If you encounter issues with component setup or DNS configuration:
+
+1. **Check Component Status**: Verify the component is active in your dashboard
+2. **Review DNS Records**: Double-check all DNS records are correctly configured
+3. **Contact Support**: Reach out to Benji support with specific error messages
+4. **Documentation**: Refer to this guide and other Benji documentation
+
+## Navigation
+
+The Components page is accessed through the Pilot sidebar under the Partnerships section.
+
+The Components page supports the following actions:
+- **Create New Component**: Start the component creation wizard
+- **Filter Components**: View components by type, status, or partner
+- **Bulk Actions**: Select multiple components for batch operations
+- **Export Configuration**: Download component configurations for backup or migration

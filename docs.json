@@ -33,7 +33,8 @@
                 "pages": [
                   "pilot/partnerships",
                   "pilot/campaigns",
-                  "pilot/campaign"
+                  "pilot/campaign",
+                  "pilot/components"
                 ]
               },
               "pilot/analytics",

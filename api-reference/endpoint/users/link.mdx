@@ -1,0 +1,154 @@
+---
+title: 'Link User'
+description: 'Endpoint to link a partner user with a merchant user'
+sidebarTitle: 'Link User'
+api: 'POST https://userservice.withbenji.com/users/external/link'
+---
+
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
+This endpoint allows you to link a partner user with a merchant user in the Benji platform. This is essential for enabling reward transactions between the partner and merchant systems.
+
+### Request Body
+
+<ParamField body="partner" type="object" required>
+  Partner user information
+  <Expandable title="properties" defaultOpen="true">
+    <ParamField body="partner_id" type="string" required>
+      The unique identifier of the partner in the Benji platform
+    </ParamField>
+    <ParamField body="user_external_id" type="string" required>
+      The external user identifier from the partner's system
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="merchant" type="object" required>
+  Merchant user information
+  <Expandable title="properties" defaultOpen="true">
+    <ParamField body="merchant_id" type="string" required>
+      The unique identifier of the merchant in the Benji platform
+    </ParamField>
+    <ParamField body="user_external_id" type="string" optional>
+      The external user identifier from the merchant's system. If not present, Benji assumes this is an anonymous user
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Return values 
+<ResponseField name="code" type="string">
+  Status code indicating the result of the operation
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Human-readable message describing the result
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Response data containing the link information
+  <Expandable title="properties" defaultOpen="true">
+    <ResponseField name="link_id" type="string">
+      The unique identifier for the created user link
+    </ResponseField>
+    <ResponseField name="partner_user_id" type="string">
+      The Benji platform user ID for the partner user
+    </ResponseField>
+    <ResponseField name="merchant_user_id" type="string">
+      The Benji platform user ID for the merchant user (null for anonymous users)
+    </ResponseField>
+    <ResponseField name="created_date" type="datetime">
+      The timestamp when the link was created
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```json Request with identified merchant user
+{
+  "partner": {
+    "partner_id": "partner_123",
+    "user_external_id": "user_456"
+  },
+  "merchant": {
+    "merchant_id": "merchant_789",
+    "user_external_id": "customer_101"
+  }
+}
+```
+
+```json Request with anonymous merchant user
+{
+  "partner": {
+    "partner_id": "partner_123",
+    "user_external_id": "user_456"
+  },
+  "merchant": {
+    "merchant_id": "merchant_789"
+  }
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 Success - Identified User
+{
+  "code": "ok",
+  "message": "User link created successfully",
+  "data": {
+    "link_id": "link_abc123",
+    "partner_user_id": "benji_user_456",
+    "merchant_user_id": "benji_merchant_user_101",
+    "created_date": "2024-09-25T10:30:00.000Z"
+  }
+}
+```
+
+```json 200 Success - Anonymous User
+{
+  "code": "ok",
+  "message": "User link created successfully",
+  "data": {
+    "link_id": "link_def456",
+    "partner_user_id": "benji_user_456",
+    "merchant_user_id": null,
+    "created_date": "2024-09-25T10:30:00.000Z"
+  }
+}
+```
+
+```json 400 Bad Request
+{
+  "error": "invalid_request",
+  "message": "Missing required field: partner.partner_id"
+}
+```
+
+```json 401 Unauthorized
+{
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
+}
+```
+
+```json 404 Not Found
+{
+  "error": "partner_not_found",
+  "message": "The specified partner does not exist"
+}
+```
+
+```json 409 Conflict
+{
+  "error": "link_already_exists",
+  "message": "A link between these users already exists"
+}
+```
+</ResponseExample>
+
+<Tip>
+**Anonymous Users**: When `merchant.user_external_id` is not provided, Benji treats this as an anonymous user. This is useful for scenarios where you want to track partner user activity without requiring merchant user identification.
+</Tip>
+
+<Note>
+This endpoint establishes the connection required for reward transactions to flow between partner and merchant systems. Make sure both the partner and merchant are properly configured in your Benji account before calling this endpoint.
+</Note>

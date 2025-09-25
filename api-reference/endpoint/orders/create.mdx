@@ -1,0 +1,220 @@
+---
+title: 'Create External Order'
+description: 'Endpoint to create an external order in the Benji platform'
+sidebarTitle: 'Create External Order'
+api: 'POST https://orderservice.withbenji.com/orders/external'
+---
+
+<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+
+This endpoint allows you to create an external order in the Benji platform. This is used to track orders from external systems and associate them with users for reward processing.
+
+### Request Body
+
+
+
+<ParamField body="user" type="object" required>
+  User identification information. **At least one of the following fields must be provided:**
+  <Expandable title="properties" defaultOpen="true">
+    <ParamField body="user_external_id" type="string" optional>
+      The external user identifier from the merchant's system
+    </ParamField>
+    <ParamField body="user_link_id" type="string" optional>
+      The Benji platform user link ID (from the Link User endpoint)
+    </ParamField>
+    <ParamField body="user_id" type="string" optional>
+      The Benji platform user ID
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="transaction_total" type="integer" required>
+  The total transaction amount in cents (e.g., $1.50 = 150)
+</ParamField>
+
+<ParamField body="transaction_subtotal" type="integer" required>
+  The subtotal transaction amount in cents (before taxes, fees, etc.)
+</ParamField>
+
+<ParamField body="transaction_discount" type="integer" optional>
+  The discount amount in cents, if any
+</ParamField>
+
+<ParamField body="order_external_id" type="string" required>
+  The external order identifier from your system
+</ParamField>
+
+<ParamField body="order_payment_id" type="string" optional>
+  The payment identifier associated with this order
+</ParamField>
+
+<ParamField body="line_items" type="array" optional>
+  Array of line items in the order
+  <Expandable title="line_item properties" defaultOpen="true">
+    <ParamField body="product_id" type="string" required>
+      The product identifier
+    </ParamField>
+    <ParamField body="product_name" type="string" optional>
+      The name of the product
+    </ParamField>
+    <ParamField body="product_price" type="integer" required>
+      The price of the product in cents
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Return values 
+<ResponseField name="code" type="string">
+  Status code indicating the result of the operation
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Response data containing the order information
+  <Expandable title="properties" defaultOpen="true">
+    <ResponseField name="order_id" type="string">
+      The Benji platform order ID
+    </ResponseField>
+    <ResponseField name="external_order_id" type="string">
+      The external order identifier provided in the request
+    </ResponseField>    
+    <ResponseField name="user_id" type="string">
+      The Benji platform user ID associated with the order
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      The current status of the order
+    </ResponseField>
+    <ResponseField name="created_date" type="datetime">
+      The timestamp when the order was created
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<RequestExample>
+```json Request with user_link_id and line items
+{
+  "merchant_external_id": "merchant_123",
+  "users": {
+    "user_link_id": "link_abc123"
+  },
+  "transaction_total": 2550,
+  "transaction_sub_total": 2300,
+  "transaction_discount": 200,
+  "order_external_id": "order_456789",
+  "order_payment_id": "payment_xyz789",
+  "line_items": [
+    {
+      "product_id": "prod_001",
+      "product_name": "Premium Coffee",
+      "product_price": 1200
+    },
+    {
+      "product_id": "prod_002",
+      "product_name": "Pastry",
+      "product_price": 800
+    }
+  ]
+}
+```
+
+```json Request with merchant_external_id (minimal)
+{
+  "merchant_external_id": "merchant_123",
+  "users": {
+    "merchant_external_id": "customer_456"
+  },
+  "transaction_total": 1500,
+  "transaction_sub_total": 1500,
+  "order_external_id": "order_789012"
+}
+```
+
+```json Request with user_id
+{
+  "merchant_external_id": "merchant_123",
+  "users": {
+    "user_id": "benji_user_789"
+  },
+  "transaction_total": 3200,
+  "transaction_sub_total": 2900,
+  "transaction_discount": 100,
+  "order_external_id": "order_345678",
+  "line_items": [
+    {
+      "product_id": "prod_005",
+      "product_price": 2900
+    }
+  ]
+}
+```
+</RequestExample>
+
+<ResponseExample>
+```json 201 Success
+{
+  "code": "created",
+  "message": "External order created successfully",
+  "data": {
+    "order_id": "benji_order_123456",
+    "external_order_id": "order_456789",
+    "merchant_id": "benji_merchant_789",
+    "user_id": "benji_user_456",
+    "total_amount": 2550,
+    "status": "pending",
+    "created_date": "2024-09-25T10:30:00.000Z"
+  }
+}
+```
+
+```json 400 Bad Request - Missing required field
+{
+  "error": "invalid_request",
+  "message": "Missing required field: transaction_total"
+}
+```
+
+```json 400 Bad Request - No user identification
+{
+  "error": "invalid_request",
+  "message": "At least one user identification field must be provided (merchant_external_id, user_link_id, or user_id)"
+}
+```
+
+```json 401 Unauthorized
+{
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
+}
+```
+
+```json 404 Not Found
+{
+  "error": "merchant_not_found",
+  "message": "The specified merchant does not exist"
+}
+```
+
+```json 409 Conflict
+{
+  "error": "order_already_exists",
+  "message": "An order with this external_order_id already exists"
+}
+```
+</ResponseExample>
+
+<Tip>
+**User Identification**: You must provide at least one of the user identification fields:
+- `merchant_external_id`: Use when you have the merchant's customer ID
+- `user_link_id`: Use when you have a link ID from the Link User endpoint
+- `user_id`: Use when you have the Benji platform user ID directly
+</Tip>
+
+<Note>
+**Amount Format**: All monetary values should be provided in cents. For example:
+- $1.50 should be sent as `150`
+- $25.99 should be sent as `2599`
+- $100.00 should be sent as `10000`
+</Note>
+
+<Warning>
+Make sure the `order_external_id` is unique within your system to avoid conflicts when creating orders.
+</Warning>

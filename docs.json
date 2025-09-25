@@ -98,9 +98,27 @@
           },
           {
             "group": "Member API",
+            
+            
             "openapi": {
               "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/userservice/staging/openapi_public.json"
-            }
+            },
+            "pages": [
+              {
+                "group": "Manual",
+                "pages": ["api-reference/endpoint/users/link"]
+              }
+            ]
+          },
+          {
+            "group": "Link API",
+            "pages": ["api-reference/endpoint/users/link"]
+          },
+          {
+            "group": "Orders",
+            "pages": [
+              "api-reference/endpoint/orders/create"
+            ]
           },
           {
             "group": "Campaign API",

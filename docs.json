@@ -111,10 +111,6 @@
             ]
           },
           {
-            "group": "Link API",
-            "pages": ["api-reference/endpoint/users/link"]
-          },
-          {
             "group": "Orders",
             "pages": [
               "api-reference/endpoint/orders/create"

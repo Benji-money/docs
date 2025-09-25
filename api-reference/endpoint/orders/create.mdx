@@ -11,14 +11,12 @@ This endpoint allows you to create an external order in the Benji platform. This
 
 ### Request Body
 
-<ParamField body="merchant_external_id" type="string" required>
-  The external identifier of the merchant in your system
-</ParamField>
 
-<ParamField body="users" type="object" required>
+
+<ParamField body="user" type="object" required>
   User identification information. **At least one of the following fields must be provided:**
   <Expandable title="properties" defaultOpen="true">
-    <ParamField body="merchant_external_id" type="string" optional>
+    <ParamField body="user_external_id" type="string" optional>
       The external user identifier from the merchant's system
     </ParamField>
     <ParamField body="user_link_id" type="string" optional>
@@ -34,7 +32,7 @@ This endpoint allows you to create an external order in the Benji platform. This
   The total transaction amount in cents (e.g., $1.50 = 150)
 </ParamField>
 
-<ParamField body="transaction_sub_total" type="integer" required>
+<ParamField body="transaction_subtotal" type="integer" required>
   The subtotal transaction amount in cents (before taxes, fees, etc.)
 </ParamField>
 
@@ -70,10 +68,6 @@ This endpoint allows you to create an external order in the Benji platform. This
   Status code indicating the result of the operation
 </ResponseField>
 
-<ResponseField name="message" type="string">
-  Human-readable message describing the result
-</ResponseField>
-
 <ResponseField name="data" type="object">
   Response data containing the order information
   <Expandable title="properties" defaultOpen="true">
@@ -82,15 +76,9 @@ This endpoint allows you to create an external order in the Benji platform. This
     </ResponseField>
     <ResponseField name="external_order_id" type="string">
       The external order identifier provided in the request
-    </ResponseField>
-    <ResponseField name="merchant_id" type="string">
-      The Benji platform merchant ID
-    </ResponseField>
+    </ResponseField>    
     <ResponseField name="user_id" type="string">
       The Benji platform user ID associated with the order
-    </ResponseField>
-    <ResponseField name="total_amount" type="integer">
-      The total transaction amount in cents
     </ResponseField>
     <ResponseField name="status" type="string">
       The current status of the order

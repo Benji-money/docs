@@ -1,0 +1,424 @@
+---
+title: "ALP Best Practices"
+sidebarTitle: "Best Practices"
+description: "Advanced guidelines and best practices for optimal Agentic Loyalty Protocol implementation"
+---
+
+## Performance Optimization
+
+### Response Time Requirements
+
+<Warning>
+  ALP endpoints must respond within 2 seconds to maintain optimal user experience.
+</Warning>
+
+**Target Response Times:**
+- **Simple enrichments**: < 500ms
+- **Complex enrichments**: < 1.5s
+- **Maximum allowed**: 2s
+
+### Caching Strategies
+
+Implement intelligent caching to improve performance:
+
+```javascript
+// Example caching implementation
+const cache = new Map();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+async function getEnrichmentData(sessionId, merchantId) {
+  const cacheKey = `${merchantId}:${sessionId}`;
+  const cached = cache.get(cacheKey);
+  
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  
+  const data = await fetchEnrichmentData(sessionId, merchantId);
+  cache.set(cacheKey, {
+    data,
+    timestamp: Date.now()
+  });
+  
+  return data;
+}
+```
+
+### Database Optimization
+
+- **Indexing**: Create indexes on frequently queried fields
+- **Connection Pooling**: Use connection pooling for database connections
+- **Query Optimization**: Optimize database queries for speed
+- **Read Replicas**: Use read replicas for enrichment data queries
+
+## Security Best Practices
+
+### API Key Management
+
+```javascript
+// Secure API key validation
+function validateApiKey(apiKey) {
+  if (!apiKey || apiKey.length < 32) {
+    throw new Error('Invalid API key format');
+  }
+  
+  // Additional validation logic
+  return true;
+}
+
+// Rate limiting per API key
+const rateLimiter = new Map();
+
+function checkRateLimit(apiKey) {
+  const now = Date.now();
+  const windowMs = 60 * 1000; // 1 minute
+  const maxRequests = 100;
+  
+  if (!rateLimiter.has(apiKey)) {
+    rateLimiter.set(apiKey, { count: 1, resetTime: now + windowMs });
+    return true;
+  }
+  
+  const limit = rateLimiter.get(apiKey);
+  
+  if (now > limit.resetTime) {
+    limit.count = 1;
+    limit.resetTime = now + windowMs;
+    return true;
+  }
+  
+  if (limit.count >= maxRequests) {
+    return false;
+  }
+  
+  limit.count++;
+  return true;
+}
+```
+
+### Data Validation
+
+```javascript
+// Comprehensive input validation
+const Joi = require('joi');
+
+const enrichmentSchema = Joi.object({
+  checkout_session_id: Joi.string().required().min(10).max(100),
+  merchant_id: Joi.string().required().alphanum().min(5).max(50),
+  customer_data: Joi.object({
+    email: Joi.string().email().required(),
+    phone: Joi.string().pattern(/^\+?[\d\s\-\(\)]+$/).optional(),
+    address: Joi.object({
+      city: Joi.string().max(100).optional(),
+      state: Joi.string().max(50).optional(),
+      country: Joi.string().length(2).optional(),
+      postal_code: Joi.string().max(20).optional()
+    }).optional()
+  }).required(),
+  cart_items: Joi.array().items(
+    Joi.object({
+      id: Joi.string().required().max(100),
+      name: Joi.string().required().max(200),
+      price: Joi.number().positive().required(),
+      quantity: Joi.number().integer().positive().required(),
+      category: Joi.string().max(100).optional()
+    })
+  ).required().min(1)
+});
+
+function validateEnrichmentRequest(req, res, next) {
+  const { error } = enrichmentSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({
+      success: false,
+      error: 'Invalid request data',
+      details: error.details[0].message
+    });
+  }
+  next();
+}
+```
+
+## Error Handling and Resilience
+
+### Circuit Breaker Pattern
+
+```javascript
+class CircuitBreaker {
+  constructor(threshold = 5, timeout = 60000) {
+    this.failureThreshold = threshold;
+    this.timeout = timeout;
+    this.failureCount = 0;
+    this.lastFailureTime = null;
+    this.state = 'CLOSED'; // CLOSED, OPEN, HALF_OPEN
+  }
+  
+  async execute(operation) {
+    if (this.state === 'OPEN') {
+      if (Date.now() - this.lastFailureTime > this.timeout) {
+        this.state = 'HALF_OPEN';
+      } else {
+        throw new Error('Circuit breaker is OPEN');
+      }
+    }
+    
+    try {
+      const result = await operation();
+      this.onSuccess();
+      return result;
+    } catch (error) {
+      this.onFailure();
+      throw error;
+    }
+  }
+  
+  onSuccess() {
+    this.failureCount = 0;
+    this.state = 'CLOSED';
+  }
+  
+  onFailure() {
+    this.failureCount++;
+    this.lastFailureTime = Date.now();
+    
+    if (this.failureCount >= this.failureThreshold) {
+      this.state = 'OPEN';
+    }
+  }
+}
+```
+
+### Retry Logic with Exponential Backoff
+
+```javascript
+async function retryWithBackoff(operation, maxRetries = 3) {
+  let lastError;
+  
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+      
+      if (attempt === maxRetries) {
+        throw error;
+      }
+      
+      // Exponential backoff: 1s, 2s, 4s
+      const delay = Math.pow(2, attempt) * 1000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError;
+}
+```
+
+## Monitoring and Observability
+
+### Comprehensive Logging
+
+```javascript
+// Structured logging
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
+  transports: [
+    new winston.transports.File({ filename: 'alp-errors.log', level: 'error' }),
+    new winston.transports.File({ filename: 'alp-combined.log' })
+  ]
+});
+
+// Log enrichment requests
+function logEnrichmentRequest(req, res, next) {
+  logger.info('ALP enrichment request', {
+    checkout_session_id: req.body.checkout_session_id,
+    merchant_id: req.body.merchant_id,
+    timestamp: new Date().toISOString(),
+    user_agent: req.get('User-Agent'),
+    ip: req.ip
+  });
+  next();
+}
+```
+
+### Metrics Collection
+
+```javascript
+// Prometheus metrics
+const prometheus = require('prom-client');
+
+const enrichmentCounter = new prometheus.Counter({
+  name: 'alp_enrichment_requests_total',
+  help: 'Total number of ALP enrichment requests',
+  labelNames: ['merchant_id', 'status']
+});
+
+const enrichmentDuration = new prometheus.Histogram({
+  name: 'alp_enrichment_duration_seconds',
+  help: 'Duration of ALP enrichment requests',
+  labelNames: ['merchant_id']
+});
+
+// Track metrics
+function trackEnrichmentMetrics(merchantId, status, duration) {
+  enrichmentCounter.inc({ merchant_id: merchantId, status });
+  enrichmentDuration.observe({ merchant_id: merchantId }, duration);
+}
+```
+
+### Health Checks
+
+```javascript
+// Health check endpoint
+app.get('/alp/health', async (req, res) => {
+  const health = {
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    services: {}
+  };
+  
+  // Check database connection
+  try {
+    await database.ping();
+    health.services.database = 'healthy';
+  } catch (error) {
+    health.services.database = 'unhealthy';
+    health.status = 'degraded';
+  }
+  
+  // Check external dependencies
+  try {
+    await externalService.healthCheck();
+    health.services.external = 'healthy';
+  } catch (error) {
+    health.services.external = 'unhealthy';
+    health.status = 'degraded';
+  }
+  
+  const statusCode = health.status === 'healthy' ? 200 : 503;
+  res.status(statusCode).json(health);
+});
+```
+
+## Data Privacy and Compliance
+
+### GDPR Compliance
+
+```javascript
+// Data anonymization for logging
+function anonymizeCustomerData(customerData) {
+  return {
+    ...customerData,
+    email: customerData.email ? 
+      customerData.email.replace(/(.{2}).*(@.*)/, '$1***$2') : null,
+    phone: customerData.phone ? 
+      customerData.phone.replace(/(.{3}).*(.{3})/, '$1***$2') : null
+  };
+}
+
+// Log with anonymized data
+logger.info('Enrichment request', {
+  checkout_session_id: req.body.checkout_session_id,
+  customer_data: anonymizeCustomerData(req.body.customer_data)
+});
+```
+
+### Data Retention Policies
+
+```javascript
+// Implement data retention
+const dataRetentionDays = 90;
+
+async function cleanupOldData() {
+  const cutoffDate = new Date();
+  cutoffDate.setDate(cutoffDate.getDate() - dataRetentionDays);
+  
+  await database.deleteOldEnrichmentData(cutoffDate);
+  await database.deleteOldLogs(cutoffDate);
+}
+```
+
+## Testing Strategies
+
+### Unit Testing
+
+```javascript
+// Example unit test
+describe('ALP Enrichment', () => {
+  test('should enrich checkout session with discounts', async () => {
+    const mockRequest = {
+      checkout_session_id: 'cs_123',
+      merchant_id: 'merchant_123',
+      customer_data: { email: 'test@example.com' },
+      cart_items: [{ id: 'item_1', name: 'Product', price: 10, quantity: 1 }]
+    };
+    
+    const result = await enrichCheckoutSession(mockRequest);
+    
+    expect(result.success).toBe(true);
+    expect(result.enrichment.discounts).toBeDefined();
+    expect(result.totals).toBeDefined();
+  });
+});
+```
+
+### Load Testing
+
+```javascript
+// Artillery.js load test configuration
+module.exports = {
+  config: {
+    target: 'https://api.your-service.com',
+    phases: [
+      { duration: '2m', arrivalRate: 10 },
+      { duration: '5m', arrivalRate: 20 },
+      { duration: '2m', arrivalRate: 10 }
+    ]
+  },
+  scenarios: [
+    {
+      name: 'ALP enrichment load test',
+      weight: 100,
+      flow: [
+        {
+          post: {
+            url: '/alp/enrich',
+            headers: {
+              'Authorization': 'Bearer {{ apiKey }}',
+              'Content-Type': 'application/json'
+            },
+            json: {
+              checkout_session_id: 'cs_{{ $randomString() }}',
+              merchant_id: 'merchant_123',
+              customer_data: {
+                email: 'test@example.com'
+              },
+              cart_items: [
+                {
+                  id: 'item_1',
+                  name: 'Test Product',
+                  price: 10,
+                  quantity: 1
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+};
+```
+
+---
+
+## Related Topics
+- [ALP Implementation Guide](./implementation) - Basic implementation steps
+- [ALP API Reference](./api-reference) - Complete API documentation
+- [ALP Troubleshooting](./troubleshooting) - Common issues and solutions

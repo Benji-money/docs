@@ -1,0 +1,311 @@
+---
+title: "ALP API Reference"
+sidebarTitle: "API Reference"
+description: "Complete technical documentation for Agentic Loyalty Protocol endpoints and data structures"
+---
+
+## Authentication
+
+ALP endpoints use API key authentication. Include your API key in the Authorization header:
+
+```bash
+Authorization: Bearer your-api-key
+```
+
+<Info>
+  Contact your Benji representative to obtain your ALP API key.
+</Info>
+
+## Endpoints
+
+### Enrich Checkout Session
+
+Enrich a checkout session with your loyalty service's data.
+
+**Endpoint:** `POST /alp/enrich`
+
+**Request Body:**
+
+```json
+{
+  "checkout_session_id": "string",
+  "merchant_id": "string", 
+  "customer_data": {
+    "email": "string",
+    "phone": "string",
+    "address": {
+      "city": "string",
+      "state": "string", 
+      "country": "string",
+      "postal_code": "string"
+    }
+  },
+  "cart_items": [
+    {
+      "id": "string",
+      "name": "string",
+      "price": "number",
+      "quantity": "number",
+      "category": "string"
+    }
+  ]
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": "boolean",
+  "enrichment": {
+    "discounts": [
+      {
+        "type": "percentage|fixed",
+        "value": "number",
+        "description": "string",
+        "code": "string"
+      }
+    ],
+    "recommendations": [
+      {
+        "product_id": "string",
+        "name": "string",
+        "reason": "string",
+        "price": "number"
+      }
+    ],
+    "loyalty_points": {
+      "earned": "number",
+      "available": "number", 
+      "message": "string"
+    },
+    "shipping": {
+      "options": [
+        {
+          "type": "standard|express|overnight",
+          "cost": "number",
+          "estimated_days": "number"
+        }
+      ]
+    }
+  },
+  "totals": {
+    "subtotal": "number",
+    "discount": "number",
+    "shipping": "number",
+    "tax": "number",
+    "total": "number"
+  },
+  "messages": ["string"]
+}
+```
+
+**Error Response:**
+
+```json
+{
+  "success": false,
+  "error": "string",
+  "code": "string",
+  "fallback": "boolean"
+}
+```
+
+## Data Types
+
+### Customer Data
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `email` | string | Customer email address |
+| `phone` | string | Customer phone number |
+| `address.city` | string | Customer city |
+| `address.state` | string | Customer state/province |
+| `address.country` | string | Customer country code (ISO 3166-1) |
+| `address.postal_code` | string | Customer postal/zip code |
+
+### Cart Items
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique product identifier |
+| `name` | string | Product name |
+| `price` | number | Product price |
+| `quantity` | number | Quantity ordered |
+| `category` | string | Product category |
+
+### Enrichment Data
+
+#### Discounts
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | "percentage" or "fixed" |
+| `value` | number | Discount value |
+| `description` | string | Human-readable description |
+| `code` | string | Optional discount code |
+
+#### Recommendations
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `product_id` | string | Recommended product ID |
+| `name` | string | Product name |
+| `reason` | string | Why this product is recommended |
+| `price` | number | Product price |
+
+#### Loyalty Points
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `earned` | number | Points earned with this purchase |
+| `available` | number | Total points available |
+| `message` | string | Points-related message |
+
+#### Shipping Options
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | Shipping method type |
+| `cost` | number | Shipping cost |
+| `estimated_days` | number | Estimated delivery time |
+
+## Error Codes
+
+| Code | Description | Action |
+|------|-------------|--------|
+| `INVALID_REQUEST` | Request data is invalid | Check request format |
+| `AUTHENTICATION_FAILED` | Invalid API key | Verify API key |
+| `RATE_LIMIT_EXCEEDED` | Too many requests | Implement backoff |
+| `SERVICE_UNAVAILABLE` | Service temporarily down | Retry with exponential backoff |
+| `ENRICHMENT_FAILED` | Enrichment process failed | Check logs and retry |
+
+## Rate Limits
+
+- **Standard**: 100 requests per minute
+- **Premium**: 1000 requests per minute
+- **Enterprise**: Custom limits available
+
+Rate limit headers are included in responses:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1640995200
+```
+
+## Webhooks
+
+### Enrichment Events
+
+Subscribe to enrichment events to track usage and performance:
+
+**Webhook URL:** `POST /alp/webhooks/enrichment`
+
+**Event Types:**
+- `enrichment.success` - Successful enrichment
+- `enrichment.failed` - Failed enrichment
+- `enrichment.timeout` - Enrichment timeout
+
+**Event Payload:**
+
+```json
+{
+  "event_type": "enrichment.success",
+  "timestamp": "2024-01-01T00:00:00Z",
+  "data": {
+    "checkout_session_id": "cs_1234567890",
+    "merchant_id": "merchant_abc123",
+    "response_time_ms": 150,
+    "enrichment_type": "discounts"
+  }
+}
+```
+
+## SDKs and Libraries
+
+### JavaScript/Node.js
+
+```bash
+npm install @benji/alp-sdk
+```
+
+```javascript
+import { ALPClient } from '@benji/alp-sdk';
+
+const client = new ALPClient({
+  apiKey: 'your-api-key',
+  baseUrl: 'https://api.withbenji.com'
+});
+
+const enrichment = await client.enrich({
+  checkout_session_id: 'cs_123',
+  merchant_id: 'merchant_123',
+  customer_data: customerData,
+  cart_items: cartItems
+});
+```
+
+### Python
+
+```bash
+pip install benji-alp
+```
+
+```python
+from benji_alp import ALPClient
+
+client = ALPClient(api_key='your-api-key')
+
+enrichment = client.enrich(
+    checkout_session_id='cs_123',
+    merchant_id='merchant_123',
+    customer_data=customer_data,
+    cart_items=cart_items
+)
+```
+
+## Testing
+
+### Sandbox Environment
+
+Use the sandbox environment for testing:
+
+**Base URL:** `https://sandbox-api.withbenji.com`
+
+**Test API Key:** `test_key_1234567890`
+
+### Test Data
+
+```json
+{
+  "checkout_session_id": "test_cs_1234567890",
+  "merchant_id": "test_merchant_123",
+  "customer_data": {
+    "email": "test@example.com",
+    "phone": "+1234567890",
+    "address": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "US",
+      "postal_code": "94105"
+    }
+  },
+  "cart_items": [
+    {
+      "id": "test_product_123",
+      "name": "Test Product",
+      "price": 29.99,
+      "quantity": 1,
+      "category": "electronics"
+    }
+  ]
+}
+```
+
+---
+
+## Related Topics
+- [ALP Implementation Guide](./implementation) - Step-by-step implementation
+- [ALP Best Practices](./best-practices) - Advanced implementation guidelines
+- [ALP Troubleshooting](./troubleshooting) - Common issues and solutions

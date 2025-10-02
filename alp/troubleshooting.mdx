@@ -1,0 +1,467 @@
+---
+title: "ALP Troubleshooting"
+sidebarTitle: "Troubleshooting"
+description: "Common issues and solutions for Agentic Loyalty Protocol implementation"
+---
+
+## Common Issues
+
+### Authentication Problems
+
+#### Issue: "Invalid API key" error
+
+**Symptoms:**
+- HTTP 401 Unauthorized responses
+- "Authentication failed" error messages
+
+**Solutions:**
+
+1. **Verify API Key Format:**
+   ```bash
+   # Check if API key is properly formatted
+   curl -H "Authorization: Bearer your-api-key" \
+        https://api.withbenji.com/alp/health
+   ```
+
+2. **Check API Key Permissions:**
+   - Ensure your API key has ALP permissions enabled
+   - Verify the key hasn't expired
+   - Check if the key is for the correct environment (sandbox vs production)
+
+3. **Regenerate API Key:**
+   - If the key is compromised or lost, generate a new one
+   - Update all integrations with the new key
+
+#### Issue: Rate limiting errors
+
+**Symptoms:**
+- HTTP 429 Too Many Requests
+- "Rate limit exceeded" error messages
+
+**Solutions:**
+
+1. **Implement Exponential Backoff:**
+   ```javascript
+   async function retryWithBackoff(operation, maxRetries = 3) {
+     for (let attempt = 0; attempt <= maxRetries; attempt++) {
+       try {
+         return await operation();
+       } catch (error) {
+         if (error.status === 429 && attempt < maxRetries) {
+           const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s
+           await new Promise(resolve => setTimeout(resolve, delay));
+           continue;
+         }
+         throw error;
+       }
+     }
+   }
+   ```
+
+2. **Implement Request Queuing:**
+   ```javascript
+   class RequestQueue {
+     constructor(maxConcurrent = 10) {
+       this.queue = [];
+       this.running = 0;
+       this.maxConcurrent = maxConcurrent;
+     }
+     
+     async add(operation) {
+       return new Promise((resolve, reject) => {
+         this.queue.push({ operation, resolve, reject });
+         this.process();
+       });
+     }
+     
+     async process() {
+       if (this.running >= this.maxConcurrent || this.queue.length === 0) {
+         return;
+       }
+       
+       this.running++;
+       const { operation, resolve, reject } = this.queue.shift();
+       
+       try {
+         const result = await operation();
+         resolve(result);
+       } catch (error) {
+         reject(error);
+       } finally {
+         this.running--;
+         this.process();
+       }
+     }
+   }
+   ```
+
+### Performance Issues
+
+#### Issue: Slow response times
+
+**Symptoms:**
+- Response times > 2 seconds
+- Timeout errors
+- Poor user experience
+
+**Solutions:**
+
+1. **Database Optimization:**
+   ```sql
+   -- Add indexes for frequently queried fields
+   CREATE INDEX idx_merchant_customer ON enrichment_data(merchant_id, customer_email);
+   CREATE INDEX idx_session_timestamp ON enrichment_data(session_id, created_at);
+   
+   -- Optimize queries
+   EXPLAIN ANALYZE SELECT * FROM enrichment_data 
+   WHERE merchant_id = ? AND created_at > NOW() - INTERVAL '1 hour';
+   ```
+
+2. **Implement Caching:**
+   ```javascript
+   const Redis = require('redis');
+   const client = Redis.createClient();
+   
+   async function getCachedEnrichment(key) {
+     const cached = await client.get(key);
+     return cached ? JSON.parse(cached) : null;
+   }
+   
+   async function setCachedEnrichment(key, data, ttl = 300) {
+     await client.setex(key, ttl, JSON.stringify(data));
+   }
+   ```
+
+3. **Async Processing:**
+   ```javascript
+   // Process enrichment in background
+   async function processEnrichmentAsync(sessionData) {
+     // Return immediately with processing status
+     const processingId = generateId();
+     
+     // Process in background
+     setImmediate(async () => {
+       try {
+         const result = await performEnrichment(sessionData);
+         await storeResult(processingId, result);
+       } catch (error) {
+         await storeError(processingId, error);
+       }
+     });
+     
+     return { processing_id: processingId, status: 'processing' };
+   }
+   ```
+
+#### Issue: Memory leaks
+
+**Symptoms:**
+- Increasing memory usage over time
+- Application crashes
+- Slow performance
+
+**Solutions:**
+
+1. **Proper Resource Cleanup:**
+   ```javascript
+   // Clean up database connections
+   process.on('SIGTERM', async () => {
+     await database.close();
+     await redis.quit();
+     process.exit(0);
+   });
+   
+   // Clean up event listeners
+   process.on('uncaughtException', (error) => {
+     console.error('Uncaught Exception:', error);
+     cleanup();
+     process.exit(1);
+   });
+   ```
+
+2. **Memory Monitoring:**
+   ```javascript
+   // Monitor memory usage
+   setInterval(() => {
+     const usage = process.memoryUsage();
+     console.log('Memory Usage:', {
+       rss: Math.round(usage.rss / 1024 / 1024) + ' MB',
+       heapTotal: Math.round(usage.heapTotal / 1024 / 1024) + ' MB',
+       heapUsed: Math.round(usage.heapUsed / 1024 / 1024) + ' MB'
+     });
+   }, 30000);
+   ```
+
+### Data Issues
+
+#### Issue: Invalid enrichment data
+
+**Symptoms:**
+- Malformed responses
+- Missing required fields
+- Incorrect data types
+
+**Solutions:**
+
+1. **Input Validation:**
+   ```javascript
+   const Joi = require('joi');
+   
+   const enrichmentSchema = Joi.object({
+     checkout_session_id: Joi.string().required(),
+     merchant_id: Joi.string().required(),
+     customer_data: Joi.object({
+       email: Joi.string().email().required()
+     }).required(),
+     cart_items: Joi.array().items(
+       Joi.object({
+         id: Joi.string().required(),
+         name: Joi.string().required(),
+         price: Joi.number().positive().required(),
+         quantity: Joi.number().integer().positive().required()
+       })
+     ).required()
+   });
+   
+   function validateRequest(req, res, next) {
+     const { error } = enrichmentSchema.validate(req.body);
+     if (error) {
+       return res.status(400).json({
+         success: false,
+         error: 'Invalid request data',
+         details: error.details[0].message
+       });
+     }
+     next();
+   }
+   ```
+
+2. **Response Validation:**
+   ```javascript
+   function validateEnrichmentResponse(data) {
+     const requiredFields = ['success', 'enrichment', 'totals'];
+     const missingFields = requiredFields.filter(field => !(field in data));
+     
+     if (missingFields.length > 0) {
+       throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
+     }
+     
+     if (data.success && !data.enrichment) {
+       throw new Error('Enrichment data missing for successful response');
+     }
+     
+     return true;
+   }
+   ```
+
+#### Issue: Data inconsistency
+
+**Symptoms:**
+- Different results for same input
+- Stale data being returned
+- Race conditions
+
+**Solutions:**
+
+1. **Implement Data Versioning:**
+   ```javascript
+   // Add version to enrichment data
+   const enrichmentData = {
+     version: '1.0',
+     timestamp: new Date().toISOString(),
+     data: {
+       discounts: [...],
+       recommendations: [...]
+     }
+   };
+   ```
+
+2. **Use Database Transactions:**
+   ```javascript
+   async function updateEnrichmentData(sessionId, data) {
+     const transaction = await database.beginTransaction();
+     
+     try {
+       await transaction.query(
+         'UPDATE enrichment_data SET data = ?, updated_at = NOW() WHERE session_id = ?',
+         [JSON.stringify(data), sessionId]
+       );
+       
+       await transaction.commit();
+     } catch (error) {
+       await transaction.rollback();
+       throw error;
+     }
+   }
+   ```
+
+### Integration Issues
+
+#### Issue: ACP checkout integration problems
+
+**Symptoms:**
+- Enrichment not appearing in checkout
+- Incorrect data display
+- Integration failures
+
+**Solutions:**
+
+1. **Verify ACP Integration:**
+   ```javascript
+   // Test ACP integration
+   async function testACPIntegration() {
+     const testSession = {
+       checkout_session_id: 'test_cs_123',
+       merchant_id: 'test_merchant',
+       customer_data: { email: 'test@example.com' },
+       cart_items: [{ id: 'test_item', name: 'Test Product', price: 10, quantity: 1 }]
+     };
+     
+     const response = await fetch('https://api.withbenji.com/alp/enrich', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer your-api-key'
+       },
+       body: JSON.stringify(testSession)
+     });
+     
+     const result = await response.json();
+     console.log('ACP Integration Test:', result);
+   }
+   ```
+
+2. **Debug ACP Data Flow:**
+   ```javascript
+   // Add detailed logging for ACP integration
+   function logACPIntegration(sessionId, merchantId, requestData, responseData) {
+     console.log('ACP Integration Debug:', {
+       session_id: sessionId,
+       merchant_id: merchantId,
+       request_timestamp: new Date().toISOString(),
+       request_data: requestData,
+       response_data: responseData,
+       processing_time_ms: Date.now() - requestData.timestamp
+     });
+   }
+   ```
+
+## Debugging Tools
+
+### Health Check Endpoint
+
+```javascript
+app.get('/alp/debug/health', async (req, res) => {
+  const health = {
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    services: {},
+    metrics: {}
+  };
+  
+  // Check database
+  try {
+    const dbStart = Date.now();
+    await database.query('SELECT 1');
+    health.services.database = {
+      status: 'healthy',
+      response_time_ms: Date.now() - dbStart
+    };
+  } catch (error) {
+    health.services.database = {
+      status: 'unhealthy',
+      error: error.message
+    };
+    health.status = 'degraded';
+  }
+  
+  // Check cache
+  try {
+    const cacheStart = Date.now();
+    await redis.ping();
+    health.services.cache = {
+      status: 'healthy',
+      response_time_ms: Date.now() - cacheStart
+    };
+  } catch (error) {
+    health.services.cache = {
+      status: 'unhealthy',
+      error: error.message
+    };
+    health.status = 'degraded';
+  }
+  
+  // System metrics
+  health.metrics = {
+    memory_usage: process.memoryUsage(),
+    uptime: process.uptime(),
+    node_version: process.version
+  };
+  
+  res.json(health);
+});
+```
+
+### Request Tracing
+
+```javascript
+// Add request tracing
+function addRequestTracing(req, res, next) {
+  const traceId = generateTraceId();
+  req.traceId = traceId;
+  
+  // Add trace ID to response headers
+  res.set('X-Trace-Id', traceId);
+  
+  // Log request start
+  console.log(`[${traceId}] Request started:`, {
+    method: req.method,
+    url: req.url,
+    timestamp: new Date().toISOString()
+  });
+  
+  // Log request end
+  res.on('finish', () => {
+    console.log(`[${traceId}] Request completed:`, {
+      status: res.statusCode,
+      duration_ms: Date.now() - req.startTime
+    });
+  });
+  
+  next();
+}
+```
+
+## Getting Help
+
+### Support Channels
+
+- **Email**: support@withbenji.com
+- **Documentation**: [ALP Documentation](./introduction)
+- **Community**: [Benji Developer Community](https://community.withbenji.com)
+
+### Reporting Issues
+
+When reporting issues, include:
+
+1. **Error Details:**
+   - Full error message
+   - Stack trace
+   - Request/response data
+
+2. **Environment Information:**
+   - Node.js version
+   - Operating system
+   - ALP SDK version
+
+3. **Reproduction Steps:**
+   - Steps to reproduce the issue
+   - Sample request data
+   - Expected vs actual behavior
+
+---
+
+## Related Topics
+- [ALP Implementation Guide](./implementation) - Basic implementation steps
+- [ALP Best Practices](./best-practices) - Advanced implementation guidelines
+- [ALP API Reference](./api-reference) - Complete API documentation

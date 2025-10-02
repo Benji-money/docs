@@ -1,0 +1,260 @@
+---
+title: "ALP Implementation Guide"
+sidebarTitle: "Implementation"
+description: "Step-by-step guide for merchants to make their loyalty programs available in AI shopping"
+---
+
+## Why Merchants Need ALP
+
+Your customers are already starting to shop with AI agents like ChatGPT. When they do, they expect their loyalty benefits to be there automatically. Without ALP, your loyalty programs become invisible in the fastest-growing shopping channel.
+
+## Prerequisites
+
+Before implementing ALP, ensure you have:
+
+- An existing loyalty program (points, rewards, discounts, etc.)
+- Basic understanding of REST APIs and webhooks
+- Access to your loyalty program's data and systems
+- A development team or technical partner
+
+## Implementation Steps
+
+### Step 1: Create Your ALP Loyalty Endpoint
+
+Create an endpoint that makes your loyalty program available in AI shopping. This endpoint will be called whenever a customer shops through an AI agent:
+
+```javascript
+// Example: Make your loyalty program available in AI shopping
+app.post('/alp/enrich', async (req, res) => {
+  try {
+    const { checkout_session_id, merchant_id, customer_data, cart_items } = req.body;
+    
+    // Check if customer has loyalty account and get their benefits
+    const customerLoyaltyData = await getCustomerLoyaltyBenefits({
+      customerEmail: customer_data.email,
+      merchantId: merchant_id,
+      cartValue: calculateCartValue(cart_items)
+    });
+    
+    // Return loyalty benefits that will appear in AI shopping cart
+    res.json({
+      success: true,
+      enrichment: {
+        loyalty_points: {
+          earned: customerLoyaltyData.pointsEarned,
+          available: customerLoyaltyData.pointsBalance,
+          message: `Earn ${customerLoyaltyData.pointsEarned} points with this purchase!`
+        },
+        discounts: customerLoyaltyData.availableDiscounts,
+        rewards: customerLoyaltyData.availableRewards
+      },
+      totals: {
+        loyalty_discount: customerLoyaltyData.discountAmount,
+        final_total: calculateFinalTotal(cart_items, customerLoyaltyData.discountAmount)
+      },
+      messages: [
+        `You have ${customerLoyaltyData.pointsBalance} loyalty points available`,
+        `Earn ${customerLoyaltyData.pointsEarned} points with this purchase!`
+      ]
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+```
+
+### Step 2: Understand AI Shopping Data
+
+When customers shop through AI agents, your endpoint receives data about their shopping session:
+
+```json
+{
+  "checkout_session_id": "cs_1234567890",
+  "merchant_id": "merchant_abc123",
+  "customer_data": {
+    "email": "customer@example.com",
+    "phone": "+1234567890",
+    "address": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "US"
+    }
+  },
+  "cart_items": [
+    {
+      "id": "item_123",
+      "name": "Product Name",
+      "price": 29.99,
+      "quantity": 1
+    }
+  ]
+}
+```
+
+### Step 3: Return Loyalty Benefits for AI Shopping
+
+Your response should include the loyalty benefits that will appear in the AI shopping experience:
+
+```json
+{
+  "success": true,
+  "enrichment": {
+    "discounts": [
+      {
+        "type": "percentage",
+        "value": 10,
+        "description": "10% off for new customers"
+      }
+    ],
+    "recommendations": [
+      {
+        "product_id": "rec_123",
+        "name": "Recommended Product",
+        "reason": "Frequently bought together"
+      }
+    ],
+    "loyalty_points": {
+      "earned": 150,
+      "available": 500,
+      "message": "Earn 150 points with this purchase"
+    }
+  },
+  "totals": {
+    "subtotal": 29.99,
+    "discount": 2.99,
+    "total": 27.00
+  },
+  "messages": [
+    "You're eligible for free shipping!",
+    "Earn 150 loyalty points with this purchase"
+  ]
+}
+```
+
+## How Merchants Integrate ALP
+
+### For Merchants: Making Your Loyalty Program Available in AI Shopping
+
+To make your loyalty program available when customers shop through AI agents, add this simple integration to your checkout system:
+
+```javascript
+// Add this to your checkout system to make loyalty benefits available in AI shopping
+const loyaltyEnrichment = await fetch('https://your-loyalty-system.com/alp/enrich', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your-loyalty-api-key'
+  },
+  body: JSON.stringify({
+    checkout_session_id: session.id,
+    merchant_id: session.merchant_id,
+    customer_data: session.customer,
+    cart_items: session.items
+  })
+});
+
+const loyaltyBenefits = await loyaltyEnrichment.json();
+
+// Make loyalty benefits visible in AI shopping experience
+if (loyaltyBenefits.success) {
+  // Add loyalty discounts to cart total
+  session.totals = { ...session.totals, ...loyaltyBenefits.totals };
+  
+  // Show loyalty messages to customer in AI shopping
+  session.messages = [...(session.messages || []), ...loyaltyBenefits.messages];
+  
+  // Include loyalty points and rewards in AI shopping cart
+  session.loyalty_benefits = loyaltyBenefits.enrichment;
+}
+```
+
+## Best Practices
+
+### Performance Optimization
+
+<Warning>
+  ALP endpoints should respond within 2 seconds to maintain good user experience.
+</Warning>
+
+- **Caching**: Implement caching for frequently requested data
+- **Async Processing**: Use background processing for complex calculations
+- **Rate Limiting**: Implement rate limiting to prevent abuse
+- **Monitoring**: Set up monitoring and alerting for your ALP endpoints
+
+### Security Considerations
+
+- **Authentication**: Implement proper API key authentication
+- **Data Validation**: Validate all incoming data
+- **HTTPS Only**: Always use HTTPS for ALP endpoints
+- **Input Sanitization**: Sanitize all inputs to prevent injection attacks
+
+### Error Handling
+
+```javascript
+// Example error handling
+app.post('/alp/enrich', async (req, res) => {
+  try {
+    // Your enrichment logic
+    const result = await processEnrichment(req.body);
+    res.json({ success: true, ...result });
+  } catch (error) {
+    console.error('ALP Enrichment Error:', error);
+    
+    // Return graceful error response
+    res.status(500).json({
+      success: false,
+      error: 'Enrichment service temporarily unavailable',
+      fallback: true // Indicates merchant should proceed without enrichment
+    });
+  }
+});
+```
+
+## Testing Your ALP Implementation
+
+### Local Testing
+
+```bash
+# Test your ALP endpoint locally
+curl -X POST http://localhost:3000/alp/enrich \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-test-key" \
+  -d '{
+    "checkout_session_id": "test_session_123",
+    "merchant_id": "test_merchant",
+    "customer_data": {
+      "email": "test@example.com"
+    },
+    "cart_items": [
+      {
+        "id": "test_item",
+        "name": "Test Product",
+        "price": 10.00,
+        "quantity": 1
+      }
+    ]
+  }'
+```
+
+### Production Testing
+
+1. **Staging Environment**: Test with real merchant data in staging
+2. **Load Testing**: Ensure your endpoint can handle expected traffic
+3. **Integration Testing**: Test with actual ACP checkout flows
+4. **Monitoring**: Set up comprehensive monitoring and alerting
+
+## Next Steps
+
+- [ALP API Reference](./api-reference) - Complete API documentation
+- [ALP Best Practices](./best-practices) - Advanced implementation guidelines
+- [ALP Troubleshooting](./troubleshooting) - Common issues and solutions
+
+---
+
+## Related Topics
+- [ALP Introduction](./introduction) - Overview of ALP
+- [Benji Connect SDK](../connect/introduction) - For loyalty integrations
+- [API Reference](../api-reference/introduction) - General API documentation

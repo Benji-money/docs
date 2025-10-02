@@ -81,6 +81,22 @@
         ]
       },
       {
+        "tab": "Agentic Loyalty Protocol",
+        "groups": [
+          {
+            "group": "ALP Documentation",
+            "pages": [
+              "alp/introduction",
+              "alp/implementation",
+              "alp/api-reference",
+              "alp/best-practices",
+              "alp/troubleshooting",
+              "alp/coming-soon"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API Reference",
         "groups": [
           {

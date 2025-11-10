@@ -5,9 +5,14 @@ sidebarTitle: 'Authentication'
 ---
 
 All API endpoints are authenticated using Bearer tokens. There are 2 types of bearer tokens supported :
-- **User based access tokens**, to initiate user based activites such as earn, reddem and get status actions.
+- **User based access tokens**, to initiate user based activites such as earn, reddem and get status actions. This tokens are returned as part of the access/token/exchange API flow following the connect Sdk onSuccess callback.
 - **Partner tokens**, which you can obtain as part of your onboarding process and can view on your developer settings page on Pilot, for all non user based interactions like retrieving campaign and partner information
 
+<Warning>
+  Note that user tokens are short lived and must be refreshed using the access/token/refresh API endpoint before they expire. User tokens are typically valid for 90 days. If a token has expired, yo will get a 401 error form the relevant API endpoint. You can refresh the token using the access/token/refresh API endpoint.
+</Warning>
+
+<Tip>In APIs that support user_id or user_external_ids, you can either use the Partner Token and explicitlly specify the user_id, or user the user based access token and omit these parameters since they are distinguished through the access token</Tip>
 <ParamField header="Bearer <token>" type="string" required>
   Partner or User token
 </ParamField>

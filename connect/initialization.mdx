@@ -12,6 +12,21 @@ The Benji Connect SDK can be added to your application by including the SDK scri
 <script src="https://d1ochlq3jv1msw.cloudfront.net/connect/sdk/connect-sdk.js"></script>
 ```
 
+or by installing the package via npm
+```bash
+npm install @benji-money/connect-sdk
+```
+
+or by installing the package via yarn
+```bash
+yarn add @benji-money/connect-sdk
+```
+
+or by installing the package via pnpm
+```bash
+pnpm add @benji-money/connect-sdk
+```
+<Warning>Note that you will be able to acces sthe above packages/scripts once authorized to use the Benji SDKs. Contact your account manager for additional info</Warning>
 ### Initializing the SDK 
 
 The SDK is initialized with the following parameters :
@@ -20,19 +35,19 @@ The SDK is initialized with the following parameters :
   This is the token that you created using the [Create Token API](/connect/create_token) in the previous step
 </ParamField>
 
-<ParamField body="onSuccess" type="callbak function" required>
+<ParamField body="onSuccess" type="callbak function">
   This is your callback function method, which will be triggered when a member has succesfully connected with a partner loyalty program
 </ParamField>
 
-<ParamField body="onExit" type="callbak function" required>
+<ParamField body="onExit" type="callbak function">
   This is your callback function method, which will be triggered when a member has closed the Benji Connect Modal. Note that this function can be whether the onSuccess callback has been called or not.
 </ParamField>
 
-<ParamField body="onError" type="callbak function" required>
+<ParamField body="onError" type="callbak function">
   This is your callback function method, which will be triggered when a member encountered an error while connecting with their account.
 </ParamField>
 
-<ParamField body="onEvent" type="callbak function" required>
+<ParamField body="onEvent" type="callbak function">
   This is your callback function method, which will be triggered for various events throughout the user journey within the Benji Connect flow.
 </ParamField>
 
@@ -41,7 +56,7 @@ The SDK is initialized with the following parameters :
 let sdk = null;
 
 function initializeSDK(token) {
-    sdk = new AuthSDK({
+    sdk = new ConnectSDK({
         token: token,
         onSuccess: (token, metadata) => {
             console.log('Connect successful', token, metadata);

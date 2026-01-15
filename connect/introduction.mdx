@@ -21,8 +21,8 @@ The Benji SDK is a simple javascript SDK meant to simplify connectivity to your 
 
 The flow to to connect a member to their loyalty reward program using the Benji Connect SDK is as follows :
 
-- [Call the token/create Auth API endpoint](/connect/create_token) to generate an initialization token to pass to the SDK. When calling this endpoint, you will be providing basic information such as user identifier, geo location if applicable, product information etc..
-- [Initialize the SDK](/connect/initialization) using the token retrieved from the previous endpoint. When initializaing the SDK, you will also be passing success, error and event callback functions in order to listen to events coming from the SDK.
+- [Call the connect/token Auth API endpoint](/connect/create_token) to generate a connect token to pass in when initializing the Benji Connect SDK. When calling the connect/token endpoint, you will be providing basic information such as the mode, partnership information, user information etc..
+- [Initialize the SDK](/connect/initialization) using the connect token retrieved from the previous endpoint. When initializaing the SDK, you also have the option to pass in success, error exit, and event callback functions in order to listen to events coming from the SDK.
 - [Interact with the SDK and listen to events](/connect/methods) coming from the SDK, giving you information regarding the user's journey and status while going through the Benji Connect flow.
 - [(Optional) Exchange the token](/connect/exchange_token) returned on the onSuccess event using the token/exchange Auth API endpoint to retrieve a user specific access token and refresh token. This will be the token you will be using when interacting with any user specific endpoints on the Benji Platform APIs.
 

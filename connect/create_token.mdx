@@ -2,7 +2,7 @@
 title: 'Create a Connect Token to initialize the SDK'
 description: 'Create a Connect Token to initialize an instance of the Benji Connect SDK.'
 sidebarTitle: "Create Connect Token"
-api: 'POST https://authservice.withbenji.com/connect/token'
+api: 'POST https://authservice-staging.withbenji.com/connect/token'
 ---
 
 <Note>The Bearer token to be used on this API is your **partner access token**.</Note>
@@ -48,7 +48,7 @@ api: 'POST https://authservice.withbenji.com/connect/token'
 <RequestExample>
 ```bash Request Template
 curl --request POST \
-  --url https://authservice.withbenji.com/connect/token \
+  --url https://authservice-staging.withbenji.com/connect/token \
   --header 'Authorization: Bearer <token>' \
   --header 'Content-Type: application/json' \
   --data '

@@ -1,24 +1,117 @@
 ---
-title: 'Create a token to initialize the SDK'
-description: 'Create a token to initialize an instance of the Benji Connect SDK.'
-sidebarTitle: "Create Token"
-api: 'POST https://authservice.withbenji.com/verify/token/create'
+title: 'Create a Connect Token to initialize the SDK'
+description: 'Create a Connect Token to initialize an instance of the Benji Connect SDK.'
+sidebarTitle: "Create Connect Token"
+api: 'POST https://authservice.withbenji.com/connect/token'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+<Note>The Bearer token to be used on this API is your **partner access token**.</Note>
 
-<ParamField body="user_external_id" type="string" required>
-  A unique identifier associated with the user connecting their loyalty reward program
+<ParamField body="display_name" type="string" required>
+  The partnership display name you wish to be shown in the Benji Connect flow UI _Note: If this is not passed, the name configured on the Benji platform will be used._
 </ParamField>
-<ParamField body="display_name" type="string">
-  The name of your store you wish to be displayed in the Benji Connect flow. If this is not passed, the name configured on the Benji platform will be used
+<ParamField body="merchant_id" type="number" required>
+  The connecting merchant's identifier on the Benji Platform
 </ParamField>
-<ParamField body="user_ip" type="string">
-  The IP of the user currently connecting. Note that this is required if there are any geo specific conditions applied to the partner campaigns.
+<ParamField body="mode" type="number" required>
+  The connection mode for the SDK (Connect = 1, Transfer = 3, and Redeem = 4)
 </ParamField>
-<ParamField body="partner_ids" type="string array">
-  For marketplace only scenarios, if you want to filter specific partners, pass an array of their respective identifiers on the Benji Platform. The full list if Benji Partner IDs can be found in the partners page on the Benji dashboard, Pilot.
+<ParamField body="partner_id" type="number" required>
+  The partner's identifier on the Benji Platform
 </ParamField>
+<ParamField body="partnership_id" type="number" required>
+  The partnership identifier on the Benji Platform
+</ParamField>
+<ParamField body="user_external_id" type="string">
+  A unique identifier associated with the user connecting their loyalty reward program, when set flow skips the initial user authorization with the partner and continues to authorize the user with the related merchant/partner.  
+</ParamField>
+<ParamField body="custom_attributes" type="object" optional>
+  Custom attributes for the connection flow
+  <Expandable title="properties" defaultOpen="true">
+    <ParamField body="actions" type="array" optional>
+      Array of actions to be performed during the connection flow
+      <Expandable title="action properties" defaultOpen="true">
+        <ParamField body="mode" type="number" optional>
+          The action mode (Transfer = 3, Redeem = 4)
+        </ParamField>
+        <ParamField body="amount" type="number" optional>
+          The points amount to transfer or redeem from the partner
+        </ParamField>
+        <ParamField body="allows_editing" type="boolean" optional>
+          Determines whether the user can edit the points amount in the UI or not
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<RequestExample>
+```bash Request Template
+curl --request POST \
+  --url https://authservice.withbenji.com/connect/token \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '
+{
+  "mode": "<number>",
+  "display_name": "<string>",
+  "merchant_id": "<number>",
+  "partner_id": "<number>",
+  "partnership_id": "<number>",
+  "user_external_id": "<string>",
+  "custom_attributes": {
+    "actions": [
+      {
+        "mode": "<number>",
+        "amount": "<number>",
+        "allows_editing": "<boolean>"
+      }
+    ]
+  }
+}
+'
+```
+
+```json Connect (minimal)
+{
+    "mode": 1,
+    "display_name": "Reward Cookies",
+    "partner_id": 3,
+    "partnership_id": 49,
+    "merchant_id": 48
+}
+```
+
+```json With user_external_id
+{
+    "mode": 1,
+    "display_name": "Reward Cookies",
+    "partner_id": 3,
+    "partnership_id": 49,
+    "merchant_id": 48,
+    "user_external_id": "1234"
+}
+```
+
+```json With custom_attributes
+{
+    "mode": 3,
+    "display_name": "Reward Cookies",
+    "partner_id": 3,
+    "partnership_id": 49,
+    "merchant_id": 48,
+    "custom_attributes": {
+        "actions": [
+            {
+                "mode": 3,
+                "amount": 1000,
+                "allows_editing": true
+            }
+        ]
+    }
+}
+```
+</RequestExample>
 
 ### Return values 
 <ResponseField name="token" type="string" required>

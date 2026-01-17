@@ -31,14 +31,17 @@ In order to optionally authenticate and validate that the webhook was received f
 The signature is essentially the webhook body, signed with the salt provided in the response from the [subscribe endpoint](/api-reference/webhooks/subscribe), using a HMAC SHA-256 (HS256) algorithm.
 To authenticate the webhook, you can go through the following steps : 
 - Store the salt returned in the subscribe API call.
-- When receieving a webhook, use the salt to create a signature using the body of the webhook and the salt from the previous step using the HS256 algorithm.
+- When receiving a webhook:
+  - Extract the timestamp from the x-benji-timestamp header value
+  - Create the signature input by concatenating: **timestamp** and **body**
+  - Generate a signature using HMAC SHA-256 with your stored salt: HMAC-SHA256(salt, concatenated timestamp and body string)
 - Extract the provided signature from the x-benji-signature header value
-- Compare your signed body and the siganture provided, and continue processing the webhook only if the signatures match.
+- Compare your signed body and the signature provided, and continue processing the webhook only if the signatures match.
 
 The webhook will also contain a header including the datetime in GMT format of the event. Typically, you can use this field to validate that this webhook is not a **replay** event.
 
 <ParamField header="x-benji-signature" type="string">Signature described above</ParamField>
-<ParamField header="x-webhook-datetime" type="string">String representing the datetime in GMT format of the event</ParamField>
+<ParamField header="x-benji-timestamp" type="string">String representing the datetime in GMT format of the event</ParamField>
 
 ### Webhook body sample
 

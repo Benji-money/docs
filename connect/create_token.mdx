@@ -45,34 +45,11 @@ api: 'POST https://authservice-staging.withbenji.com/connect/token'
   </Expandable>
 </ParamField>
 
-<RequestExample>
-```bash Request Template
-curl --request POST \
-  --url https://authservice-staging.withbenji.com/connect/token \
-  --header 'Authorization: Bearer <token>' \
-  --header 'Content-Type: application/json' \
-  --data '
-{
-  "mode": "<number>",
-  "display_name": "<string>",
-  "merchant_id": "<number>",
-  "partner_id": "<number>",
-  "partnership_id": "<number>",
-  "user_external_id": "<string>",
-  "custom_attributes": {
-    "actions": [
-      {
-        "mode": "<number>",
-        "amount": "<number>",
-        "allows_editing": "<boolean>"
-      }
-    ]
-  }
-}
-'
-```
+### Example Requests
 
-```json Connect (minimal)
+<AccordionGroup>
+  <Accordion title="Minimal Request (Connect mode)">
+```json
 {
     "mode": 1,
     "display_name": "Reward Cookies",
@@ -81,8 +58,10 @@ curl --request POST \
     "merchant_id": 48
 }
 ```
+  </Accordion>
 
-```json With user_external_id
+  <Accordion title="With user_external_id">
+```json
 {
     "mode": 1,
     "display_name": "Reward Cookies",
@@ -92,8 +71,10 @@ curl --request POST \
     "user_external_id": "1234"
 }
 ```
+  </Accordion>
 
-```json With custom_attributes
+  <Accordion title="With custom_attributes (Transfer mode)">
+```json
 {
     "mode": 3,
     "display_name": "Reward Cookies",
@@ -111,7 +92,8 @@ curl --request POST \
     }
 }
 ```
-</RequestExample>
+  </Accordion>
+</AccordionGroup>
 
 ### Return values 
 <ResponseField name="token" type="string" required>

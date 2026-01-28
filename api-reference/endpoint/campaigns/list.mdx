@@ -2,7 +2,7 @@
 title: 'List Campaigns'
 description: 'Endpoint to retrieve all campaigns associated with your account'
 sidebarTitle: 'List Campaigns'
-api: 'GET https://campaignservice.withbenji.com/campaigns'
+api: 'GET https://campaignservice-staging.withbenji.com/campaigns'
 ---
 
 <Note>The Bearer token to be used on this API is your **partner access token**</Note>
@@ -39,7 +39,7 @@ An Array of campaign objects associated with your account
         <Expandable title="possible trigger type values" type="enum">
             - **SPEND (1)** : Indicating a campaign triggered on a transaction <br/>
             - **REGISTRATION (2)** : Indicating a campaign triggered on a new user registration  <br/>
-            - **REFERRAL (3)** : Indicating a campaign triggered on a succesfull user referral action <br/>
+            - **REFERRAL (3)** : Indicating a campaign triggered on a succesful user referral action <br/>
             - **CUSTOM (3)** : Indicating a campaign triggered by a custom action
         </Expandable>
     </ResponseField>

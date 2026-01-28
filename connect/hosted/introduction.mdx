@@ -1,0 +1,36 @@
+---
+title: "Introduction to Benji Hosted Connect"
+description: "A fully hosted solution for connecting members to reward partners."
+sidebarTitle: "Introduction"
+---
+
+## Overview
+
+Benji Hosted Connect is a fully hosted solution that allows you to connect your members to reward loyalty partners without integrating an SDK into your application. Instead of embedding the Benji Connect SDK, you can redirect your users to a Benji-hosted page that handles the entire connection flow.
+
+This approach is ideal for:
+
+- **Quick integration** - Get started without any frontend code changes
+- **Server-side implementations** - Connect users from backend services or email campaigns
+- **Multi-platform support** - Use a single hosted URL across web, mobile, and other platforms
+
+<Tip>
+  Benji Hosted Connect and Benji Connect SDK can be used together. Choose the approach that best fits each use case in your application.
+</Tip>
+
+## How It Works
+
+- [Generate a connection token using the Benji API](/connect/create_token) using your partner key and user information.
+- Redirect or link your user to the hosted Benji Connect page. You can also include a state query parameter, which will be sent as is to the callback url.
+- The user completes the connection flow on the Benji-hosted page.
+- Upon completion, the user is redirected back to your specified callback URL with the connection result and Benji user ID.
+- Listen to [webhooks](/api-reference/webhooks/overview) to additionally receive updates on the user's connection status.
+
+## When to Use Hosted Connect vs SDK
+
+| Feature | Hosted Connect | Connect SDK |
+|---------|---------------|-------------|
+| **Integration effort** | Minimal | Requires frontend integration |
+| **Customization** | Can be customized through the Benji Dashboard | Embedded in your UI |
+| **User experience** | Redirect to Benji hosted page | Inline modal |
+| **Best for** | Email campaigns, dedicated partner pages | Native app integrations, web applications |

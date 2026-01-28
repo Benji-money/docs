@@ -48,7 +48,13 @@
         "tab": "Benji Connect",
         "groups": [
           {
-            "group": "Benji Connect",
+            "group": "Benji Hosted Connect",
+            "pages": [
+              "connect/hosted/introduction"
+            ]
+          },
+          {
+            "group": "Benji Connect SDK",
             "pages": [
               "connect/introduction",
               "connect/create_token",

@@ -1,0 +1,57 @@
+---
+title: "Benji Connect Overview"
+description: "Choose the right integration approach for connecting members to reward partners."
+sidebarTitle: "Overview"
+---
+
+## What is Benji Connect?
+
+Benji Connect enables you to connect your members to reward loyalty partners, allowing them to earn and redeem rewards through your platform. There are two ways to integrate Benji Connect into your application:
+
+- **Benji Hosted Connect** - A fully hosted landing page solution
+- **Benji Connect SDK** - A JavaScript SDK for embedded integration
+
+Both approaches accomplish the same goal—connecting your members to reward partners—but differ in implementation, customization, and user experience.
+
+## Hosted Connect
+
+Benji Hosted Connect is a fully hosted solution where you redirect users to a Benji-managed page that handles the entire connection flow. No frontend code changes are required.
+
+**Best suited for:**
+
+- Quick integrations without frontend development
+- Server-side implementations or email campaigns
+- Multi-platform support using a single hosted URL
+- Dedicated partner landing pages
+
+<Card title="Hosted Connect Introduction" icon="browser" href="/connect/hosted/introduction">
+  Learn how to integrate with Benji Hosted Connect
+</Card>
+
+## Connect SDK
+
+The Benji Connect SDK is a JavaScript SDK that you embed directly into your application. It provides an inline modal experience and gives you full control over when and how the connection flow is triggered.
+
+**Best suited for:**
+
+- Native app integrations
+- Web applications requiring seamless user experience
+- Scenarios where you want the connection flow embedded in your UI
+- Advanced customization and event handling
+
+<Card title="Connect SDK Introduction" icon="code" href="/connect/introduction">
+  Learn how to integrate with the Benji Connect SDK
+</Card>
+
+## Comparison
+
+| Feature | Hosted Connect | Connect SDK |
+|---------|---------------|-------------|
+| **Integration** | Minimal | Requires frontend integration |
+| **Customization** | Can be customized through the Benji Dashboard | Embedded in your UI |
+| **User experience** | Redirect to Benji hosted page | Inline modal |
+| **Best for** | Email campaigns, dedicated partner pages | Native app integrations, web applications |
+
+<Tip>
+  Benji Hosted Connect and Benji Connect SDK can be used together. Choose the approach that best fits each use case in your application.
+</Tip>

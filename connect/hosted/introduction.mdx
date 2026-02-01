@@ -20,17 +20,8 @@ This approach is ideal for:
 
 ## How It Works
 
-- [Generate a connection token using the Benji API](/connect/create_token) using your partner key and user information.
+- [Generate a connection token using the Benji API](/connect/create_token) using your partner key and user information. Alternatively, Benji can connect to your IDP to enable native authentication of your users. Beni supports all major IDP providers. Contact your Benji account manager to learn more and setup your IDP integration.
 - Redirect or link your user to the hosted Benji Connect page. You can also include a state query parameter, which will be sent as is to the callback url.
 - The user completes the connection flow on the Benji-hosted page.
 - Upon completion, the user is redirected back to your specified callback URL with the connection result and Benji user ID.
 - Listen to [webhooks](/api-reference/webhooks/overview) to additionally receive updates on the user's connection status.
-
-## When to Use Hosted Connect vs SDK
-
-| Feature | Hosted Connect | Connect SDK |
-|---------|---------------|-------------|
-| **Integration effort** | Minimal | Requires frontend integration |
-| **Customization** | Can be customized through the Benji Dashboard | Embedded in your UI |
-| **User experience** | Redirect to Benji hosted page | Inline modal |
-| **Best for** | Email campaigns, dedicated partner pages | Native app integrations, web applications |

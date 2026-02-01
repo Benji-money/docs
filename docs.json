@@ -48,6 +48,12 @@
         "tab": "Benji Connect",
         "groups": [
           {
+            "group": "Getting Started",
+            "pages": [
+              "connect/overview"
+            ]
+          },
+          {
             "group": "Benji Hosted Connect",
             "pages": [
               "connect/hosted/introduction"

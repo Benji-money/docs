@@ -50,7 +50,8 @@
           {
             "group": "Getting Started",
             "pages": [
-              "connect/overview"
+              "connect/overview",
+              "connect/create_token"
             ]
           },
           {
@@ -63,7 +64,6 @@
             "group": "Benji Connect SDK",
             "pages": [
               "connect/introduction",
-              "connect/create_token",
               "connect/initialization",
               "connect/methods",
               "connect/exchange_token"

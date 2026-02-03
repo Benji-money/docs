@@ -10,17 +10,11 @@ api: 'POST https://api-staging.withbenji.com/verify/token/create'
 <ParamField body="display_name" type="string" required>
   The partnership display name you wish to be shown in the Benji Connect flow UI _Note: If this is not passed, the name configured on the Benji platform will be used._
 </ParamField>
-<ParamField body="merchant_id" type="number" required>
-  The connecting merchant's identifier on the Benji Platform
-</ParamField>
 <ParamField body="mode" type="number" required>
   The connection mode for the SDK (Connect = 1, Transfer = 3, and Redeem = 4)
 </ParamField>
-<ParamField body="partner_id" type="number" required>
-  The partner's identifier on the Benji Platform
-</ParamField>
-<ParamField body="partnership_id" type="number" required>
-  The partnership identifier on the Benji Platform
+<ParamField body="partnership_id" type="string">
+  The unique identifier of the partnership on the Benji Platform.
 </ParamField>
 <ParamField body="user_external_id" type="string">
   A unique identifier associated with the user connecting their loyalty reward program, when set flow skips the initial user authorization with the partner and continues to authorize the user with the related merchant/partner.  

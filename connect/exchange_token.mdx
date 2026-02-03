@@ -2,7 +2,7 @@
 title: 'Exchange the Connect Token'
 description: 'Exchange the short lived toke returned from the SDK to a long living access token and refresh token using the Benji Platform API'
 sidebarTitle: "Exchange Token"
-api: 'POST https://authservice.withbenji.com/access/token/exchange'
+api: 'POST https://authservice-staging.withbenji.com/access/token/exchange'
 ---
 
 <Note>The Bearer token to be used on this API is your **partner access token**</Note>
@@ -60,7 +60,7 @@ An object representing the access_token, refresh_token to use when using the Ben
 </ResponseExample>
 
 <Tip>Access token are typically valid for 90 days. You can refresh an access token either before it expires proactively, or after calling an API and getting an expired_token 401 status code</Tip>
-<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a succesfull user connect flow. The exchange token is valid for 15 minutes after the succesfull callback flow</Warning>
+<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a succesful user connect flow. The exchange token is valid for 15 minutes after the succesful callback flow</Warning>
 
 
 

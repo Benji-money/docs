@@ -4,7 +4,7 @@ description: 'Overview of supported methods and events in the Benji Connect SDK'
 sidebarTitle: 'Methods & Events'
 ---
 
-Once initialized , the Benji Connect SDK supports the following methods and events
+Once initialized, the Benji Connect SDK supports the following methods and events.
 
 ## Methods
 
@@ -25,11 +25,11 @@ $('#connectBtn').on('click', function(e) {
 As a user goes through the Benji Connect flow, your application will receive the following events to the callback functions you specified as part of the [initialization flow](/connect/initialization) :
 
 ### onSuccess
-Event that indicates a succesfull authentication between the member and a Benji loyalty rewards partner.
+Event that indicates a succesful authentication between the member and a Benji loyalty rewards partner
 <Expandable title="onSuccess" defaultOpen="true">
 Returns 2 values 
 - **token** : A short lived access token to identify the user in the Benji Platform APIs. This token should be exchanged for an access token.
-- **metadata** : Metadata giving you information regarding the user details and user loyalty status to be able to immediatley display or log in your system.
+- **metadata** : Metadata giving you information regarding the user details and user loyalty status to be able to immediately display or log in your system
 ```javascript
 {
    "status": {
@@ -50,18 +50,24 @@ Returns 2 values
 ### onExit
 Event that indicates that the user has exited the Benji Connect flow
 <Expandable title="onExit" defaultOpen="true">
-This event does not return any return values. The onExit event can be triggered as a result of the following user actions : 
+This event returns 1 value :
+- **metadata** : Additional metadata about the event such as the step and exit trigger
+   - **trigger** : The trigger which caused the SDK to close the connect UI
+      - **ACTION_BUTTON_CLICKED** : The user clicked the action button at the end of the flow. 
+      - **CLOSE_BUTTON_CLICKED** : The user clicked the x button. 
+      - **TAPPED_OUT_OF_BOUNDS** : The user tapped out of the modal bounds to dismiss. 
+
+The onExit event can be triggered as a result of the following user actions : 
 - The user has completed a full flow and has pressed close button at the end of the flow
 - The user has exited the flow before completing a full flow by pressing on the close button or pressing outside of the connect modal
-Note that the onExit will be called regardless of if the user has succesfully linked their loyalty account. The only event that indicates a succesfull connection is the onSuccess even above.
+Note that the onExit will be called regardless of if the user has succesfully linked their loyalty account. The only event that indicates a succesful connection is the onSuccess even above.
 </Expandable>
 
 ### onEvent
 Event that indicates an event as part of the user flow on the Benji Connect flow
 <Expandable title="onEvent" defaultOpen="true">
 This event returns 2 values :
-- **event** : The name of the event. The following event names are supported :
-   - **user_partner_select** : The user has selected a loyalty partner to connect with
+- **type** : The name of the event. The following event names are supported :
    - **user_authenticated_with_partner** : The user has completed authentication with the partner network
    - **go_back_clicked**: The user clicked on the back button as part of the connect flow
    - **user_inactive**: The user has not clicked on the flow for more than 1 minute.
@@ -78,10 +84,11 @@ This event returns 2 values :
 ### onError
 Event that indicates an error has occured as part of the Benji Connect flow
 <Expandable title="onError" defaultOpen="true">
-This event returns 2 values :
+This event returns 3 values :
 - **error** : The name of the error. The following error code names are supported :
    - **unexpected_error** : An unexpected error has occured on the Benji Platform.
    - **partner_connect_error** : An error occured while trying to connect the user with their selected loyalty network
-- **error_id** : An ID to identify the error on the Benji platform. WHen contacting Benji support, you can use this error ID to help our team quickly identify and help investigate the error if applicable
+- **error_id** : An ID to identify the error on the Benji platform. When contacting Benji support, you can use this error ID to help our team quickly identify and help investigate the error if applicable.
+- **metadata** : Metadata with additional data on the event if relevant.
 
 </Expandable>

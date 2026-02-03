@@ -31,46 +31,68 @@ pnpm add @benji-money/connect-sdk
 
 The SDK is initialized with the following parameters :
 
+<ParamField body="environment" type="string" required>
+  This is the environment to be used in the connect flow ('development' | 'sandbox' | 'production').
+</ParamField>
+
 <ParamField body="token" type="string" required>
-  This is the token that you created using the [Create Token API](/connect/create_token) in the previous step
+  This is the connect token which can be created via [Create Token API](/connect/create_token).
 </ParamField>
 
-<ParamField body="onSuccess" type="callbak function">
-  This is your callback function method, which will be triggered when a member has succesfully connected with a partner loyalty program
+<ParamField body="onSuccess" type="callback function">
+  This is your callback function method, which will be triggered when a member has succesfully connected with a partner loyalty program.
 </ParamField>
 
-<ParamField body="onExit" type="callbak function">
+<ParamField body="onExit" type="callback function">
   This is your callback function method, which will be triggered when a member has closed the Benji Connect Modal. Note that this function can be whether the onSuccess callback has been called or not.
 </ParamField>
 
-<ParamField body="onError" type="callbak function">
-  This is your callback function method, which will be triggered when a member encountered an error while connecting with their account.
+<ParamField body="onError" type="callback function">
+  This is your callback function method, which will be triggered when a member encountered an error while connecting their account.
 </ParamField>
 
-<ParamField body="onEvent" type="callbak function">
+<ParamField body="onEvent" type="callback function">
   This is your callback function method, which will be triggered for various events throughout the user journey within the Benji Connect flow.
 </ParamField>
 
 
 ```javascript
+import { ConnectSDK } from '@benji-money/connect-sdk';
+
 let sdk = null;
 
 function initializeSDK(token) {
+
     sdk = new ConnectSDK({
+
+        // Benji Connect Environment 
+        environment: 'sandbox', // | 'development' | 'production',
+        
+        // Connect Token
         token: token,
-        onSuccess: (token, metadata) => {
-            console.log('Connect successful', token, metadata);
-                      
+
+        // onSuccess callback (token: string, metadata: BenjiConnectOnSuccessMetadata)
+        onSuccess: (_token, _metadata) => {
+            console.log('Benji Connect successful');
             // Handle success event in your code, such as displaying a sucess message on your site and storing the returned token
-           
         },
-        onExit: () => {
-            console.log('Connect flow exited');
-            // Handle close Connect flow, such as log in your systen or disokay a message to the user
+
+        // onError callback (error: Error, error_id: string, metadata: BenjiConnectMetadata)
+        onError: (_error, _error_id, _metadata) => {
+          console.log('Benji Connect onError');
+          // Handle error event in your code, such as displaying an error message or prompting the user to try again 
         },
-        onEvent: (event, metadata) => {
-            console.log('Event received:', event);
-            //Listen and react to various events in the user flow.
+
+        // onExit callback (metadata: BenjiConnectOnExitMetadata)
+        onExit: (_metadata) => {
+            console.log('Benji Connect onExit');
+            // Handle close Connect flow, such as log in your system or display a message to the user
+        },
+
+        // onEvent callback (type: BenjiConnectEventType, metadata: BenjiConnectMetadata)
+        onEvent: (type, _metadata) => {
+            console.log('Benji Connect onEvent:', type);
+            // Listen and react to various events in the user flow
         }
     });
 }

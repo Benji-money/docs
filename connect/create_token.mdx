@@ -16,8 +16,8 @@ api: 'POST https://api-staging.withbenji.com/verify/token/create'
 <ParamField body="user_ip" type="string">
   The IP of the user currently connecting. Note that this is required if there are any geo specific conditions applied to the partner campaigns.
 </ParamField>
-<ParamField body="partner_ids" type="string array">
-  For marketplace only scenarios, if you want to filter specific partners, pass an array of their respective identifiers on the Benji Platform. The full list if Benji Partner IDs can be found in the partners page on the Benji dashboard, Pilot.
+<ParamField body="partnership_id" type="string">
+  The unique identifier of the partnership on the Benji Platform.
 </ParamField>
 
 ### Return values 

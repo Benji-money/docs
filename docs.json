@@ -103,42 +103,23 @@
             ]
           },
           {
-            "group": "Tokens",
-            "pages": [
-              "api-reference/endpoint/authentication/refresh"
-            ]
-          },
-          {
             "group": "Member API",
-            
-            
-            "openapi": {
-              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/userservice/staging/openapi_public.json"
-            },
             "pages": [
-              {
-                "group": "Link",
-                "pages": ["api-reference/endpoint/users/link"]
-              }
+              "api-reference/endpoint/users/get"
             ]
-          },
-          {
-            "group": "Orders",
-            "pages": [
-              "api-reference/endpoint/orders/create"
-            ]
-          },
-          {
-            "group": "Campaign API",
-            "openapi": {
-              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/campaignservice/staging/openapi_public.json"
-            }
           },
           {
             "group": "Reward API",
-            "openapi": {
-              "source": "https://benji-api-build-artifacts.s3.us-east-1.amazonaws.com/openapi/rewardservice/staging/openapi_public.json"
-            }
+            "pages": [
+              "api-reference/endpoint/transactions/get"
+            ]
+          },
+          {
+            "group": "Partnerships",
+            "pages": [
+              "api-reference/endpoint/partnerships/get",
+              "api-reference/endpoint/triggers/send"
+            ]
           },
           {
             "group": "Webhooks",
@@ -163,7 +144,8 @@
         "https://mintlify.com/api2"
       ],
       "auth": {
-        "method": "bearer"
+        "method": "key",
+        "name": "x-api-key"
       }
     }
   },

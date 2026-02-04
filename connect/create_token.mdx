@@ -2,18 +2,18 @@
 title: 'Create a token to initialize the SDK'
 description: 'Create a token to initialize an instance of the Benji Connect SDK or Hosted Page.'
 sidebarTitle: "Create Token"
-api: 'POST https://api-staging.withbenji.com/verify/token/create'
+api: 'POST https://api-staging.withbenji.com/auth/connect'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**.</Note>
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
-<ParamField body="display_name" type="string" required>
+<ParamField body="display_name" type="string">
   The partnership display name you wish to be shown in the Benji Connect flow UI _Note: If this is not passed, the name configured on the Benji platform will be used._
 </ParamField>
 <ParamField body="mode" type="number" required>
   The connection mode for the SDK (Connect = 1, Transfer = 3, and Redeem = 4)
 </ParamField>
-<ParamField body="partnership_id" type="string">
+<ParamField body="partnership_id" type="string" required>
   The unique identifier of the partnership on the Benji Platform.
 </ParamField>
 <ParamField body="user_external_id" type="string">

@@ -5,7 +5,7 @@ sidebarTitle: "Create Transaction"
 api: 'POST https://rewardservice-staging.withbenji.com/reward_transaction/create'
 ---
 
-<Note>The Bearer token to be used on this API is a **user based access token**</Note>
+<Note>The `x-api-key` header value to be used on this API is a **user based access token**.</Note>
 
 <ParamField body="reward_authentication_token" type="string" required>
   The token received from the [authenticate reward transaction](/api-reference/endpoint/transactions/authenticate) API call.

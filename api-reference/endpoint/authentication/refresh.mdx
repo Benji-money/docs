@@ -5,7 +5,7 @@ sidebarTitle: "Refresh Token"
 api: 'GET https://authservice-staging.withbenji.com/access/token/refresh'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
 <ParamField body="refresh_token" type="string" required>
   The refresh token received from the [exchange token](/connect/exchange_token) API flow or previsouly received from refreshing an access token form this API

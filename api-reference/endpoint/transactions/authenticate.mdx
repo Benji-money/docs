@@ -5,7 +5,7 @@ sidebarTitle: "Authenticate"
 api: 'POST https://rewardservice-staging.withbenji.com/reward_transaction/auth'
 ---
 
-<Note>The Bearer token to be used on this API is a **user based access token**</Note>
+<Note>The `x-api-key` header value to be used on this API is a **user based access token**.</Note>
 
 <ParamField body="transaction_amount" type="integer" required>
   The total amount of the transaction.

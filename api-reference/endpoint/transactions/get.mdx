@@ -2,13 +2,13 @@
 title: 'Get Reward Transaction'
 description: 'Endpoint to retrieve information regarding a reward transaction'
 sidebarTitle: 'Get Transaction'
-api: 'GET https://rewardservice-staging.withbenji.com/reward_transaction/{id}'
+api: 'GET https://api-staging.withbenji.com/transactions/{id}'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
-<ParamField path="id" type="integer" required>
-  The Benji Platform ID of the reward transaction
+<ParamField path="id" type="string" required>
+  Unique identifier of the reward transaction to retrieve (UUID)
 </ParamField>
 
 ### Return values 

@@ -1,0 +1,73 @@
+---
+title: 'Get User'
+description: 'Get a single user by ID'
+sidebarTitle: 'Get User'
+api: 'GET https://api-staging.withbenji.com/users/{id}'
+---
+
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
+
+<ParamField path="id" type="string" required>
+  Unique identifier of the user to retrieve (UUID)
+</ParamField>
+
+### Response
+
+<ResponseField name="user" type="object" required>
+  The requested user object containing all user details including personal information, partner statuses, and merchant associations.
+  <Expandable title="properties" defaultOpen="true">
+    <ResponseField name="uuid_id" type="string" required>
+      UUID identifier for the user.
+    </ResponseField>
+    <ResponseField name="first_name" type="string" required>
+      The user's first name.
+    </ResponseField>
+    <ResponseField name="last_name" type="string" required>
+      The user's last name.
+    </ResponseField>
+    <ResponseField name="email" type="string" required>
+      The user's email address.
+    </ResponseField>
+    <ResponseField name="phone_number" type="string" required>
+      The user's phone number in E.164 format.
+    </ResponseField>
+    <ResponseField name="created_date" type="string" required>
+      The date and time when the user was created, in ISO 8601 format.
+    </ResponseField>
+    <ResponseField name="external_id" type="string">
+      External system identifier for the user, if applicable.
+    </ResponseField>
+    <ResponseField name="partner_status_tiers" type="array">
+      List of partner status tier objects associated with the user. Each object contains details about the user's status with a partner.
+      <Expandable title="partner status tier properties">
+        <ResponseField name="id" type="integer">Unique identifier for the partner status tier record.</ResponseField>
+        <ResponseField name="user_id" type="integer">The user's unique identifier.</ResponseField>
+        <ResponseField name="partner_id" type="integer">The partner's unique identifier.</ResponseField>
+        <ResponseField name="partner_status_tier_id" type="integer">The status tier's unique identifier for this partner.</ResponseField>
+        <ResponseField name="external_id" type="string">External system identifier for the partner status tier, if applicable.</ResponseField>
+        <ResponseField name="first_name" type="string">First name as recorded for this partner status tier.</ResponseField>
+        <ResponseField name="last_name" type="string">Last name as recorded for this partner status tier.</ResponseField>
+        <ResponseField name="total_rewards" type="integer">Total rewards available for this partner status tier.</ResponseField>
+        <ResponseField name="total_rewards_earned" type="integer">Total rewards earned for this partner status tier.</ResponseField>
+        <ResponseField name="total_rewards_redeemed" type="integer">Total rewards redeemed for this partner status tier.</ResponseField>
+        <ResponseField name="created_date" type="string">Date and time when this partner status tier was created.</ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="merchants" type="array">
+      List of merchant association objects for the user. Each object contains details about the user's relationship with a merchant.
+      <Expandable title="merchant properties">
+        <ResponseField name="id" type="integer">Unique identifier for the user-merchant association record.</ResponseField>
+        <ResponseField name="user_id" type="integer">The user's unique identifier.</ResponseField>
+        <ResponseField name="merchant_id" type="integer">The merchant's unique identifier.</ResponseField>
+        <ResponseField name="external_id" type="string">External system identifier for the merchant association, if applicable.</ResponseField>
+        <ResponseField name="total_rewards_earned" type="integer">Total rewards earned with this merchant.</ResponseField>
+        <ResponseField name="total_rewards_redeemed" type="integer">Total rewards redeemed with this merchant.</ResponseField>
+        <ResponseField name="created_date" type="string">Date and time when this merchant association was created.</ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Tip>
+This endpoint retrieves detailed information about a specific user, including their loyalty status with all connected partners and merchants.
+</Tip>

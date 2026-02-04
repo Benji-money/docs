@@ -1,0 +1,72 @@
+---
+title: 'Get Partnership'
+description: 'Get a single partnership by ID'
+sidebarTitle: 'Get Partnership'
+api: 'GET https://api-staging.withbenji.com/partnerships/{id}'
+---
+
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
+
+<ParamField path="id" type="string" required>
+  Unique identifier of the partnership to retrieve (UUID)
+</ParamField>
+
+### Response
+
+<ResponseField name="partnership" type="object" required>
+  The partnership object containing all partnership details including its configuration, associated campaigns, and performance metrics.
+  <Expandable title="properties" defaultOpen="true">
+    <ResponseField name="uuid_id" type="string" required>
+      The UUID identifier of the partnership. This is an alternative identifier that can be used in API operations.
+    </ResponseField>
+    <ResponseField name="name" type="string" required>
+      The name of the partnership that is displayed to users and administrators. Identifies the business relationship between a merchant and partner.
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      A detailed description of the partnership explaining its purpose, benefits, and terms. May be null if no description is provided.
+    </ResponseField>
+    <ResponseField name="img" type="string">
+      The URL to the partnership logo or image that is displayed in marketing materials and the user interface. May be null if no image is provided.
+    </ResponseField>
+    <ResponseField name="merchant_id" type="integer" required>
+      The unique identifier of the merchant in this partnership. Merchants are businesses where users can earn or redeem rewards.
+    </ResponseField>
+    <ResponseField name="related_partner_id" type="integer">
+      The unique identifier of the related partner in this partnership. May be null if no related partner is specified.
+    </ResponseField>
+    <ResponseField name="partner_id" type="integer" required>
+      The unique identifier of the partner in this partnership. Partners are loyalty program providers who offer rewards to users.
+    </ResponseField>
+    <ResponseField name="is_active" type="integer" required>
+      Indicates whether this partnership is currently active and available to users. Values: 1=active, 0=inactive. Inactive partnerships do not generate rewards.
+    </ResponseField>
+    <ResponseField name="is_deleted" type="integer" required>
+      Indicates whether this partnership has been marked as deleted. Values: 1=deleted, 0=not deleted. Deleted partnerships are not shown in standard API responses.
+    </ResponseField>
+    <ResponseField name="owner_id" type="integer" required>
+      The unique identifier of the user who created or owns this partnership. Used for attribution and permission management.
+    </ResponseField>
+    <ResponseField name="total_rewards_earned" type="number">
+      The total amount of rewards that users have earned through this partnership so far, in the smallest currency unit (e.g., cents). May be null if no rewards have been earned yet.
+    </ResponseField>
+    <ResponseField name="total_rewards_redeemed" type="number">
+      The total amount of rewards that users have redeemed through this partnership so far, in the smallest currency unit (e.g., cents). May be null if no rewards have been redeemed yet.
+    </ResponseField>
+    <ResponseField name="num_of_transactions" type="integer">
+      The total number of transactions that have occurred within this partnership. Used for analytics and reporting. May be null if no transactions have occurred yet.
+    </ResponseField>
+    <ResponseField name="is_demo" type="integer" required>
+      Indicates whether this partnership is for demonstration purposes only. Values: 1=demo, 0=real. Demo partnerships are not included in production reports.
+    </ResponseField>
+    <ResponseField name="created_date" type="string">
+      The date and time when this partnership was created, in ISO 8601 format. Used for auditing and sorting.
+    </ResponseField>
+    <ResponseField name="campaigns" type="array">
+      The list of campaigns associated with this partnership. Each campaign defines specific reward structures and eligibility criteria. May be null if no campaigns exist for this partnership yet.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Tip>
+This endpoint retrieves detailed information about a specific partnership, including all associated campaigns and performance metrics.
+</Tip>

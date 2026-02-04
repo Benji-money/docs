@@ -13,14 +13,14 @@ This is where you can configure all of the basic settings of your campaign
 
 In this section you can view or configure the following parameters :
 
-| Parameter                                                                                        | Description                                                                                                                                                                 | Possible values                                         |
-| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| <ResponseField name="ID" type="Numeric" required>                         </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
-| <ResponseField name="Name" type="string" required>                         </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
-| <ResponseField name="Description" type="string">                         </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
-| <ResponseField name="Start Date/Time" type="date time">                         </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
-| <ResponseField name="End Date/Time" type="date time">                         </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
-| <ResponseField name="Image" type="file">                         </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
+| Parameter                                                                                            | Description                                                                                                                                                                 | Possible values                                         |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| <ResponseField name="ID" type="Numeric" required>                             </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
+| <ResponseField name="Name" type="string" required>                             </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
+| <ResponseField name="Description" type="string">                             </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
+| <ResponseField name="Start Date/Time" type="date time">                             </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
+| <ResponseField name="End Date/Time" type="date time">                             </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
+| <ResponseField name="Image" type="file">                             </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
 
 ## Campaign Type
 
@@ -142,7 +142,7 @@ For **Earn** type campaigns, this means the member, if the condition is met, wil
 
 For **Redeem** type campaigns, this means the member will get a multiplier on the conversion rate per dollar defined in the triggers section above.
 
-![Screenshot 2026 02 04 At 11 39 50 AM](/images/Screenshot2026-02-04at11.39.50AM.png)
+![Multipliers](/images/Screenshot2026-02-04at11.39.50AM.png)
 
 You can configure a limitless amount of multipliers per campaign. For each multiplier, you can specify the multiplier amount, a customer attribute to validate (the condition) and the corresponding value of the customer attribute to validate. The following customer attributes are supported :
 
@@ -168,7 +168,7 @@ You can configure a limitless amount of multipliers per campaign. For each multi
 
 In this section you can configure limits to control how frequently members can qualify for rewards and the maximum value they can earn or redeem.
 
-![Screenshot 2026 02 04 At 11 12 05 AM](/images/Screenshot2026-02-04at11.12.05AM.png)
+![Limits](/images/Screenshot2026-02-04at11.12.05AM.png)
 
 Limits set boundaries on transaction values, member qualification frequency, and total rewards. You can set transaction minimums to ensure meaningful engagement, cap total rewards per user, or limit qualification frequency to control the pacing of your campaigns.
 

@@ -1,0 +1,61 @@
+---
+title: "Developer"
+icon: "display-code"
+description: "Manage API authentication, webhook subscriptions, and platform integrations"
+---
+
+The Developer Settings page provides tools for integrating with the Benji Platform programmatically. You can generate API keys for authentication, configure webhook endpoints to receive real-time updates, and connect to pre-built integrations.
+
+![Developer](/images/developer.png)
+
+### API Tokens
+
+Generate and manage API keys to authenticate your requests to the Benji Platform API.
+
+**API Keys Table**
+
+Each API key displays:
+
+- **Key Name**: The identifier for the key ("Benji API Key", "Connect SDK Key")
+- **Key Value**: The API key value (masked by default)
+- **Actions**:
+  - **Show/Hide**: Click the eye icon to reveal or hide the full key value
+  - **Copy**: Click the copy icon to copy the key to your clipboard
+  - **Rotate**: Click the rotate icon to regenerate the key (this will invalidate the previous key)
+
+**Important**: Store your API keys securely. They provide access to your Benji Platform account and should never be shared publicly or committed to version control. If you rotate a key, update it immediately in any applications using it. After creating keys, they can be used with the[ Benji API](/api-reference/authentication)
+
+### Webhooks
+
+Configure webhook endpoints to receive real-time notifications about users, campaigns, and transactions. Learn more about webhook implementation in the [Webhooks documentation](https://docs.withbenji.com/api-reference/webhooks/overview).
+
+**Add Webhook**
+
+Click the Add Webhook button to create a new webhook subscription. You'll need to provide:
+
+- **Endpoint URL**: The URL where Benji will send webhook notifications
+- **Entity Type**: Select USER or TRANSACTION to specify which type of events to receive
+- **Event Name**: Select the specific event you want to subscribe to (options vary based on entity type)
+- **Active**: Toggle to enable or disable the webhook
+
+**Webhooks Table**
+
+Each webhook displays:
+
+- **Endpoint URL**: The destination for webhook notifications
+- **Entity Type**: The type of entity (User or Transaction)
+- **Event Name**: The specific event being monitored
+- **Status**: Whether the webhook is active or inactive
+- **Salt**: The authentication salt used for webhook [signature verification](https://docs.withbenji.com/api-reference/webhooks/overview#webhook-authentication)
+- **Actions**: Edit webhook configuration, delete the webhook, or send a test webhook
+
+**Entity Types and Events**
+
+- **USER**: user_partner_connected
+- **TRANSACTION**: transaction_authenticated, transaction_created, transaction_status_updated
+
+For detailed information about webhook authentication and payload formats, click the info icon next to the Add Webhook button.
+
+### Integrations
+
+Connect your Benji account to pre-built integrations with third-party platforms and services. Available integrations streamline common workflows and data synchronization tasks.

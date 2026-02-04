@@ -5,7 +5,7 @@ sidebarTitle: "Update"
 api: 'PUT https://notificationservice-staging.withbenji.com/webhooks/subscribe'
 ---
 
-<Note>The Bearer token to be used on this API is your **partner access token**</Note>
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
 <ParamField body="endpoint" type="string" required>
   Your endpoint URL that will receive the event webhooks

@@ -1,0 +1,38 @@
+---
+title: 'Send Trigger Event'
+description: 'Process a trigger event for a partnership to initiate campaign reward evaluation'
+sidebarTitle: 'Send Trigger'
+api: 'POST https://api-staging.withbenji.com/partnerships/{partnership_id}/triggers'
+---
+
+<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
+
+<ParamField path="partnership_id" type="string" required>
+  The unique identifier of the partnership associated with this trigger event.
+</ParamField>
+
+<ParamField body="trigger_name" type="string" required>
+  The name of the trigger event to process. This identifies the type of event being triggered (e.g., 'user_signup', 'transaction_completed'). Trigger name can be found in the triggers section of the Pilot dashboard.
+</ParamField>
+
+<ParamField body="external_user_id" type="string">
+  Your external identifier of the user. Used to map the event to a specific user in the Benji platform.
+</ParamField>
+
+<ParamField body="user_id" type="string">
+  The unique identifier of the user associated with this trigger event.
+</ParamField>
+
+<ParamField body="transaction_context" type="object">
+  Additional context data about the transaction that triggered this event. Contains partner-specific information about the transaction details as configured on the trigger in the triggers section on Pilot.
+</ParamField>
+
+### Response
+
+<ResponseField name="trigger_event_id" type="string" required>
+  The UUID of the trigger event. This is the preferred identifier for referencing the trigger event.
+</ResponseField>
+
+<Tip>
+Trigger events are used to activate campaign flows and generate rewards for users. Make sure the trigger is configured in your partnership settings before sending events.
+</Tip>

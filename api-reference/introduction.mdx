@@ -4,43 +4,52 @@ description: 'Welcome to the Benji Platform APIs'
 ---
 
 <Note>
-  This API documentation section assumes you have obtained a valid access token by using the [Benji Connect SDK](/connect/introduction)
+  All API endpoints require authentication using an **API key** via the `x-api-key` header. API keys can be generated through the Benji dashboard.
 </Note>
 
 ## Overview
 
-The Benji Platform APIs are REST based APIs, giving you access to trigger Earn and Redeem points campaigns as they are configured on the Benji Platform, get user member loyalty data to display and use on your system and retrieve campaign information to display on your user flow.
+The Benji Platform APIs are REST-based APIs that give you access to trigger campaigns, manage partnerships, retrieve user loyalty data, and interact with reward transactions. All endpoints use the `x-api-key` header for authentication.
+
+## API Base URL
+
+```
+https://api-staging.withbenji.com (sandbox)
+https://api.withbenji.com (production - available after approval post sandbox integration)
+```
+
+## API Categories
 
 <CardGroup cols={2}>
   <Card
-    title="Token Endpoints"
-    href="/api-reference/endpoint/authentication/refresh"
+    title="Partnerships"
+    href="/api-reference/endpoint/partnerships/get"
   >
-    Refresh expired access tokens to silently authenticate members
+    Retrieve partnership details and send trigger events
   </Card>
   <Card
-    title="Member Status Endpoints"
-    href="/api-reference/endpoint/status/get"
+    title="Member API"
+    href="/api-reference/endpoint/users/get"
   >
-    Interact with member data and status
+    Get user information and link external users
   </Card>
   <Card
-    title="Campaign Endpoints"
+    title="Reward API"
+    href="/api-reference/endpoint/transactions/get"
+  >
+    Retrieve reward transaction details
+  </Card>
+  <Card
+    title="Campaigns"
     href="/api-reference/endpoint/campaigns/get"
   >
-    Interact with campaign data
-  </Card>
-  <Card
-    title="Transaction Endpoints"
-    href="/api-reference/endpoint/transactions/overview"
-  >
-    Create and retrieve user transactions
+    List and retrieve campaign information
   </Card>
   <Card
     title="Webhooks"
     href="/api-reference/webhooks/overview"
   >
-    Subscribe to events to get updated on users, campaigns and transactions in near real time.
+    Subscribe to events for real-time updates on users, campaigns, and transactions
   </Card>
 </CardGroup>
 

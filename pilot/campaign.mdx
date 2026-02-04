@@ -13,14 +13,14 @@ This is where you can configure all of the basic settings of your campaign
 
 In this section you can view or configure the following parameters :
 
-| Parameter                                                                            | Description                                                                                                                                                                 | Possible values                                         |
-| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| <ResponseField name="ID" type="Numeric" required>             </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
-| <ResponseField name="Name" type="string" required>             </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
-| <ResponseField name="Description" type="string">             </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
-| <ResponseField name="Start Date/Time" type="date time">             </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
-| <ResponseField name="End Date/Time" type="date time">             </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
-| <ResponseField name="Image" type="file">             </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
+| Parameter                                                                                | Description                                                                                                                                                                 | Possible values                                         |
+| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| <ResponseField name="ID" type="Numeric" required>                 </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
+| <ResponseField name="Name" type="string" required>                 </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
+| <ResponseField name="Description" type="string">                 </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
+| <ResponseField name="Start Date/Time" type="date time">                 </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
+| <ResponseField name="End Date/Time" type="date time">                 </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
+| <ResponseField name="Image" type="file">                 </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
 
 ## Campaign Type
 
@@ -160,6 +160,36 @@ You can configure a limitless amount of multipliers per campaign. For each multi
 
   - **Operators** : **Is In** or **Is Not In**
   - **Values** : Configrable values based on the variable attribute possible values configured in the settings section of the Benji Platform.
+</Expandable>
+
+## Campaign Limits
+
+In this section you can configure limits to control how frequently members can qualify for rewards and the maximum value they can earn or redeem.
+
+![Screenshot 2026 02 04 At 11 12 05 AM](/images/Screenshot2026-02-04at11.12.05AM.png)
+
+Limits set boundaries on transaction values, member qualification frequency, and total rewards. You can set transaction minimums to ensure meaningful engagement, cap total rewards per user, or limit qualification frequency to control the pacing of your campaigns.
+
+You can configure multiple limits per campaign. The following limit types are supported:
+
+**Transaction Limits**
+
+<Expandable title="Transaction Limits">
+  Controls the minimum or maximum value allowed per individual transaction.
+
+  - **Operators**: Minimum, Maximum
+  - **Values**: Numeric amount (points or dollars depending on campaign type)
+</Expandable>
+
+**User Limits**
+
+<Expandable title="User Limits">
+  Controls the maximum number of qualifying events or total points a user can accumulate within a specified time period.
+
+  - **Operators**: Maximum
+  - **Units**: Qualifying events or Points
+  - **Values**: Numeric amount
+  - **Time Period**: Per day, per week, per month, or lifetime
 </Expandable>
 
 ## Campaign Goals

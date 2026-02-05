@@ -6,24 +6,27 @@ description: "Manage API authentication, webhook subscriptions, and platform int
 
 The Developer Settings page provides tools for integrating with the Benji Platform programmatically. You can generate API keys for authentication, configure webhook endpoints to receive real-time updates, and connect to pre-built integrations.
 
-![Developer](/images/developer.png)
+![Developer](/images/Developer.png)
 
 ### API Tokens
 
 Generate and manage API keys to authenticate your requests to the Benji Platform API.
 
+**Add Key**
+
+Click the Add Key button to generate a new API key. You'll be prompted to enter a name for the key to identify it. When created, the full key value will be displayed once. Copy and store it securely, as you won't be able to view the complete key again. To access the key value later, you'll need to generate a new key.
+
 **API Keys Table**
 
 Each API key displays:
 
-- **Key Name**: The identifier for the key ("Benji API Key", "Connect SDK Key")
-- **Key Value**: The API key value (masked by default)
+- **Key Name**: The identifier for the key
+- **Key Value**: The API key value (masked for security)
 - **Actions**:
-  - **Show/Hide**: Click the eye icon to reveal or hide the full key value
-  - **Copy**: Click the copy icon to copy the key to your clipboard
-  - **Rotate**: Click the rotate icon to regenerate the key (this will invalidate the previous key)
+  - **Edit**: Modify the key name
+  - **Delete**: Remove the API key (this will invalidate it immediately)
 
-**Important**: Store your API keys securely. They provide access to your Benji Platform account and should never be shared publicly or committed to version control. If you rotate a key, update it immediately in any applications using it. After creating keys, they can be used with the[ Benji API](/api-reference/authentication)
+**Important**: Store your API keys securely when first generated. They provide access to your Benji Platform account and should never be shared publicly or committed to version control. If you delete a key, update any applications using it immediately to prevent authentication failures. After creating keys, they can be used with the[ Benji API](/api-reference/authentication)
 
 ### Webhooks
 

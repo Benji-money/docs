@@ -1,10 +1,81 @@
 ---
-title: 'Partner Settings Page'
-description: 'A page to set and view your account settings and configurations'
-sidebarTitle: 'Settings'
-icon: 'sliders'
+title: "Partner Settings Page"
+description: "A page to set and view your account settings and configurations"
+sidebarTitle: "Settings"
+icon: "sliders"
 ---
 
 import ComingSoon from '/snippets/coming_soon.mdx'
 
-<ComingSoon></ComingSoon>
+Partner Settings allows you to configure your loyalty program's details including branding, tier structure, custom member attributes, and custom campaign triggers.
+
+![Settings](/images/Settings-1.png)
+
+### General Settings
+
+Configure your basic program information and branding.
+
+**Partner Details**
+
+Click Edit to update your branding:
+
+- **Logo (Full Size)**: Your loyalty program's full logo (minimum 500px, PNG or SVG)
+- **Logo (Square Icon)**: Square icon version (minimum 250px x 250px, PNG or SVG)
+- **Partner Name**: Display name for your loyalty program
+
+**Loyalty Program**
+
+Click Edit to update your loyalty program details:
+
+- **Loyalty Program Name**: Name of your loyalty program
+- **Loyalty Currency**: The currency used for rewards (e.g., Points, Miles)
+
+### Loyalty Tiers & Attributes
+
+Define your loyalty program's tier structure and custom member attributes.
+
+**Loyalty Tiers**
+
+Define your loyalty program's tier structure. Click New Tier to add a tier:
+
+- **Your ID**: The tier identifier in your system
+- **Status Tier Name**: Display name for the tier
+- **Base Tier**: Check this box to set as the base tier
+
+**Custom Attributes**
+
+Custom attributes capture additional information about your members that can be used in campaign conditions and multipliers. For example, you might create an attribute to track credit card holder status or membership level.
+
+Click New Attribute to create a custom attribute:
+
+- **Attribute Name**: Display name for the attribute
+- **Your ID**: The attribute identifier used in your system
+- **Attribute Type**: Data type for the attribute
+  - Text: String values
+  - Number: Numeric values
+  - Multi Value: Multiple selection values
+  - Boolean: True/false values
+
+### Custom Triggers
+
+Configure custom triggers for use in campaigns with the Custom Action trigger type. Custom triggers provide flexibility to create campaigns for use cases not covered by standard trigger types, for example Spend Per Dollar, Registration, or Customer Referral.
+
+Click New Trigger to create a custom trigger:
+
+- **Name**: Display name for the trigger
+- **Trigger Value**: The identifier sent when triggering the campaign via API
+- **Description**: Description of when this trigger should be used
+
+**Instructions to Send Events**
+
+Click "Instructions to Send Events" to view the JSON payload format for sending custom trigger events via the Benji API. The payload shows the trigger_name and user_id fields required to activate campaigns using this trigger.
+
+### Users
+
+Manage administrator access for your loyalty program. Click Invite New User to grant users access to manage campaigns and settings for your program.
+
+### Campaign Templates
+
+Create reusable campaign configurations that can be quickly deployed across multiple campaigns. Templates allow you to standardize campaign structures for common use cases.
+
+Click Add New Template to open the campaign editor and create a template with pre-configured triggers, actions, conditions, and multipliers.

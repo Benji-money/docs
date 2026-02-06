@@ -94,12 +94,17 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
   The created token token to use when initializing the Benji Connect SDK
 </ResponseField>
 
+<ResponseField name="connect_url" type="string" required>
+  For accounts with hosted urls enabled, the URL to redirect the user to in order to complete the connection flow. Empty for accounts without hosted urls enabled.
+</ResponseField>
+
 <ResponseExample>
 ```json 200
 {
     "code": "ok",
     "data": {
-        "token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02"
+        "token": "0c371a1c-aa81-11ef-b28c-0a58a9feac02",
+        "connect_url": "https://connect.withbenji.com/khkgfoud76td"
     }
 }
 ```

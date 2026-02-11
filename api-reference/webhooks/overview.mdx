@@ -23,7 +23,7 @@ All webhooks contain the following JSON body parameters :
             - **TRANSACTION (3)** : Indicating a reward transaction entity
         </Expandable>
 </ParamField>
-<ParamField body="entity_id" type="integer">The ID of the entity</ParamField>
+<ParamField body="entity_id" type="string">The ID of the entity</ParamField>
 
 ### Webhook Authentication
 
@@ -49,7 +49,7 @@ The webhook will also contain a header including the datetime in GMT format of t
 {
     "event": "reward_transaction_updated",
     "entity": 3,
-    "entity_id": 243
+    "entity_id": "55af7b67-bf3c-4fbf-81bc-05db9426ca96"
 }
 ```
 ### Webhook Flow

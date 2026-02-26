@@ -68,6 +68,82 @@ api: 'GET https://api-staging.withbenji.com/users/{id}'
   </Expandable>
 </ResponseField>
 
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "user": {
+            "created_date": "2026-02-08T00:13:59.970754+00:00",
+            "email": "test@test.com",
+            "external_id": null,
+            "first_name": "Test",
+            "id": 155,
+            "last_name": "User",
+            "merchants": [
+                {
+                    "created_date": "2026-02-09T14:50:17.198641+00:00",
+                    "external_id": "4731354127758848",
+                    "id": 196,
+                    "merchant_id": 85,
+                    "total_rewards_earned": 0,
+                    "total_rewards_redeemed": 0,
+                    "user_id": 155
+                },
+                {
+                    "created_date": "2026-02-11T18:08:18.532675+00:00",
+                    "external_id": "daae5365-c895-48bf-bc23-a9861a351e04",
+                    "id": 215,
+                    "merchant_id": 93,
+                    "total_rewards_earned": 3327,
+                    "total_rewards_redeemed": 0,
+                    "user_id": 155
+                }
+            ],
+            "partner_status_tiers": [
+                {
+                    "created_date": "2026-02-08T00:16:10.255945+00:00",
+                    "external_id": "4731354127758848",
+                    "first_name": "Test",
+                    "id": 287,
+                    "last_name": "User",
+                    "partner_id": 61,
+                    "partner_status_tier_id": 92,
+                    "total_rewards": 8696,
+                    "total_rewards_earned": 8873,
+                    "total_rewards_redeemed": 0,
+                    "user_id": 155
+                }
+            ],
+            "phone_number": null,
+            "uuid_id": "77a5ad82-c27a-47fd-b21d-2d19a3ff222d"
+        }
+    }
+}
+```
+
+```json 400
+{
+  "error": "invalid_token",
+  "message": "Invalid token"
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
+}
+```
+
+```json 404
+{
+  "error": "user_does_not_exist",
+  "message": "The user does not exist"
+}
+```
+</ResponseExample>
+
 <Tip>
 This endpoint retrieves detailed information about a specific user, including their loyalty status with all connected partners and merchants.
 </Tip>

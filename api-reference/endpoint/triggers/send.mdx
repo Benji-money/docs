@@ -33,6 +33,38 @@ api: 'POST https://api-staging.withbenji.com/partnerships/{partnership_id}/trigg
   The UUID of the trigger event. This is the preferred identifier for referencing the trigger event.
 </ResponseField>
 
+<ResponseExample>
+```json 200
+{
+    "code": "ok",
+    "data": {
+        "trigger_event_id": "f0f8ae48-f005-471c-9a15-ec53c207218c"
+    }
+}
+```
+
+```json 400
+{
+  "code": "invalid_token",
+  "message": "Invalid token"
+}
+```
+
+```json 401
+{
+  "code": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
+}
+```
+
+```json 404
+{
+  "code": "partnership_does_not_exist",
+  "message": "The partnership does not exist"
+}
+```
+</ResponseExample>
+
 <Tip>
 Trigger events are used to activate campaign flows and generate rewards for users. Make sure the trigger is configured in your partnership settings before sending events.
 </Tip>

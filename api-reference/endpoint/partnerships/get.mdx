@@ -67,6 +67,55 @@ api: 'GET https://api-staging.withbenji.com/partnerships/{id}'
   </Expandable>
 </ResponseField>
 
+<ResponseExample>
+```json 200
+{
+  "code": "ok",
+  "data": {
+    "partnership": {
+      "uuid_id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Test Partnership",
+      "description": "A partnership between merchant and loyalty partner",
+      "img": "https://example.com/partnership-logo.png",
+      "merchant_id": 1,
+      "related_partner_id": null,
+      "partner_id": 3,
+      "is_active": 1,
+      "is_deleted": 0,
+      "owner_id": 5,
+      "total_rewards_earned": 15000,
+      "total_rewards_redeemed": 3200,
+      "num_of_transactions": 142,
+      "is_demo": 0,
+      "created_date": "2024-11-20T00:30:57.256493+00:00",
+      "campaigns": null
+    }
+  }
+}
+```
+
+```json 400
+{
+  "error": "invalid_token",
+  "message": "Invalid token"
+}
+```
+
+```json 401
+{
+  "error": "unauthorized_request",
+  "message": "Token is not authorized to make this request"
+}
+```
+
+```json 404
+{
+  "error": "partnership_does_not_exist",
+  "message": "The partnership does not exist"
+}
+```
+</ResponseExample>
+
 <Tip>
 This endpoint retrieves detailed information about a specific partnership, including all associated campaigns and performance metrics.
 </Tip>

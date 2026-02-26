@@ -30,16 +30,18 @@ api: 'GET https://api-staging.withbenji.com/transactions/{id}'
             - **REDEEM (2)** : Indicating a redeem transaction type  <br/>
         </Expandable>
     </ResponseField>
-    <ResponseField name="status" type="integer">
-    Integer representing an enum of one of the following transaction values : 
+    <ResponseField name="transaction_status" type="integer">
+    Integer representing an enum of one of the following transaction status values : 
         <Expandable title="possible transaction status values" type="enum">
-            - **PENDING (1)** : Indicating a transaction that is pending and has not been confirmed by the partner yet <br/>
-            - **CONFIRMED (2)** : Indicating a transaction that has been confirmed by the partner  <br/>
-            - **FAILED (3)** : Indicating a transaction that has been rejected by the partner  <br/>
+            - **INITIATED (1)** : Transaction has been initiated <br/>
+            - **PENDING (2)** : Transaction is pending and has not been confirmed by the partner yet <br/>
+            - **COMPLETED (3)** : Transaction has been completed successfully <br/>
+            - **ERROR (4)** : An error occurred during processing <br/>
+            - **REVERSED (5)** : Transaction was reversed <br/>
+            - **FAILED (6)** : Transaction was rejected by the partner <br/>
+            - **CANCELLED (7)** : Transaction was cancelled <br/>
         </Expandable>
     </ResponseField>
-    <ResponseField name="error_reason" type="string">If status is FAILED, the reason why this transaction was rejected</ResponseField>
-    <ResponseField name="last_update_date" type="datetime">Datetime indicating the last status change.For instance, is the status is CONFIRMED, this date will indicate when the transaction was confirmed</ResponseField>
     <ResponseField name="created_date" type="datetime">The transaction date</ResponseField>
     
   </Expandable>
@@ -51,18 +53,20 @@ api: 'GET https://api-staging.withbenji.com/transactions/{id}'
     "code": "ok",
     "data": {
         "reward_transaction": {
-            "created_date": "2024-08-23T19:55:12.015047+00:00",
-            "last_updated_date": "2024-08-23T19:57:12.015047+00:00",
-            "status": 2,
-            "external_order_id": "5856681787572",
-            "id": 1,
-            "merchant_id": 1,
-            "partner_id": 1,
-            "campaign_id": 1,
-            "reward_amount": 266,
-            "transaction_amount": 885.95,
+            "campaign_id": "675976-khkgyt7-9876-khfiy",
+            "created_date": "2025-08-18T20:45:01.186277+00:00",
+            "external_id": null,
+            "external_order_id": null,
+            "external_partner_transaction_id": null,
+            "id": 5924,
+            "merchant_id": 41,
+            "partner_id": 5,
+            "partnership_id": "partnership-uuid ",
+            "reward_amount": 600,
+            "transaction_amount": 0.0,
+            "transaction_status": 4,
             "transaction_type": 1,
-            "user_id": 1
+            "user_id": "user-uuid"
         }
     }
 }
@@ -70,21 +74,21 @@ api: 'GET https://api-staging.withbenji.com/transactions/{id}'
 
 ```json 400
 {
-  "error": "invalid_token",
+  "code": "invalid_token",
   "message": "Invalid token"
 }
 ```
 
 ```json 401
 {
-  "error": "unauthorized_request",
+  "code": "unauthorized_request",
   "message": "Token is not authorized to make this request"
 }
 ```
 
 ```json 404
 {
-  "error": "transaction_does_not_exist",
+  "code": "transaction_does_not_exist",
   "message": "The transaction does not exist"
 }
 ```

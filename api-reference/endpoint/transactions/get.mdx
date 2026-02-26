@@ -17,8 +17,9 @@ api: 'GET https://api-staging.withbenji.com/transactions/{id}'
   <Expandable title="properties" defaultOpen="true">
     <ResponseField name="id" type="integer">Benji Platform reward transaction identifier</ResponseField>
     <ResponseField name="partner_id" type="integer">The ID of the partner associated with this transaction in the Benji Platform</ResponseField>
+    <ResponseField name="partnership_uuid" type="string">The UUID of the partnership associated with this transaction in the Benji Platform</ResponseField>
     <ResponseField name="campaign_id" type="integer">The ID of the campaign triggered for this transaction in the Benji Platform</ResponseField>
-    <ResponseField name="user_id" type="integer">The ID of the user associated with the transaction in the Benji Platform</ResponseField>
+    <ResponseField name="user_uuid" type="string">The UUID of the user associated with the transaction in the Benji Platform</ResponseField>
     <ResponseField name="merchant_id" type="integer">The ID of the merchant partner associated with this campaign in the Benji Platform</ResponseField>
     <ResponseField name="transaction_amount" type="integer">The total amount of dollars amount of the transaction</ResponseField>
     <ResponseField name="reward_amount" type="integer">The total amount of rewards earned or redeemed on this transaction</ResponseField>
@@ -61,12 +62,12 @@ api: 'GET https://api-staging.withbenji.com/transactions/{id}'
             "id": 5924,
             "merchant_id": 41,
             "partner_id": 5,
-            "partnership_id": "partnership-uuid ",
+            "partnership_uuid": "partnership-uuid ",
             "reward_amount": 600,
             "transaction_amount": 0.0,
             "transaction_status": 4,
             "transaction_type": 1,
-            "user_id": "user-uuid"
+            "user_uuid": "user-uuid"
         }
     }
 }

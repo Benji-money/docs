@@ -1,6 +1,6 @@
 ---
 title: 'Exchange the Connect Token'
-description: 'Exchange the short lived toke returned from the SDK to a long living access token and refresh token using the Benji Platform API'
+description: 'Exchange the short lived token returned from the SDK to a long living access token and refresh token using the Benji Platform API'
 sidebarTitle: "Exchange Token"
 api: 'POST https://authservice-staging.withbenji.com/access/token/exchange'
 ---
@@ -20,7 +20,7 @@ api: 'POST https://authservice-staging.withbenji.com/access/token/exchange'
   Your system ID as specified on the Benji Platform
 </ResponseField>
 <ResponseField name="token_data" type="object" required>
-An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh tpken to obtain a new access token silently without requiring the user to authenticate again.
+An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh token to obtain a new access token silently without requiring the user to authenticate again.
     <Expandable title="properties" defaultOpen="true">
         <ResponseField name="access_token" type="string" required>Access Token to use when making user oriented requests to the Benji Platform APIs </ResponseField>
         <ResponseField name="refresh_token" type="string" required>Refresh Token to [use](/api-reference/endpoint/authentication/refresh) on order to silently obtain a new access token when it expires </ResponseField>
@@ -60,7 +60,7 @@ An object representing the access_token, refresh_token to use when using the Ben
 </ResponseExample>
 
 <Tip>Access token are typically valid for 90 days. You can refresh an access token either before it expires proactively, or after calling an API and getting an expired_token 401 status code</Tip>
-<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a succesful user connect flow. The exchange token is valid for 15 minutes after the succesful callback flow</Warning>
+<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a successful user connect flow. The exchange token is valid for 15 minutes after the successful callback flow</Warning>
 
 
 

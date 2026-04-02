@@ -13,30 +13,33 @@ This is where you can configure all of the basic settings of your campaign
 
 In this section you can view or configure the following parameters :
 
-| Parameter                                                                                                | Description                                                                                                                                                                 | Possible values                                         |
-| -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| <ResponseField name="ID" type="Numeric" required>                                 </ResponseField>       | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only**  |
-| <ResponseField name="Name" type="string" required>                                 </ResponseField>      | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign                               |                                                         |
-| <ResponseField name="Description" type="string">                                 </ResponseField>        | A description for this campaign.                                                                                                                                            |                                                         |
-| <ResponseField name="Start Date/Time" type="date time">                                 </ResponseField> | The start date of the specific campaign                                                                                                                                     | A valid future date and time to activate this campaign. |
-| <ResponseField name="End Date/Time" type="date time">                                 </ResponseField>   | The end date for this specific campaign.                                                                                                                                    | A valid future date to automatically end this campaign  |
-| <ResponseField name="Image" type="file">                                 </ResponseField>                | An image to associate with this specific campaign                                                                                                                           | A JPG, JPEG, PNG or SVG image                           |
+| Parameter | Description | Possible values |
+| --- | --- | --- |
+| <ResponseField name="ID" type="Numeric" required>                                         </ResponseField> | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only** |
+| <ResponseField name="Name" type="string" required>                                         </ResponseField> | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop in Components related to this campaign |  |
+| <ResponseField name="Description" type="string">                                         </ResponseField> | A description for this campaign. |  |
+| <ResponseField name="Start Date/Time" type="date time">                                         </ResponseField> | The start date of the specific campaign | A valid future date and time to activate this campaign. |
+| <ResponseField name="End Date/Time" type="date time">                                         </ResponseField> | The end date for this specific campaign. | A valid future date to automatically end this campaign |
+| <ResponseField name="Image" type="file">                                         </ResponseField> | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image |
 
 ## Campaign Type
 
-In this section you can configure the distinct campaign type for this campaign. <img src="/images/pilot/campaign_type.png" alt="title" />
+In this section you can configure the distinct campaign type for this campaign.
 
-The Benji Platform supports 3 types of different campaign types :
+![Campaign Type](/images/Campaign_type.png)
 
-- **Earn Points** : A campaign that once triggered, and if the specific conditions are met, will distribute points to the connected user based on the base points distribution amount and any multipliers associated with the specific connected user.
-- **Pay with Points** : A campaign that once triggered, and if the specific conditions are met, will allow the users to redeem points to use to purchase items (or partial items) on the partner's online store.
-- **Connect Only** : A status sharing only campaign , meant to connect member data between your and your partners accounts. In this campaign type there is no movement of points to or from members.
+The Benji Platform supports 4 types of different campaign types :
+
+- **Earn Points**: A campaign that, once triggered and if the configured conditions are met, distributes points to the connected user based on the base points distribution amount and any multipliers associated with the specific connected user.
+- **Redeem**: A campaign that, once triggered and if the configured conditions are met, allows the connected member to redeem points to use to purchase items (or partial items) on the partner's online store.
+- **Transfer**: A campaign that allows connected members to transfer points between their loyalty program account and a partner's program. Operators configure a transfer conversion rate and transfer increments so members transfer in set multiples (for example, 1,000 points at a time).
+- **Connect Only:**  A status sharing only campaign, meant to connect member data between your and your partners accounts. In this campaign type there is no movement of points to or from members.
 
 ## Campaign Trigger
 
 In this section you can configure the the action the trigger to activate the campaign. This action essentially triggers a rule engine, that validates the conditions associated with the campaign, and attaches any configured multipliers to the transaction if the connected member is eligible for a multiplier.
 
- <img src="/images/pilot/campaign_trigger.png" alt="title" />
+![title](/images/pilot/campaign_trigger.png)
 
 The Benji Platform currently supports the following trigger types :
 
@@ -49,7 +52,7 @@ The Benji Platform currently supports the following trigger types :
   Triggers are especially useful when used in conjuction with Benji Drop In components. The drop in components can automatically render on the partner's online store based on these triggers and their respective placement
 </Tip>
 
-- **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Pay with Points type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
+- **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Redeem type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
 
 ## Campaign Actions
 

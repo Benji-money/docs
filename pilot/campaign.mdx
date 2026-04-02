@@ -37,7 +37,7 @@ The Benji Platform supports 4 types of different campaign types :
 
 ## Campaign Trigger
 
-In this section you can configure the the action the trigger to activate the campaign. This action essentially triggers a rule engine, that validates the conditions associated with the campaign, and attaches any configured multipliers to the transaction if the connected member is eligible for a multiplier.
+In this section you can configure the action the trigger to activate the campaign. This action essentially triggers a rule engine, that validates the conditions associated with the campaign, and attaches any configured multipliers to the transaction if the connected member is eligible for a multiplier.
 
 ![title](/images/pilot/campaign_trigger.png)
 
@@ -45,11 +45,11 @@ The Benji Platform currently supports the following trigger types :
 
 - **Spend Per Dollar** : Triggered on a transaction event on the partner's store.
 - **Registration** : Triggered when a member registers on the partner store and connects their account through the Benji platform to your loyalty program.
-- **Customer Referral** : Triggered when a connected member makes a succesful referal on the partner store.
+- **Customer Referral** : Triggered when a connected member makes a successful referral on the partner store.
 - **Custom Action** : A custom action that can be triggered from anywhere on the partner's store. This is meant for use cases that are not yet natively supported by the platform and provides flexibility to create any type of campaign using Benji's APIs.
 
 <Tip>
-  Triggers are especially useful when used in conjuction with Benji Drop In components. The drop in components can automatically render on the partner's online store based on these triggers and their respective placement
+  Triggers are especially useful when used in conjunction with Benji Drop In components. The drop in components can automatically render on the partner's online store based on these triggers and their respective placement
 </Tip>
 
 - **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Redeem type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
@@ -58,12 +58,12 @@ The Benji Platform currently supports the following trigger types :
 
 In this section you can configure the base actions that will occur when a trigger happens and the relevant conditions are met
 
-![title](/Screenshot2026-02-04at11.08.31AM.png)
+![title](/images/Screenshot2026-02-04at11.08.31AM.png)
 
 You can configure multiple actions per campaign.
 
 <Tip>
-  A common example for a campaign with multiple actions is receiving rewards from both partners. For instance - Earn 2 reward points from Partner A and 3 reward points form partner B for every transaction
+  A common example for a campaign with multiple actions is receiving rewards from both partners. For instance - Earn 2 reward points from Partner A and 3 reward points from partner B for every transaction
 </Tip>
 
 For each action, you can specify the action itself, which partner controls the action (if applicable), and the **base** conversion rate of the action :
@@ -77,7 +77,7 @@ For each action, you can specify the action itself, which partner controls the a
 <Expandable title="Action">
   Possible values of actions to perform:
 
-  - **Award Points/Redeem Points** : Dependent on if the canpaign is an Earn or Redeem type campaign
+  - **Award Points/Redeem Points** : Dependent on if the campaign is an Earn or Redeem type campaign
   - **Award Cashback** : If applicable and configured in your settings, enables earning cashback for a trigger on the user's account.
 </Expandable>
 
@@ -99,7 +99,7 @@ The partner owning this action. This will be automatically filled in based on wh
 
 ## Campaign Conditions
 
-In this section you can configure the the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met. <img src="/images/pilot/campaign_conditions.png" alt="title" />
+In this section you can configure the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met. <img src="/images/pilot/campaign_conditions.png" alt="title" />
 
 You can configure a limitless amount of conditions per campaign, and configure whether the association between each condition is an OR , meaning just one of the conditions need to be met, or as an AND, meaning all of the conditions need to met to satisfy the condition. For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
 
@@ -159,16 +159,16 @@ You can configure a limitless amount of multipliers per campaign. For each multi
   Will only be valid if the user is of a certain status.
 
   - **Operators** : **Is In** or **Is Not In**
-  - **Values** : Any one of your loyalty programs' status tiered configured in the Benji Platform.
+  - **Values** : Any one of your loyalty programs' status tiers configured in the Benji Platform.
 </Expandable>
 
 **Variable Attributes**
 
 <Expandable title="Customer Spend">
-  You can create multipliers based on any attribute returned as part of the Benji Platform integration with your platform. A typical example example would be Card Member status, # of total rewards earned throughout their membership etc.
+  You can create multipliers based on any attribute returned as part of the Benji Platform integration with your platform. A typical example would be Card Member status, # of total rewards earned throughout their membership etc.
 
   - **Operators** : **Is In** or **Is Not In**
-  - **Values** : Configrable values based on the variable attribute possible values configured in the settings section of the Benji Platform.
+  - **Values** : Configurable values based on the variable attribute possible values configured in the settings section of the Benji Platform.
 </Expandable>
 
 ## Campaign Limits

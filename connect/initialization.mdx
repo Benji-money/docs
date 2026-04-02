@@ -26,7 +26,7 @@ or by installing the package via pnpm
 ```bash
 pnpm add @benji-money/connect-sdk
 ```
-<Warning>Note that you will be able to acces sthe above packages/scripts once authorized to use the Benji SDKs. Contact your account manager for additional info</Warning>
+<Warning>Note that you will be able to access the above packages/scripts once authorized to use the Benji SDKs. Contact your account manager for additional info</Warning>
 ### Initializing the SDK 
 
 The SDK is initialized with the following parameters :
@@ -40,7 +40,7 @@ The SDK is initialized with the following parameters :
 </ParamField>
 
 <ParamField body="onSuccess" type="callback function">
-  This is your callback function method, which will be triggered when a member has succesfully connected with a partner loyalty program.
+  This is your callback function method, which will be triggered when a member has successfully connected with a partner loyalty program.
 </ParamField>
 
 <ParamField body="onExit" type="callback function">
@@ -74,7 +74,7 @@ function initializeSDK(token) {
         // onSuccess callback (token: string, metadata: BenjiConnectOnSuccessMetadata)
         onSuccess: (_token, _metadata) => {
             console.log('Benji Connect successful');
-            // Handle success event in your code, such as displaying a sucess message on your site and storing the returned token
+            // Handle success event in your code, such as displaying a success message on your site and storing the returned token
         },
 
         // onError callback (error: Error, error_id: string, metadata: BenjiConnectMetadata)

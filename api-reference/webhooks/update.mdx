@@ -26,7 +26,7 @@ api: 'PUT https://notificationservice-staging.withbenji.com/webhooks/subscribe'
 
 ### Return values 
 <ResponseField name="subscribed" type="boolean" required>
-  A true or false value indicating whether the subscription was succesful.
+  A true or false value indicating whether the subscription was successful.
 </ResponseField>
 
 <ResponseExample>
@@ -58,11 +58,12 @@ api: 'PUT https://notificationservice-staging.withbenji.com/webhooks/subscribe'
   "error": "event_not_exists",
   "message": "The specified event subscription does not exist"
 }
+```
 
 ```json 500
 {
   "error": "unexpected_error",
-  "message": "An unexpected error has occured"
+  "message": "An unexpected error has occurred"
 }
 ```
 </ResponseExample>

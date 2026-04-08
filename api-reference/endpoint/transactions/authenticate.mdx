@@ -25,7 +25,7 @@ api: 'POST https://rewardservice-staging.withbenji.com/reward_transaction/auth'
   The transaction token to use when calling the create transaction API
 </ResponseField>
 <ResponseField name="authentication_status" type="integer" required>
-    Integer representing an enum of one of the following transaction authentication status values : 
+    Integer representing an enum of one of the following transaction authentication status values:
         <Expandable title="possible transaction authentication status values" type="enum">
             - **AUTHENTICATED (1)** : Transaction is authenticated <br/>
             - **INSUFFICIENT_REWARDS_AMOUNT (2)** : Member does not have sufficient rewards for the transaction  <br/>

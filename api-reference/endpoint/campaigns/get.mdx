@@ -20,7 +20,7 @@ api: 'GET https://campaignservice-staging.withbenji.com/campaigns/{id}'
     <ResponseField name="description" type="string">The campaign's description as configured on the Benji platform</ResponseField>
     <ResponseField name="campaign_logo" type="string">URL of a marketing logo associated with the campaign</ResponseField>
     <ResponseField name="campaign_type" type="integer">
-    Integer representing an enum of one of the following campaign type values : 
+    Integer representing an enum of one of the following campaign type values:
         <Expandable title="possible campaign type values" type="enum">
             - **EARN (1)** : Indicating an earn rewards campaign type <br/>
             - **REDEEM (2)** : Indicating a redeem rewards campaign type  <br/>
@@ -28,7 +28,7 @@ api: 'GET https://campaignservice-staging.withbenji.com/campaigns/{id}'
         </Expandable>
     </ResponseField>
     <ResponseField name="trigger_type" type="integer">
-    Integer representing an enum of one of the following campaign trigger values : 
+    Integer representing an enum of one of the following campaign trigger values:
         <Expandable title="possible trigger type values" type="enum">
             - **SPEND (1)** : Indicating a campaign triggered on a transaction <br/>
             - **REGISTRATION (2)** : Indicating a campaign triggered on a new user registration  <br/>

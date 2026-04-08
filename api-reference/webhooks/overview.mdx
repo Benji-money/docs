@@ -1,22 +1,22 @@
 ---
 title: 'Benji Platform Webhooks Overview'
-description: 'An overview of the Benji Platform webhooks, allowing you to receive real time updates on users, campaigns and reward transactions.'
+description: 'An overview of the Benji Platform webhooks, allowing you to receive real-time updates on users, campaigns and reward transactions.'
 sidebarTitle: 'Overview'
 ---
 
 ## Overview
 
-The Benji Platform webhooks allow you to receive updates in near real time on activities in your partnership ecosystem. The following webhook entities are supported:
-- **Users** : Updates on a user's partner connect status and lifecycle on the Benji Platform.
-- **Campaigns** : Updates to relevant campaigns and their lifecycle on the Benji Platform
-- **Transactions** : Updates on reward transaction statuses and lifecycle.
+The Benji Platform webhooks allow you to receive updates in near real-time on activities in your partnership ecosystem. The following webhook entities are supported:
+- **Users**: Updates on a user's partner connect status and lifecycle on the Benji Platform.
+- **Campaigns**: Updates to relevant campaigns and their lifecycle on the Benji Platform
+- **Transactions**: Updates on reward transaction statuses and lifecycle.
 
 ### Webhook Format
 
-All webhooks contain the following JSON body parameters : 
+All webhooks contain the following JSON body parameters:
 <ParamField body="event" type="string" required>The name of the event</ParamField>
 <ParamField body="entity_type" type="integer">
-    Integer representing an enum of one of the following entity type values : 
+    Integer representing an enum of one of the following entity type values:
         <Expandable title="possible entity type values" type="enum">
             - **USER (1)** : Indicating a user entity <br/>
             - **CAMPAIGN (2)** : Indicating a campaign entity  <br/>
@@ -29,7 +29,7 @@ All webhooks contain the following JSON body parameters :
 
 In order to optionally authenticate and validate that the webhook was received from the Benji Platform, Benji provides a header value representing a signature that you can then validate.
 The signature is essentially the webhook body, signed with the salt provided in the response from the [subscribe endpoint](/api-reference/webhooks/subscribe), using a HMAC SHA-256 (HS256) algorithm.
-To authenticate the webhook, you can go through the following steps : 
+To authenticate the webhook, you can go through the following steps:
 - Store the salt returned in the subscribe API call.
 - When receiving a webhook:
   - Extract the timestamp from the x-benji-timestamp header value
@@ -53,13 +53,13 @@ The webhook will also contain a header including the datetime in GMT format of t
 }
 ```
 ### Webhook Flow
-A typical webhook flow requires the following steps :
+A typical webhook flow requires the following steps:
 - **[Subscribe to an event](/api-reference/webhooks/subscribe)** and register your webhook endpoint. The Benji Platform will send any updates to this event to this endpoint using a **POST** request.
 - **Listen to any webhooks** on your registered webhook event endpoint
 - **Call the Benji Platform API** to retrieve additional information on the entity based on the event and the entity_type parameters in the webhook.
 
 ### Supported events
-The following events and their corresponding entity types are supported :
+The following events and their corresponding entity types are supported:
 #### User Events
 <Expandable title="User Events">
     - user_partner_authentication_created : Indicating a user has successfully connected with a partner through the Benji Platform

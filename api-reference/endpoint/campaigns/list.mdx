@@ -8,7 +8,7 @@ api: 'GET https://campaignservice-staging.withbenji.com/campaigns'
 <Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
 <ParamField query="campaign_types" type="string" required>
- Comma separated list of possible campaign type values : 
+ Comma-separated list of possible campaign type values:
         <Expandable title="possible campaign type values" type="enum">
             - **EARN (1)** : Indicating an earn rewards campaign type <br/>
             - **REDEEM (2)** : Indicating a redeem rewards campaign type  <br/>
@@ -27,7 +27,7 @@ An Array of campaign objects associated with your account
     <ResponseField name="description" type="string">The campaign's description as configured on the Benji platform</ResponseField>
     <ResponseField name="campaign_logo" type="string">URL of a marketing logo associated with the campaign</ResponseField>
     <ResponseField name="campaign_type" type="integer">
-    Integer representing an enum of one of the following values : 
+    Integer representing an enum of one of the following values:
         <Expandable title="possible campaign type values" type="enum">
             - **EARN (1)** : Indicating an earn rewards campaign type <br/>
             - **REDEEM (2)** : Indicating a redeem rewards campaign type  <br/>
@@ -35,7 +35,7 @@ An Array of campaign objects associated with your account
         </Expandable>
     </ResponseField>
     <ResponseField name="trigger_type" type="integer">
-    Integer representing an enum of one of the following campaign trigger values : 
+    Integer representing an enum of one of the following campaign trigger values:
         <Expandable title="possible trigger type values" type="enum">
             - **SPEND (1)** : Indicating a campaign triggered on a transaction <br/>
             - **REGISTRATION (2)** : Indicating a campaign triggered on a new user registration  <br/>

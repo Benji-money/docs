@@ -27,14 +27,14 @@ An array of reward transaction objects created with this transaction
     <ResponseField name="reward_amount" type="integer">The total amount of rewards earned or redeemed on this transaction</ResponseField>
     <ResponseField name="external_order_id" type="string">The external reference of the order on the merchant partner system</ResponseField>
     <ResponseField name="transaction_type" type="integer">
-    Integer representing an enum of one of the following campaign type values : 
+    Integer representing an enum of one of the following campaign type values:
         <Expandable title="possible transaction type values" type="enum">
             - **EARN (1)** : Indicating an earn transaction type <br/>
             - **REDEEM (2)** : Indicating a redeem transaction type  <br/>
         </Expandable>
     </ResponseField>
     <ResponseField name="status" type="integer">
-    Integer representing an enum of one of the following transaction values : 
+    Integer representing an enum of one of the following transaction values:
         <Expandable title="possible transaction status values" type="enum">
             - **PENDING (1)** : Indicating a transaction that is pending and has not been confirmed by the partner yet <br/>
             - **CONFIRMED (2)** : Indicating a transaction that has been confirmed by the partner  <br/>

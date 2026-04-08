@@ -5,13 +5,13 @@ sidebarTitle: "Campaign Settings"
 icon: "sliders"
 ---
 
-The campaign page is where you can control all of your campaign settings. The page consists of 7 configurable sections :
+The campaign page is where you can control all of your campaign settings. The page consists of 7 configurable sections:
 
 ## Details
 
 This is where you can configure all of the basic settings of your campaign
 
-In this section you can view or configure the following parameters :
+In this section you can view or configure the following parameters:
 
 | Parameter | Description | Possible values |
 | --- | --- | --- |
@@ -28,7 +28,7 @@ In this section you can configure the distinct campaign type for this campaign.
 
 ![Campaign Type](/images/Campaign_type.png)
 
-The Benji Platform supports 4 types of different campaign types :
+The Benji Platform supports 4 different campaign types:
 
 - **Earn Points**: A campaign that, once triggered and if the configured conditions are met, distributes points to the connected user based on the base points distribution amount and any multipliers associated with the specific connected user.
 - **Redeem**: A campaign that, once triggered and if the configured conditions are met, allows the connected member to redeem points to use to purchase items (or partial items) on the partner's online store.
@@ -41,18 +41,18 @@ In this section you can configure the action the trigger to activate the campaig
 
 ![title](/images/pilot/campaign_trigger.png)
 
-The Benji Platform currently supports the following trigger types :
+The Benji Platform currently supports the following trigger types:
 
-- **Spend Per Dollar** : Triggered on a transaction event on the partner's store.
-- **Registration** : Triggered when a member registers on the partner store and connects their account through the Benji platform to your loyalty program.
-- **Customer Referral** : Triggered when a connected member makes a successful referral on the partner store.
-- **Custom Action** : A custom action that can be triggered from anywhere on the partner's store. This is meant for use cases that are not yet natively supported by the platform and provides flexibility to create any type of campaign using Benji's APIs.
+- **Spend Per Dollar**: Triggered on a transaction event on the partner's store.
+- **Registration**: Triggered when a member registers on the partner store and connects their account through the Benji platform to your loyalty program.
+- **Customer Referral**: Triggered when a connected member makes a successful referral on the partner store.
+- **Custom Action**: A custom action that can be triggered from anywhere on the partner's store. This is meant for use cases that are not yet natively supported by the platform and provides flexibility to create any type of campaign using Benji's APIs.
 
 <Tip>
-  Triggers are especially useful when used in conjunction with Benji Drop In components. The drop in components can automatically render on the partner's online store based on these triggers and their respective placement
+  Triggers are especially useful when used in conjunction with Benji Drop-In components. The drop-in components can automatically render on the partner's online store based on these triggers and their respective placement
 </Tip>
 
-- **Points per dollar spent** : This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Redeem type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
+- **Points per dollar spent**: This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Redeem type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
 
 ## Campaign Actions
 
@@ -77,8 +77,8 @@ For each action, you can specify the action itself, which partner controls the a
 <Expandable title="Action">
   Possible values of actions to perform:
 
-  - **Award Points/Redeem Points** : Dependent on if the campaign is an Earn or Redeem type campaign
-  - **Award Cashback** : If applicable and configured in your settings, enables earning cashback for a trigger on the user's account.
+  - **Award Points/Redeem Points**: Dependent on if the campaign is an Earn or Redeem type campaign
+  - **Award Cashback**: If applicable and configured in your settings, enables earning cashback for a trigger on the user's account.
 </Expandable>
 
 **Partner**
@@ -88,9 +88,9 @@ The partner owning this action. This will be automatically filled in based on wh
 **Conversion Rate**
 
 <Expandable title="Conversion Rate">
-  The base value of conversion of the action :
+  The base value of conversion of the action:
 
-  - **Reward Distribution Value** : A number representing the value of the conversion (e.g. **3 reward point per dollar spent**)
+  - **Reward Distribution Value**: A number representing the value of the conversion (e.g. **3 reward points per dollar spent**)
 </Expandable>
 
 <Tip>
@@ -101,7 +101,7 @@ The partner owning this action. This will be automatically filled in based on wh
 
 In this section you can configure the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met. <img src="/images/pilot/campaign_conditions.png" alt="title" />
 
-You can configure a limitless amount of conditions per campaign, and configure whether the association between each condition is an OR , meaning just one of the conditions need to be met, or as an AND, meaning all of the conditions need to met to satisfy the condition. For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
+You can configure a limitless amount of conditions per campaign, and configure whether the association between each condition is an OR , meaning just one of the conditions need to be met, or as an AND, meaning all of the conditions need to be met to satisfy the condition. For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
 
 **Customer Geography**
 
@@ -132,7 +132,7 @@ You can configure a limitless amount of conditions per campaign, and configure w
 
 **Time Elapsed**
 
-<Expandable title="Basket Size">
+<Expandable title="Time Elapsed">
   Will only be valid if a defined amount of time has passed since they connected their accounts.
 
   - **Operators** : **Greater Than**,  **Less than**
@@ -151,7 +151,7 @@ For **Redeem** type campaigns, this means the member will get a multiplier on th
   ![multipliers](/images/pilot/multipliers.png)
 </Frame>
 
-You can configure a limitless amount of multipliers per campaign. For each multiplier, you can specify the multiplier amount, a customer attribute to validate (the condition) and the corresponding value of the customer attribute to validate. The following customer attributes are supported :
+You can configure a limitless amount of multipliers per campaign. For each multiplier, you can specify the multiplier amount, a customer attribute to validate (the condition) and the corresponding value of the customer attribute to validate. The following customer attributes are supported:
 
 **Customer Status**
 
@@ -209,7 +209,7 @@ In this section you can configure goals for the campaign. Benji will track the p
 
 ![title](/images/pilot/campaign_goals.png)
 
-The Benji platform supports settings of the following built in goals :
+The Benji platform supports settings of the following built-in goals:
 
 **Registrations**
 
@@ -225,6 +225,6 @@ The Benji platform supports settings of the following built in goals :
 
 **Points Redeemed**
 
-<Expandable title="Points Earned" defaultOpen="true">
+<Expandable title="Points Redeemed" defaultOpen="true">
   Specifies a number representing the total amount of reward points redeemed throughout the campaign
 </Expandable>

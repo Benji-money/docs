@@ -17,7 +17,7 @@ api: 'POST https://rewardservice-staging.withbenji.com/transactions/{id}/reverse
   <Expandable title="properties" defaultOpen="true">
     <ResponseField name="reward_transaction_id" type="integer">Benji Platform reward transaction identifier</ResponseField>
     <ResponseField name="transaction_status" type="string">
-    String representing one of the transaction status values : 
+    String representing one of the transaction status values:
         <Expandable title="possible transaction status values" type="enum">
             - **REVERSED (1)** : Indicating a transaction was successfully reversed <br/>
             - **FAILED (2)** : Indicating a transaction failed to reverse since it has already been completed  <br/>

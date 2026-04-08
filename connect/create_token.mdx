@@ -17,7 +17,7 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
   The unique identifier of the partnership on the Benji Platform.
 </ParamField>
 <ParamField body="user_external_id" type="string">
-  A unique identifier associated with the user connecting their loyalty reward program, when set flow skips the initial user authorization with the partner and continues to authorize the user with the related merchant/partner.  
+  A unique identifier associated with the user connecting their loyalty reward program. When set, the flow skips the initial user authorization with the partner and continues to authorize the user with the related merchant/partner.  
 </ParamField>
 <ParamField body="custom_attributes" type="object" optional>
   Custom attributes for the connection flow
@@ -89,7 +89,7 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
   </Accordion>
 </AccordionGroup>
 
-### Return values 
+### Return values
 <ResponseField name="token" type="string" required>
   The created token to use when initializing the Benji Connect SDK
 </ResponseField>

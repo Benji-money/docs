@@ -27,7 +27,7 @@ As a user goes through the Benji Connect flow, your application will receive the
 ### onSuccess
 Event that indicates a successful authentication between the member and a Benji loyalty rewards partner
 <Expandable title="onSuccess" defaultOpen="true">
-Returns 2 values 
+Returns 2 values:
 - **token**: A short-lived access token to identify the user in the Benji Platform APIs. This token should be exchanged for an access token.
 - **metadata**: Metadata giving you information regarding the user details and user loyalty status to be able to immediately display or log in your system
 ```javascript
@@ -64,7 +64,7 @@ Note that the onExit will be called regardless of if the user has successfully l
 </Expandable>
 
 ### onEvent
-Event that indicates an event as part of the user flow on the Benji Connect flow
+Event that indicates an action as part of the user flow on Benji Connect
 <Expandable title="onEvent" defaultOpen="true">
 This event returns 2 values:
 - **type**: The name of the event. The following event names are supported:

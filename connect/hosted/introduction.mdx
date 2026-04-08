@@ -20,7 +20,7 @@ This approach is ideal for:
 
 ## How It Works
 
-- [Generate a connection token using the Benji API](/connect/create_token) using your partner key and user information. Alternatively, Benji can connect to your IDP to enable native authentication of your users. Benji supports all major IDP providers. Contact your Benji account manager to learn more and setup your IDP integration.
+- [Generate a connection token using the Benji API](/connect/create_token) using your partner key and user information. Alternatively, Benji can connect to your IDP to enable native authentication of your users. Benji supports all major IDP providers. Contact your Benji account manager to learn more and set up your IDP integration.
 - Build the redirect URL by taking the `connect_url` and `token` response fields from the [Create Token API](/connect/create_token) and appending the token as a query parameter: `<connect_url>?connect_token=<token>`.
 - Redirect or link your user to the redirect URL. You can also include a state query parameter, which will be sent as is to the callback URL.
 - The user completes the connection flow on the Benji-hosted page.

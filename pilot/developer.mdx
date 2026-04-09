@@ -4,7 +4,7 @@ icon: "display-code"
 description: "Manage API authentication, webhook subscriptions, and platform integrations"
 ---
 
-The Developer Settings page provides tools for integrating with the Benji Platform programmatically. You can generate API keys for authentication, configure webhook endpoints to receive real-time updates, and connect to pre-built integrations.
+The Developer Settings page provides tools for integrating with the Benji Platform programmatically. You can generate API keys for authentication, configure webhook endpoints to receive real-time updates, manage IP whitelisting, and connect to pre-built integrations.
 
 ![Developer](/images/Developer.png)
 
@@ -54,10 +54,18 @@ Each webhook displays:
 
 **Entity Types and Events**
 
-- **USER**: user_partner_connected
-- **TRANSACTION**: transaction_authenticated, transaction_created, transaction_status_updated
+- **USER**: user\_partner\_connected
+- **TRANSACTION**: transaction\_authenticated, transaction\_created, transaction\_status\_updated
 
 For detailed information about webhook authentication and payload formats, click the info icon next to the Add Webhook button.
+
+### IP Whitelist
+
+The IP Whitelist tab allows you to request that specific IP addresses be whitelisted for your Benji Platform integration. This is typically used to restrict API access to known server IPs and improve the security of your integration.
+
+**Requesting an IP Whitelist**
+
+Click the Add IP button and enter the IP address you want to whitelist. Once submitted, the request is sent to the Benji team for review. You will be notified once the IP has been approved and added.
 
 ### Integrations
 

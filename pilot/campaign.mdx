@@ -5,22 +5,20 @@ sidebarTitle: "Campaign Settings"
 icon: "sliders"
 ---
 
-The campaign page is where you can control all of your campaign settings. The page consists of 7 configurable sections:
+The Campaign Builder walks you through 4 steps to configure a campaign: Details, Schedule, Flows, and Goals. Navigate between steps using the step indicator at the top of the modal. Campaigns are saved as drafts until you complete all steps and click Save Campaign.
 
-## Details
+## Step 1: Details
 
-This is where you can configure all of the basic settings of your campaign.
+Set up your campaign name, type, description, and icon.
 
 In this section you can view or configure the following parameters:
 
 | Parameter | Description | Possible values |
 | --- | --- | --- |
-| <ResponseField name="ID" type="Numeric" required>                                             </ResponseField> | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only** |
-| <ResponseField name="Name" type="string" required>                                             </ResponseField> | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop-In Components related to this campaign |  |
-| <ResponseField name="Description" type="string">                                             </ResponseField> | A description for this campaign. |  |
-| <ResponseField name="Start Date/Time" type="date time">                                             </ResponseField> | The start date of the specific campaign | A valid future date and time to activate this campaign. |
-| <ResponseField name="End Date/Time" type="date time">                                             </ResponseField> | The end date for this specific campaign. | A valid future date to automatically end this campaign |
-| <ResponseField name="Image" type="file">                                             </ResponseField> | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image |
+| <ResponseField name="ID" type="Numeric" required>                                                 </ResponseField> | The unique system generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system generated number. This value is **Read Only** |
+| <ResponseField name="Name" type="string" required>                                                 </ResponseField> | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop-In Components related to this campaign |  |
+| <ResponseField name="Description" type="string">                                                 </ResponseField> | A description for this campaign. |  |
+| <ResponseField name="Image" type="file">                                                 </ResponseField> | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image |
 
 ## Campaign Type
 
@@ -35,13 +33,30 @@ The Benji Platform supports 4 different campaign types:
 - **Transfer**: A campaign that allows connected members to transfer points between their loyalty program account and a partner's program. Operators configure a transfer conversion rate and transfer increments so members transfer in set multiples (for example, 1,000 points at a time).
 - **Connect Only:** A status sharing only campaign, meant to connect member data between your and your partner's accounts. In this campaign type there is no movement of points to or from members.
 
-## Campaign Trigger
+## Step 2: Schedule
 
-In this section you can configure the trigger to activate the campaign. This action essentially triggers a rule engine, that validates the conditions associated with the campaign, and attaches any configured multipliers to the transaction if the connected member is eligible for a multiplier.
+Set when the campaign goes live.
+
+| Parameter | Description | Possible values |
+| :-- | :-- | :-- |
+| **Start Date** date | The date the campaign activates. | A valid future date |
+| **End Date** date | The date the campaign automatically ends. Not mandatory. | A valid future date after the start date |
+
+Note that an end date is not mandatory. Campaigns without an end date will be evergreen until paused.
+
+## Step 3: Flows
+
+Set who earns, how they earn, and what they earn for your campaign.
+
+A campaign can have multiple flows. Each flow defines a separate trigger and its associated configuration. Use the left sidebar to add and switch between flows. Each flow consists of the following configurable sections:
+
+### Campaign Trigger
+
+The trigger is the user action that qualifies a member for the campaign. Once a trigger fires, the Benji Platform triggers a rule engine to validate the conditions associated with the flow, and distributes rewards if all conditions are met.
 
 ![title](/images/pilot/campaign_trigger.png)
 
-The Benji Platform currently supports the following trigger types:
+The following trigger types are supported:
 
 - **Spend Per Dollar**: Triggered on a transaction event on the partner's store.
 - **Registration**: Triggered when a member registers on the partner store and connects their account through the Benji platform to your loyalty program.
@@ -54,7 +69,7 @@ The Benji Platform currently supports the following trigger types:
 
 - **Points per dollar spent**: This numeric value represents the base value of a transaction with your points. For Earn type campaigns, this represents the base value of how many reward points the connected member will be earning for every dollar spent. For Redeem type campaigns, this value represents the base amount of dollars each reward point is worth on the partner's store. This value will not be displayed for Connect Only type campaigns.
 
-## Campaign Actions
+### Campaign Actions
 
 In this section you can configure the base actions that will occur when a trigger happens and the relevant conditions are met
 
@@ -97,9 +112,11 @@ The partner owning this action. This will be automatically filled in based on wh
   The conversion rate configured in this section is the **base** conversion rate. Any configured multipliers will take effect based on the conversion rates defined in this section.
 </Tip>
 
-## Campaign Conditions
+### Campaign Conditions
 
-In this section you can configure the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met. <img src="/images/pilot/campaign_conditions.png" alt="title" />
+In this section you can configure the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met.
+
+ <img src="/images/pilot/campaign_conditions.png" alt="title" />
 
 You can configure a limitless amount of conditions per campaign, and configure whether the association between each condition is an OR , meaning just one of the conditions need to be met, or as an AND, meaning all of the conditions need to be met to satisfy the condition. For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
 
@@ -139,7 +156,7 @@ You can configure a limitless amount of conditions per campaign, and configure w
   - **Values** : A time period (e.g. 1 day, 2 weeks, 3 months, etc.)
 </Expandable>
 
-## Campaign Multipliers
+### Campaign Multipliers
 
 In this section you can configure certain conditions under which a certain member would get a multiplier boost on their earned or redeemed rewards for a specific transaction.
 
@@ -171,7 +188,7 @@ You can configure a limitless amount of multipliers per campaign. For each multi
   - **Values** : Configurable values based on the variable attribute possible values configured in the settings section of the Benji Platform.
 </Expandable>
 
-## Campaign Limits
+### Campaign Limits
 
 In this section you can configure limits to control how frequently members can qualify for rewards and the maximum value they can earn or redeem.
 
@@ -203,9 +220,9 @@ You can configure multiple limits per campaign. The following limit types are su
   - **Time Period:** Per day, per week, per month, per quarter, per year, or lifetime
 </Expandable>
 
-## Campaign Goals
+## Step 4: Goals
 
-In this section you can configure goals for the campaign. Benji will track the progress of the campaign and display how you are tracking towards the goals in the partnerships analytics page when you filter by campaign, as well as send out email notifications on how you are tracking towards these goals on a weekly basis, as well as ad hoc emails when you are about to hit the campaign goals.
+Set primary goals for your campaign. Benji will track progress against these goals, which you can view in the Analytics page when filtering by campaign.
 
 ![title](/images/pilot/campaign_goals.png)
 

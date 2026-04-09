@@ -93,11 +93,11 @@ This endpoint allows you to create an external order in the Benji platform. This
 ```json Request with user_link_id and line items
 {
   "merchant_external_id": "merchant_123",
-  "users": {
+  "user": {
     "user_link_id": "link_abc123"
   },
   "transaction_total": 2550,
-  "transaction_sub_total": 2300,
+  "transaction_subtotal": 2300,
   "transaction_discount": 200,
   "order_external_id": "order_456789",
   "order_payment_id": "payment_xyz789",
@@ -119,11 +119,11 @@ This endpoint allows you to create an external order in the Benji platform. This
 ```json Request with merchant_external_id (minimal)
 {
   "merchant_external_id": "merchant_123",
-  "users": {
+  "user": {
     "merchant_external_id": "customer_456"
   },
   "transaction_total": 1500,
-  "transaction_sub_total": 1500,
+  "transaction_subtotal": 1500,
   "order_external_id": "order_789012"
 }
 ```
@@ -131,11 +131,11 @@ This endpoint allows you to create an external order in the Benji platform. This
 ```json Request with user_id
 {
   "merchant_external_id": "merchant_123",
-  "users": {
+  "user": {
     "user_id": "benji_user_789"
   },
   "transaction_total": 3200,
-  "transaction_sub_total": 2900,
+  "transaction_subtotal": 2900,
   "transaction_discount": 100,
   "order_external_id": "order_345678",
   "line_items": [

@@ -13,17 +13,41 @@ The Users page allows you to manage two types of users: Admin Users who access t
 
 ### Admin Users
 
-The Admin Users tab displays all users who have access to your Benji platform account.
+The Admin Users tab displays all users who have access to your Benji platform account. Each admin user is assigned a role that controls what they can access and action within Pilot.
+
+The following roles are available:
+
+- **Admin**: Full access to all features and settings in Pilot, including user management.
+- **Campaign Manager**: Can create, edit, and manage campaigns and partnerships.
+- **Support**: Read access to member data and transactions for troubleshooting purposes.
+- **Developer**: Access to developer tools including API keys, webhooks, and IP whitelisting.
+- **Read Only**: Can view all content in Pilot but cannot make any changes.
 
 **Invite New User**
 
-Click the Invite New User button to send an invitation to a new administrator. They will receive an email with instructions to set up their account.
+Click the Invite New User button to send an invitation to a new administrator. They will receive an email with instructions to set up their account. Select a role for the user during the invitation flow.
 
 **Admin User Actions**
 
 - **Resend Invite**: Send a new invitation email to users with Invited status
 - **Edit**: Modify the user's name
 - **Delete**: Remove the user from your account
+
+### Collaborators
+
+Collaborators are external users who have been invited to access a specific partnership within your account. Unlike Admin Users who have account-wide access, collaborators are scoped to a single partnership and cannot view or action anything outside of it.
+
+Collaborators are invited from the partnership page. Each collaborator is assigned one of the following roles:
+
+- **Owner**: Full control over the partnership including managing other collaborators. There can only be one owner per campaign.
+- **Admin**: Can edit campaigns and manage partnership settings.
+- **Campaign Manager**: Can create and edit campaigns within the partnership.
+- **Marketing**: Read access to the partnership for visibility into campaign performance.
+
+**Collaborator Actions**
+
+- **Edit**: Modify the collaborator's name or role
+- **Delete**: Remove the collaborator's access to the partnership
 
 ### Members
 

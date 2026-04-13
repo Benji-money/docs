@@ -4,91 +4,144 @@ description: 'Overview of supported methods and events in the Benji Connect SDK'
 sidebarTitle: 'Methods & Events'
 ---
 
-Once initialized, the Benji Connect SDK supports the following methods and events.
+Once initialized, the Benji Connect SDK exposes the methods below. User-driven outcomes are delivered through the callbacks you passed in the [initialization](/connect/initialization) step.
 
 ## Methods
 
 ### open()
-- This method opens the Benji Connect modal through the SDK. Typically you would attach this method to an onClick function in your member connect flow.
+
+Opens the Benji Connect UI in a modal. Call this after construction, typically from a button click or route handler.
 
 ```javascript
-$('#connectBtn').on('click', function(e) {
-        e.preventDefault();
-        if (sdk) {
-            sdk.open();
-        }
-    });
+document.getElementById('connectBtn').addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (sdk) {
+    await sdk.open();
+  }
+});
 ```
+
+### ping()
+
+Returns the string `'pong'`. Intended for quick debugging to verify the **Benji Connect SDK** bundle loaded; not required for production flows.
 
 ## Events
 
-As a user goes through the Benji Connect flow, your application will receive the following events to the callback functions you specified as part of the [initialization flow](/connect/initialization):
+Callbacks match the `@benji-money/connect-sdk` contract. Types below are exported as `BenjiConnectEventType`, `BenjiConnectExitTrigger`, and related interfaces for TypeScript users.
 
 ### onSuccess
-Event that indicates a successful authentication between the member and a Benji loyalty rewards partner
+
+Fired when the Connect **flow completes successfully** (transport event `FLOW_SUCCESS`). This is the signal that the user finished link, transfer, or redeem as configured by the [connect token](/connect/create_token) ([modes](/connect/modes)).
+
 <Expandable title="onSuccess" defaultOpen="true">
-Returns 2 values:
-- **token**: A short-lived access token to identify the user in the Benji Platform APIs. This token should be exchanged for an access token.
-- **metadata**: Metadata giving you information regarding the user details and user loyalty status to be able to immediately display or log in your system
-```javascript
+
+**Arguments**
+
+- **`token`** (`string`) — Short-lived **exchange** token. Use it with [Exchange Token](/connect/exchange_token) to obtain access and refresh tokens for user-scoped APIs. Exchange it promptly (see the Exchange Token page for validity).
+- **`metadata`** — Payload aligned with `BenjiConnectOnSuccessMetadata`:
+  - **`context`** — SDK context (`namespace`, `version`).
+  - **`action`** (optional) — One of `connect`, `transfer`, `redeem` (`BenjiConnectAuthAction`).
+  - **`user_data`** (optional) — Structured user and status:
+    - **`user`**: `id`, `first_name`, `last_name`, optional `uuid`
+    - **`status`**: `status_id`, `num_of_rewards`, `reward_status`, optional `partner_status_tier_id`
+    - **`extra_data`** (optional): e.g. totals, dates
+  - **`transaction_data`** (optional) — When applicable: `action`, `amount`, `trigger_event_id`, `trigger_name`
+
+Example shape (illustrative):
+
+```json
 {
-   "status": {
-      "num_of_rewards": 45000,
-      "reward_status": true,
-      "status_id": "********4156"
-    },
+  "context": { "namespace": "benji-connect-sdk", "version": "1.0.0" },
+  "action": "connect",
+  "user_data": {
     "user": {
-      "email": "test@withbenji.com",
+      "id": 12345,
       "first_name": "Test",
-      "last_name": "Test"
+      "last_name": "User",
+      "uuid": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    "status": {
+      "status_id": "********4156",
+      "num_of_rewards": 45000,
+      "reward_status": "Mosaic 1"
     }
+  },
+  "transaction_data": {
+    "action": "redeem",
+    "amount": 1000,
+    "trigger_event_id": "abc-123",
+    "trigger_name": "connect"
   }
 }
 ```
+
 </Expandable>
 
 ### onExit
-Event that indicates that the user has exited the Benji Connect flow
-<Expandable title="onExit" defaultOpen="true">
-This event returns 1 value:
-- **metadata**: Additional metadata about the event such as the step and exit trigger
-   - **trigger**: The trigger which caused the SDK to close the connect UI
-      - **ACTION_BUTTON_CLICKED**: The user clicked the action button at the end of the flow.
-      - **CLOSE_BUTTON_CLICKED**: The user clicked the x button.
-      - **TAPPED_OUT_OF_BOUNDS**: The user tapped out of the modal bounds to dismiss.
 
-The onExit event can be triggered as a result of the following user actions:
-- The user has completed a full flow and has pressed close button at the end of the flow
-- The user has exited the flow before completing a full flow by pressing on the close button or pressing outside of the connect modal
-Note that the onExit will be called regardless of if the user has successfully linked their loyalty account. The only event that indicates a successful connection is the onSuccess event above.
+Fired when the user leaves the Connect UI (transport event `FLOW_EXIT`). The **Benji Connect SDK** closes the modal after this callback.
+
+<Expandable title="onExit" defaultOpen="true">
+
+**Arguments**
+
+- **`metadata`** — `BenjiConnectOnExitMetadata`:
+  - **`context`**
+  - **`trigger`** — Why the UI closed (`BenjiConnectExitTrigger`):
+    - **`ACTION_BUTTON_CLICKED`** — User completed the flow and used the primary dismiss/action control.
+    - **`CLOSE_BUTTON_CLICKED`** — User closed via the chrome close control.
+    - **`TAPPED_OUT_OF_BOUNDS`** — User dismissed by tapping outside the modal (when supported).
+    - **`BACK_TO_MERCHANT_CLICKED`** — Deprecated; may still appear in older flows.
+  - **`step`** (optional) — Flow step when exit occurred.
+
+`onExit` can run whether or not `onSuccess` ran. Only **`onSuccess`** indicates a completed successful Connect flow.
+
 </Expandable>
 
 ### onEvent
-Event that indicates an action as part of the user flow on Benji Connect
+
+Fired for mid-flow and auxiliary transport events. The first argument is **`type`** (`BenjiConnectEventType`).
+
 <Expandable title="onEvent" defaultOpen="true">
-This event returns 2 values:
-- **type**: The name of the event. The following event names are supported:
-   - **user_authenticated_with_partner**: The user has completed authentication with the partner network
-   - **go_back_clicked**: The user clicked on the back button as part of the connect flow
-   - **user_inactive**: The user has not clicked on the flow for more than 1 minute.
-- **metadata**: Metadata with additional data on the event if relevant. Note that not all values will be present at all times, and are specific to certain events.
-```javascript
-{
-   "partner_id": "<the Benji partner ID>",
-   "external_user_id": "<the ID of the user in your system, as passed in to the SDK during initialization>",
-   "screen_name": "<the screen name as part of the Benji flow>"
-}
-```
+
+**Arguments**
+
+- **`type`** — Values you may see include:
+  - **`AUTH_SUCCESS`** — Mid-flow authentication success. Delivered to **`onEvent`** only (not **`onSuccess`**). Use for progress or analytics; metadata can include action, user, and token-related fields.
+  - **`EVENT`** — Generic events with additional fields in **`metadata`**.
+  - Other values may be forwarded for forward compatibility.
+
+- **`metadata`** — Varies by `type`; always includes **`context`**. Additional keys are merged from the payload when present.
+
+**Routing (important):**
+
+- **`FLOW_SUCCESS`** invokes **`onSuccess`** with the exchange token — not **`onEvent`**.
+- **`FLOW_EXIT`** invokes **`onExit`** — not **`onEvent`**.
+- **`ERROR`** invokes **`onError`**.
+
+**Practical distinction:** Implement **`onSuccess`** for “flow completed + exchange token.” Use **`onEvent`** when you need mid-flow **`AUTH_SUCCESS`** or generic **`EVENT`** data before completion.
+
 </Expandable>
 
 ### onError
-Event that indicates an error has occurred as part of the Benji Connect flow
+
+Fired when an error occurs in the Connect flow (`ERROR` transport event).
+
 <Expandable title="onError" defaultOpen="true">
-This event returns 3 values:
-- **error**: The name of the error. The following error code names are supported:
-   - **unexpected_error**: An unexpected error has occurred on the Benji Platform.
-   - **partner_connect_error**: An error occurred while trying to connect the user with their selected loyalty network
-- **error_id**: An ID to identify the error on the Benji platform. When contacting Benji support, you can use this error ID to help our team quickly identify and help investigate the error if applicable.
-- **metadata**: Metadata with additional data on the event if relevant.
+
+**Arguments**
+
+- **`error`** — Typically an `Error` instance or platform-specific error information.
+- **`error_id`** — Identifier for support correlation when applicable.
+- **`metadata`** — Additional context; includes **`context`** where provided.
+
+Documented error names include:
+
+- **`unexpected_error`** — Unexpected platform error.
+- **`partner_connect_error`** — Failure while connecting the user to the selected loyalty network.
+
+<Note>
+  The **Benji Connect SDK** may refine **`onError`** payloads in a future release; treat **`error`**, **`error_id`**, and **`metadata`** as the stable integration surface.
+</Note>
 
 </Expandable>

@@ -26,7 +26,7 @@ api: 'GET https://authservice-staging.withbenji.com/access/token/refresh'
 <ResponseField name="token_data" type="object" required>
 An object representing the access_token, refresh_token to use when using the Benji Platform APIs as well as the access token expiry date. Once an access token expires, you can use the refresh token to obtain a new access token silently without requiring the user to authenticate again.
     <Expandable title="properties" defaultOpen="true">
-        <ResponseField name="access_token" type="string" required>A new access token to use when making user oriented requests to the Benji Platform APIs </ResponseField>
+        <ResponseField name="access_token" type="string" required>A new access token to use when making user-oriented requests to the Benji Platform APIs </ResponseField>
         <ResponseField name="refresh_token" type="string" required>Refresh Token to use in order to silently obtain a new access token when it expires </ResponseField>
         <ResponseField name="access_token_expires_at" type="string" required>A string representing a datetime of when this access token will expire </ResponseField>
     </Expandable>

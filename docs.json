@@ -53,6 +53,7 @@
             "group": "Getting Started",
             "pages": [
               "connect/overview",
+              "connect/modes",
               "connect/create_token"
             ]
           },

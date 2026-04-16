@@ -1,6 +1,6 @@
 ---
 title: 'Exchange the Connect Token'
-description: 'Exchange the short-lived token returned from the SDK to a long-lived access token and refresh token using the Benji Platform API'
+description: 'Exchange the short-lived token returned from the Benji Connect SDK to a long-lived access token and refresh token using the Benji Platform API'
 sidebarTitle: "Exchange Token"
 api: 'POST https://authservice-staging.withbenji.com/access/token/exchange'
 ---
@@ -8,7 +8,7 @@ api: 'POST https://authservice-staging.withbenji.com/access/token/exchange'
 <Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
 
 <ParamField body="exchange_token" type="string" required>
-  The [token received](/connect/methods) from the onSuccess callback method specified as part of the [SDK initialization](/connect/initialization) flow
+  The **string token** passed as the first argument to your **`onSuccess`** callback after a successful Connect flow ([Methods & Events](/connect/methods#onsuccess)). This is the exchange token produced when the transport layer completes with **`FLOW_SUCCESS`** — pass it here, not the raw connect token used to initialize the **Benji Connect SDK**.
 </ParamField>
 
 
@@ -60,7 +60,10 @@ An object representing the access_token, refresh_token to use when using the Ben
 </ResponseExample>
 
 <Tip>Access tokens are typically valid for 90 days. You can refresh an access token either before it expires proactively, or after calling an API and getting an expired_token 401 status code.</Tip>
-<Warning>Make sure to exchange the token returned by the Connect SDK promptly following a successful user connect flow. The exchange token is valid for 15 minutes after the successful callback flow.</Warning>
+<Warning>Call the Exchange Token API soon after **`onSuccess`**. The exchange token is valid for **15 minutes** after the successful callback.</Warning>
+
+See also [Methods & Events](/connect/methods#onsuccess) in the **Benji Connect SDK** docs for the shape of **`onSuccess`** metadata alongside the token.
+
 
 
 

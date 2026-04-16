@@ -1,55 +1,71 @@
 ---
-title: 'Create a token to initialize the SDK'
-description: 'Create a token to initialize an instance of the Benji Connect SDK or Hosted Page.'
+title: "Create a token to initialize the Benji Connect SDK"
+description: "Create a token to initialize an instance of the Benji Connect SDK or Benji Hosted Connect."
 sidebarTitle: "Create Token"
-api: 'POST https://api-staging.withbenji.com/auth/connect'
+api: "POST https://api-staging.withbenji.com/auth/connect"
 ---
 
-<Note>The `x-api-key` header value to be used on this API is your **partner API key**, which can be generated through the dashboard.</Note>
+<Note>
+  The `x-api-key` header value to be used on this API is your **partner API
+  key**, which can be generated through the [Developer](/pilot/developer) page
+  in Pilot.
+</Note>
 
-<ParamField body="display_name" type="string">
-  The partnership display name you wish to be shown in the Benji Connect flow UI _Note: If this is not passed, the name configured on the Benji platform will be used._
-</ParamField>
-<ParamField body="mode" type="number" required>
-  The connection mode for the SDK (Connect = 1, Transfer = 3, and Redeem = 4)
-</ParamField>
+<Note>
+  The Connect Token API resolves **merchant** and **partner** from
+  **`partnership_id`**.
+</Note>
+
+### Request body
+
 <ParamField body="partnership_id" type="string" required>
   The unique identifier of the partnership on the Benji Platform.
 </ParamField>
-<ParamField body="user_external_id" type="string">
-  A unique identifier associated with the user connecting their loyalty reward program. When set, the flow skips the initial user authorization with the partner and continues to authorize the user with the related merchant/partner.
+
+<ParamField body="mode" type="number" required>
+  The connection mode for the SDK (Connect = 1, Transfer = 3, and Redeem = 4).
+  See [Connect modes](/connect/modes).
 </ParamField>
+
+<ParamField body="display_name" type="string">
+  Display name shown in the Connect UI. If omitted, the name configured for the
+  partnership on the platform is used.
+</ParamField>
+
+<ParamField body="user_external_id" type="string">
+  A unique identifier for the user in your system. When set, the flow can skip
+  the authentication step for your user.
+</ParamField>
+
 <ParamField body="custom_attributes" type="object" optional>
-  Custom attributes for the connection flow
+  Custom attributes for the connection flow (e.g. transfer actions).
   <Expandable title="properties" defaultOpen="true">
     <ParamField body="actions" type="array" optional>
-      Array of actions to be performed during the connection flow
+      Array of actions (e.g. transfer amounts).
       <Expandable title="action properties" defaultOpen="true">
         <ParamField body="mode" type="number" optional>
-          The action mode (Transfer = 3, Redeem = 4)
+          Action mode: **Transfer = 3**
         </ParamField>
         <ParamField body="amount" type="number" optional>
-          The points amount to transfer or redeem from the partner
+          Preselected points amount for action.
         </ParamField>
         <ParamField body="allows_editing" type="boolean" optional>
-          Determines whether the user can edit the points amount in the UI or not
+          Whether the user can edit the amount in the UI.
         </ParamField>
       </Expandable>
     </ParamField>
   </Expandable>
 </ParamField>
 
-### Example Requests
+### Example requests
 
 <AccordionGroup>
-  <Accordion title="Minimal Request (Connect mode)">
+  <Accordion title="Minimal request (Connect mode)">
 ```json
 {
-    "mode": 1,
-    "display_name": "Reward Cookies",
-    "partner_id": 3,
     "partnership_id": 49,
-    "merchant_id": 48
+    "mode": 1,
+    "display_name": "Reward Cookies"
 }
 ```
   </Accordion>
@@ -57,24 +73,20 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
   <Accordion title="With user_external_id">
 ```json
 {
+    "partnership_id": 49,
     "mode": 1,
     "display_name": "Reward Cookies",
-    "partner_id": 3,
-    "partnership_id": 49,
-    "merchant_id": 48,
-    "user_external_id": "1234"
+    "user_external_id": "user-1234"
 }
 ```
   </Accordion>
 
-  <Accordion title="With custom_attributes (Transfer mode)">
+  <Accordion title="Transfer mode (mode 3) with custom_attributes">
 ```json
 {
+    "partnership_id": 49,
     "mode": 3,
     "display_name": "Reward Cookies",
-    "partner_id": 3,
-    "partnership_id": 49,
-    "merchant_id": 48,
     "custom_attributes": {
         "actions": [
             {
@@ -87,15 +99,28 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
 }
 ```
   </Accordion>
+
+  <Accordion title="Redeem mode (mode 4)">
+```json
+{
+    "partnership_id": 49,
+    "mode": 4,
+    "display_name": "Reward Cookies"
+}
+```
+  </Accordion>
 </AccordionGroup>
 
 ### Return values
+
 <ResponseField name="token" type="string" required>
-  The created token to use when initializing the Benji Connect SDK
+  The connect token to pass when [initializing the Benji Connect
+  SDK](/connect/initialization) or as `connect_token` on the [**Benji Hosted
+  Connect**](/connect/hosted/introduction) URL.
 </ResponseField>
 
-<ResponseField name="connect_url" type="string" required>
-  For accounts with hosted URLs enabled, the URL to redirect the user to in order to complete the connection flow. Empty for accounts without hosted URLs enabled.
+<ResponseField name="connect_url" type="string">
+  Base URL for **Benji Hosted Connect** for this partnership. Append `?connect_token=<token>` (and optional query parameters) to send users into **Benji Hosted Connect**. May be empty if **Benji Hosted Connect** URLs are not enabled for your account.
 </ResponseField>
 
 <ResponseExample>
@@ -122,10 +147,5 @@ api: 'POST https://api-staging.withbenji.com/auth/connect'
   "message": "An unexpected error has occurred"
 }
 ```
+
 </ResponseExample>
-
-
-
-
-
-

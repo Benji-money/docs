@@ -8,50 +8,74 @@ sidebarTitle: "Overview"
 
 Benji Connect enables you to connect your members to reward loyalty partners, allowing them to earn and redeem rewards through your platform. There are two ways to integrate Benji Connect into your application:
 
-- **Benji Hosted Connect** - A fully hosted landing page solution
-- **Benji Connect SDK** - A JavaScript SDK for embedded integration
+- **Benji Hosted Connect** — Connect users through [**Benji Hosted Connect**](/connect/hosted/introduction) (Benji-managed page; no embedded JavaScript required)
+- **Benji Connect SDK** — Embed the same Connect experience as a [modal in your app](/connect/introduction)
 
-Both approaches accomplish the same goal—connecting your members to reward partners—but differ in implementation, customization, and user experience.
+Both approaches accomplish the same goal—connecting your members to reward partners—but differ in implementation, customization, and user experience. Both use a [connect token](/connect/create_token) and support [Connect modes](/connect/modes) (link, transfer, redeem) depending on how you create the token.
 
-## Hosted Connect
+## Benji Hosted Connect
 
-Benji Hosted Connect is a fully hosted solution where you redirect users to a Benji-managed page that handles the entire connection flow. No frontend code changes are required.
+**Benji Hosted Connect** is a fully hosted solution where you redirect users to a Benji-managed page that handles the entire Connect flow (internally using the same patterns as the **Benji Connect SDK**). You integrate primarily via URLs, [Pilot](/pilot/developer) configuration, and APIs—not by embedding JavaScript. No frontend code changes are required.
 
 **Best suited for:**
 
-- Quick integrations without frontend development
-- Server-side implementations or email campaigns
-- Multi-platform support using a single hosted URL
-- Dedicated partner landing pages
+- Quick integrations without building your own Connect UI
+- Server-side or campaign-driven links
+- Multi-platform use of a single **Benji Hosted Connect** URL pattern
+- Dedicated **Benji Hosted Connect** experiences and custom domains configured in Pilot
 
-<Card title="Hosted Connect Introduction" icon="browser" href="/connect/hosted/introduction">
+<Card
+  title="Benji Hosted Connect Introduction"
+  icon="browser"
+  href="/connect/hosted/introduction"
+>
   Learn how to integrate with Benji Hosted Connect
 </Card>
 
-## Connect SDK
+## Benji Connect SDK
 
-The Benji Connect SDK is a JavaScript SDK that you embed directly into your application. It provides an inline modal experience and gives you full control over when and how the connection flow is triggered.
+The **Benji Connect SDK** is a JavaScript/TypeScript library you load from npm or script tag. It opens the Connect experience in a modal over your page and delivers callbacks to your code. With this solution you have full control over when and how the connection flow is triggered.
 
 **Best suited for:**
 
 - Native app integrations
 - Web applications requiring seamless user experience
 - Scenarios where you want the connection flow embedded in your UI
-- Advanced customization and event handling
+- Tight control over when the modal opens and how you handle [events](/connect/methods)
 
-<Card title="Connect SDK Introduction" icon="code" href="/connect/introduction">
+<Card
+  title="Benji Connect SDK Introduction"
+  icon="code"
+  href="/connect/introduction"
+>
   Learn how to integrate with the Benji Connect SDK
 </Card>
 
 ## Comparison
 
-| Feature | Hosted Connect | Connect SDK |
-|---------|---------------|-------------|
-| **Integration** | Minimal | Requires frontend integration |
-| **Customization** | Can be customized through the Benji Dashboard | Embedded in your UI |
-| **User experience** | Redirect to Benji hosted page | Inline modal |
-| **Best for** | Email campaigns, dedicated partner pages | Native app integrations, web applications |
+| Feature             | Benji Hosted Connect                       | Benji Connect SDK                                      |
+| ------------------- | ------------------------------------------ | ------------------------------------------------------ |
+| **Integration**     | Redirect + APIs; optional query parameters | Embed the **Benji Connect SDK**; initialize with token |
+| **Customization**   | **Benji Hosted Connect** in Pilot          | Embedded in your UI                                    |
+| **User experience** | Full-page **Benji Hosted Connect** entry   | Inline modal                                           |
+| **Best for**        | Email campaigns, dedicated partner pages   | Native app integrations, web applications              |
+| **Effort**          | Minimal                                    | Requires frontend integration                          |
 
 <Tip>
-  Benji Hosted Connect and Benji Connect SDK can be used together. Choose the approach that best fits each use case in your application.
+  You can use both: e.g. **Benji Hosted Connect** for campaigns and the **Benji
+  Connect SDK** for logged-in web sessions. Choose the approach that best fits
+  each use case in your application.
 </Tip>
+
+## Integration checklist
+
+Use this list when wiring **Benji Hosted Connect**, the **Benji Connect SDK**, and your backend.
+
+| Step                         | What to do                                                                                                   | Where to read more                                             |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| API access                   | Create a **partner API key** in Pilot                                                                        | [Developer](/pilot/developer)                                  |
+| Token                        | `POST` [Create Token](/connect/create_token) with `partnership_id`, `mode`, and optional fields              | [Create Token](/connect/create_token), [Modes](/connect/modes) |
+| **Benji Hosted Connect** URL | Use `connect_url` + `?connect_token=<token>`; configure **Redirect URL** and optional custom domain in Pilot | [Benji Hosted Connect](/connect/hosted/introduction)           |
+| **Benji Connect SDK**        | Install package, [initialize](/connect/initialization), call `open()`, handle [callbacks](/connect/methods)  | [Introduction](/connect/introduction)                          |
+| Long-lived access            | `POST` [Exchange Token](/connect/exchange_token) with the token from **`onSuccess`** within **15 minutes**   | [Exchange Token](/connect/exchange_token)                      |
+| Async updates                | Subscribe to webhooks for user and transaction lifecycle                                                     | [Webhooks overview](/api-reference/webhooks/overview)          |

@@ -1,0 +1,45 @@
+---
+title: "Connect modes"
+description: "Connect, Transfer, and Redeem modes for Benji Connect tokens and the Benji Connect SDK."
+sidebarTitle: "Modes"
+---
+
+## Overview
+
+The **mode** on your [connect token](/connect/create_token) controls what the user does in Benji Connect: link their loyalty account, move points (**Transfer**), or spend points (**Redeem**). Modes apply to both [Benji Hosted Connect](/connect/hosted/introduction) and the [Benji Connect SDK](/connect/introduction).
+
+| Mode         | Value | Typical use                                                                                      |
+| ------------ | ----- | ------------------------------------------------------------------------------------------------ |
+| **Connect**  | `1`   | User links their loyalty account to your program.                                                |
+| **Transfer** | `3`   | User transfers points (can be preselected amount via connect token `custom_attributes.actions`). |
+| **Redeem**   | `4`   | User redeems points for offers or perks                                                          |
+
+<Tip>
+  **Pilot “Direct” partnership** ([concepts](/pilot/concepts)) describes how a
+  partnership is created—not the same as **Connect mode `1`**. Mode is always
+  the numeric field on the token request.
+</Tip>
+
+## Connect (`mode`: 1)
+
+Default linking flow: authenticate and connect the member’s loyalty account. Use a minimal [Create Token](/connect/create_token) body with `partnership_id` and `mode: 1` (or rely on API defaults where supported).
+
+## Transfer (`mode`: 3)
+
+Used when the user should move points as part of the flow. Customize by supplying **`custom_attributes.actions`** with one or more action objects:
+
+- **`mode`**: `3` (Transfer)
+- **`amount`**: Preselected points amount
+- **`allows_editing`**: Whether the user can change the amount in the UI
+
+See the Transfer example on [Create Token](/connect/create_token).
+
+## Redeem (`mode`: 4)
+
+Used when the user should redeem points. Connect token **`mode`** set to **`4`**. Customize offers and perks by adding redeem actions to the partnership campaign in Pilot.
+
+See the Redeem example on [Create Token](/connect/create_token).
+
+## Benji Hosted Connect query parameters
+
+On [**Benji Hosted Connect**](/connect/hosted/introduction), **`mode`** and optional **`amount`** in the URL can influence token creation for transfer/redeem-style entry points. Prefer server-side [Create Token](/connect/create_token) for production so amounts and partnership context are authoritative.

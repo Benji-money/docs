@@ -28,7 +28,7 @@ All webhooks contain the following JSON body parameters:
 ### Webhook Authentication
 
 In order to optionally authenticate and validate that the webhook was received from the Benji Platform, Benji provides a header value representing a signature that you can then validate.
-The signature is essentially the webhook body, signed with the salt provided in the response from the [subscribe endpoint](/api-reference/webhooks/subscribe), using a HMAC SHA-256 (HS256) algorithm.
+The signature is essentially the webhook body, signed with the salt provided in the response from the [subscribe endpoint](/api-reference/webhooks/subscribe), using an HMAC SHA-256 (HS256) algorithm.
 To authenticate the webhook, you can go through the following steps:
 - Store the salt returned in the subscribe API call.
 - When receiving a webhook:

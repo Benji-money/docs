@@ -27,7 +27,7 @@ An array of reward transaction objects created with this transaction
     <ResponseField name="reward_amount" type="integer">The total amount of rewards earned or redeemed on this transaction</ResponseField>
     <ResponseField name="external_order_id" type="string">The external reference of the order on the merchant partner system</ResponseField>
     <ResponseField name="transaction_type" type="integer">
-    Integer representing an enum of one of the following campaign type values:
+    Integer representing an enum of one of the following transaction type values:
         <Expandable title="possible transaction type values" type="enum">
             - **EARN (1)** : Indicating an earn transaction type <br/>
             - **REDEEM (2)** : Indicating a redeem transaction type  <br/>
@@ -94,7 +94,7 @@ An array of reward transaction objects created with this transaction
 
 </ResponseExample>
 
-<Tip>Make sure to store the returned reward transaction ID. You can use this ID to get the status of the reward transaction when receiving reward_transaction_update webhooks</Tip>
+<Tip>Make sure to store the returned reward transaction ID. You can use this ID to get the status of the reward transaction when receiving reward_transaction_update webhooks.</Tip>
 <Warning>The transaction authentication token is valid for 10 minutes.</Warning>
 
 

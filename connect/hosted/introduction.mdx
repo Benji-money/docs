@@ -100,7 +100,7 @@ If this URL is set:
 | `status`           | Success or error flow                                             | `success` or `error`. Use this to branch in your app.       |
 | `state`            | If you passed `state` on the inbound **Benji Hosted Connect** URL | Same value you sent for correlation.                        |
 | `benji_user_uuid`  | When available                                                    | Preferred stable user identifier when returned by the flow. |
-| `benji_user_id`    | When UUID is not available                                        | Numeric Benji user id.                                      |
+| `benji_user_id`    | When UUID is not available                                        | Numeric Benji user ID.                                      |
 | `trigger_event_id` | When a transaction-related event applies                          | Useful for transfer/redeem flows tied to triggers.          |
 
 Redirects use absolute (`https://...`) or relative URLs; query strings are merged appropriately.

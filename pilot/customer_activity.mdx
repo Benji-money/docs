@@ -9,7 +9,9 @@ import ComingSoon from '/snippets/coming_soon.mdx'
 
 The Transactions page displays all reward activity across your partnerships. You can search for specific members, filter by transaction type, partner, and status, and view detailed information about each transaction.
 
-![Transactions](/images/transactions.png)
+<Frame>
+  ![Screenshot 2026 07 28 At 5 37 53 PM](/images/Screenshot-2026-07-28-at-5.37.53-PM.png "Screenshot 2026 07 28 At 5 37 53 PM")
+</Frame>
 
 ### Filters and Search
 
@@ -42,6 +44,10 @@ Select specific partners to view their transactions, or select All to view trans
 
 Filter transactions by their current status.
 
+**Filter by Confidence**
+
+Filter transactions by fraud confidence band: Low, Medium, or High.
+
 **Clear Filters**
 
 Reset all filters to their default state.
@@ -57,28 +63,57 @@ The table displays detailed information for each transaction and can be sorted b
 - **Type**: Transaction type (Earn, Redeem, or Transfer)
 - **Reward Amount**: The number of points involved in the transaction
 - **Transaction**: The dollar value of the transaction
+- **Confidence**: A color coded fraud confidence indicator for the transaction
 - **Status**: Current status of the transaction (Completed, Pending, etc.)
 - **Actions**: Click the menu icon to access transaction actions
 
+### Confidence
+
+Every reward transaction is automatically evaluated for fraud risk and assigned a confidence score, shown as a color coded badge:
+
+- **Green**: High confidence the transaction is legitimate
+- **Yellow**: Suspicious, warrants review
+- **Red**: High likelihood of fraud
+
+Once a transaction has been reviewed, a colored pip overlays its Confidence badge: green for reviewed as legitimate, red for reviewed as fraud. Reviewed rows also carry a subtle background tint.
+
 ### Transaction Actions
-
-**See Details**
-
-Opens a detailed view of the transaction showing:
-
-- Transaction ID
-- Date and time
-- Member name
-- Loyalty program member ID
-- Partner name
-- Transaction type
-- Reward amount
-- Reward value in dollars
-- Status
 
 **Reverse**
 
 Reverses the transaction. For Earn transactions, this removes the points from the member's account. For Redeem transactions, this refunds the points back to the member. For Transfer transactions, this reverses the point movement in both the source and destination accounts.
+
+### Transaction Detail Page
+
+<Frame>
+  ![Screenshot 2026 07 28 At 5 35 27 PM](/images/Screenshot-2026-07-28-at-5.35.27-PM.png "Screenshot 2026 07 28 At 5 35 27 PM")
+</Frame>
+
+See Details opens a dedicated page for the transaction, laid out in two columns. The left column holds the transaction details and, when flagged, the fraud assessment. The right column holds the assessment summary, fraud score, disposition, and actions.
+
+**Fraud Assessment**
+
+For flagged transactions, this section lists each detection model that contributed a signal and its reasoning:
+
+- **Transaction Frequency**: Abnormally high number of transactions in a short window
+- **Transaction Size**: Amount deviates from the partnership's historical norms
+- **IP Analysis**: Multiple distinct IP addresses for the same member in a short window
+- **Velocity**: Rapid, successive transactions from the same member
+- **Amount Anomaly**: Deviates from the member's own spending pattern
+- **Account Takeover**: Multiple accounts share a device, with elevated risk on the first earn from that device
+
+Shown only for transactions that have a fraud assessment.
+
+**Disposition**
+
+Mark a transaction as Legitimate or Fraud. Once set, the disposition can be switched to the other but cannot be cleared.
+
+**Actions**
+
+- **Reverse Transaction**: Voids the transaction and undoes the points movement
+- **Block Member**: Suspends the member from all future program activity
+
+Each requires an inline confirmation before it executes.
 
 ### Export
 

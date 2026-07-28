@@ -15,10 +15,10 @@ In this section you can view or configure the following parameters:
 
 | Parameter | Description | Possible values |
 | --- | --- | --- |
-| <ResponseField name="ID" type="Numeric" required>                                                     </ResponseField> | The unique system-generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system-generated number. This value is **Read Only** |
-| <ResponseField name="Name" type="string" required>                                                     </ResponseField> | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop-In Components related to this campaign |  |
-| <ResponseField name="Description" type="string">                                                     </ResponseField> | A description for this campaign. |  |
-| <ResponseField name="Image" type="file">                                                     </ResponseField> | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image |
+|  | The unique system-generated identifier for this campaign. This identifier will be used by the integrating partner when calling the Benji API to interact with the campaign. | A system-generated number. This value is **Read Only** |
+|  | A descriptive name for the campaign. This name will be displayed by default on all relevant Benji Drop-In Components related to this campaign |  |
+|  | A description for this campaign. |  |
+|  | An image to associate with this specific campaign | A JPG, JPEG, PNG or SVG image |
 
 ### Campaign Type
 
@@ -116,9 +116,28 @@ The partner owning this action. This will be automatically filled in based on wh
 
 In this section you can configure the conditions associated with a valid campaign trigger. When a trigger is met, the Benji Platform will validate the conditions configured on the campaign, and will approve and initiate the campaign transaction only if the conditions are met.
 
-![title](/images/pilot/campaign_conditions.png)
+<Frame>
+  ![Screenshot 2026 07 28 At 5 47 28 PM](/images/Screenshot-2026-07-28-at-5.47.28-PM.png "Screenshot 2026 07 28 At 5 47 28 PM")
+</Frame>
 
-You can configure a limitless number of conditions per campaign, and configure whether the association between each condition is an OR, meaning just one of the conditions needs to be met, or as an AND, meaning all of the conditions need to be met to satisfy the condition. For each condition, you can specify the attribute the condition is applied to, an operator, and a value that meets the conditions. The following attributes and their respective operators and values are supported:
+Conditions are evaluated at the point of the eligibility check, either when a member links their account or when a transaction occurs. When no conditions are configured, all members qualify.
+
+#### Condition groups
+
+Conditions are organized into groups. Each group contains one or more conditions and has its own logic type, set using the toggle in the top right corner of the group:
+
+- **Any (OR)**: The member needs to meet at least one condition in the group
+- **All (AND)**: The member needs to meet every condition in the group
+
+The description on the left side of the group updates to reflect the active logic. New groups default to Any (OR).
+
+The first condition in a group is preceded by a When label. Each condition after it is preceded by an and or or label matching the group's logic type.
+
+You can configure any number of groups. Groups always combine with AND logic at the top level, meaning a member needs to satisfy every group to qualify.
+
+To build your logic, use Add Condition inside a group to add a row to that group, and Add Group below the groups to add a new group. The delete control on a row removes that condition. Removing the last condition in a group removes the group.
+
+For each condition, you can specify the attribute, an operator, and a value. The following attributes and their respective operators and values are supported:
 
 **Customer Geography**
 
@@ -154,6 +173,15 @@ You can configure a limitless number of conditions per campaign, and configure w
 
   - **Operators**: **Greater Than**, **Less Than**
   - **Values**: A time period (e.g. 1 day, 2 weeks, 3 months, etc.)
+</Expandable>
+
+**Custom Attributes**
+
+<Expandable title="Custom Attributes">
+  Will only be valid if the member's custom attribute value meets the condition. Custom attributes are configured on the Partner Settings page and are listed by their attribute name. 
+
+  - **Operators**: **Is In** or **Is Not In**
+  - **Values**: The configured values for that attribute
 </Expandable>
 
 ### Campaign Multipliers

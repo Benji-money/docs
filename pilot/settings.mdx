@@ -44,17 +44,27 @@ Define your loyalty program's tier structure. Click New Tier to add a tier:
 
 **Custom Attributes**
 
-Custom attributes capture additional information about your members that can be used in campaign conditions and multipliers. For example, you might create an attribute to track credit card holder status or membership level.
+Custom attributes capture additional information about your members that can be used in campaign conditions and multipliers. For example, you might create an attribute to track cardholder status, membership level, or a renewal date.
 
 Click New Attribute to create a custom attribute:
 
 - **Attribute Name**: Display name for the attribute
 - **Your ID**: The attribute identifier used in your system
 - **Attribute Type**: Data type for the attribute
-  - Text: String values
-  - Number: Numeric values
-  - Multi Value: Multiple selection values
-  - Boolean: True/false values
+
+The following attribute types are supported:
+
+- **Text**: A single string value. Can optionally be restricted to a defined list of allowed values, each with its own display label, so a raw value received from your system can be shown as a friendly label.
+- **Number**: An integer or decimal value. Supports comparison operators such as equals, greater than, less than, and between when used in campaigns.
+- **Boolean**: A true or false value, with optional custom labels for the true and false states.
+- **Date**: A calendar date value. Supports date based comparisons when used in campaigns.
+- **Multi Value**: Holds more than one value at once for a given member, chosen from a defined list of allowed values that you configure up front.
+
+Once created, an attribute is available in the campaign builder as a selectable field in Conditions and Multipliers, alongside native fields like Time Elapsed, Geography, and Basket Size. Attribute values are populated through the Benji API and can be manually edited on a member's profile.
+
+<Note>
+  An attribute belongs to the partner that defines it and is visible in any partnership that partner participates in. When both partners in a partnership define attributes, each is shown separately and labeled by its source, so a campaign condition always references a specific source attribute.
+</Note>
 
 ### Custom Triggers
 
@@ -68,11 +78,48 @@ Click New Trigger to create a custom trigger:
 
 **Instructions to Send Events**
 
-Click "Instructions to Send Events" to view the JSON payload format for sending custom trigger events via the Benji API. The payload shows the trigger_name and user_id fields required to activate campaigns using this trigger.
+Click "Instructions to Send Events" to view the JSON payload format for sending custom trigger events via the Benji API. The payload shows the trigger\_name and user\_id fields required to activate campaigns using this trigger.
+
+### Redemption Codes
+
+The Redemption Codes tab lets you manage a pool of pre-generated codes for a partner. It appears only for partners that have an eligible product. If you do not see the tab, the partner has no eligible product associated.
+
+The tab shows all uploaded codes in a table with the following columns:
+
+- **Date Uploaded**: When the code was added
+- **Product Variant**: The product variant the code belongs to
+- **Redemption Code**: The code value
+- **Status**: The current state of the code
+- **Action**: Per row actions, described below
+
+**Filtering and search**
+
+Narrow the list using search by code, an upload date range, a product variant filter, and a status filter. Use Clear Filters to reset all of them.
+
+**Uploading codes**
+
+Click Upload to add codes in bulk from a file. Uploads are processed in the background. When processing finishes, the result summary shows the total number of rows, how many new codes were added, and an error count. Any rows that failed are listed individually with the row number, the code, and the reason. Duplicate codes already present in the pool are reported as errors with a duplicate reason rather than being added again.
+
+**Viewing and deleting codes**
+
+Select a redeemed code to view its details. Available codes can be deleted individually from the row action, or in bulk by selecting multiple rows with the checkboxes and choosing Delete Selected.
+
+<Note>
+  Uploading and deleting codes are permissioned actions. View-only users can see the codes and their status but cannot upload or delete. In a partnership context these follow partnership edit permissions, and in Partner Settings they follow partner settings edit permissions.
+</Note>
 
 ### Users
 
 Manage administrator access for your loyalty program. Click Invite New User to grant users access to manage campaigns and settings for your program.
+
+### Allowed Collaborators
+
+Account Admins control which email addresses can be invited as collaborators on partnerships. This is managed from Partner Settings.
+
+- **Email domains**: Add approved domains. Any email at an approved domain can be invited.
+- **Individual email addresses**: Add specific pre-approved addresses for exceptions, such as a consultant using a personal email.
+
+Only Account Admins can add, edit, or remove approved domains and addresses. When someone invites a new collaborator, their email must either belong to an approved domain or match a pre-approved address. Users who already exist in either company's account can be added regardless of their email domain.
 
 ### Campaign Templates
 

@@ -13,15 +13,17 @@ The Users page allows you to manage two types of users: Admin Users who access t
 
 ### Admin Users
 
-The Admin Users tab displays all users who have access to your Benji platform account. Each admin user is assigned a role that controls what they can access and action within Pilot.
+Each admin user is assigned one or more roles that control what they can access and action within Pilot. All users have view-only access across the account by default. Roles add the ability to take actions on top of that baseline.
 
 The following roles are available:
 
-- **Admin**: Full access to all features and settings in Pilot, including user management.
-- **Campaign Manager**: Can create, edit, and manage campaigns and partnerships.
-- **Support**: Read access to member data and transactions for troubleshooting purposes.
-- **Developer**: Access to developer tools including API keys, webhooks, and IP whitelisting.
-- **Read Only**: Can view all content in Pilot but cannot make any changes.
+- **Admin**: Full access to all features and settings in Pilot, including user management. Admin must be assigned on its own.
+- **Campaign Manager**: Create new partnerships and campaigns, and access the marketing section.
+- **Support**: Reverse transactions, and block or unlink members.
+- **Developer**: Access the developer section, manage API keys, and configure webhooks and integrations.
+- **Member**: View-only access across the entire account. Member must be assigned on its own and is selected by default when inviting a new user.
+
+A user can hold more than one role, with two restrictions: Admin must be assigned alone, Member must be assigned alone, and Campaign Manager, Support, and Developer can be combined in any mix. At least one role must always be assigned. Only Admins can assign or change roles, and changes take effect immediately.
 
 **Invite New User**
 
@@ -35,14 +37,18 @@ Click the Invite New User button to send an invitation to a new administrator. T
 
 ### Collaborators
 
-Collaborators are external users who have been invited to access a specific partnership within your account. Unlike Admin Users who have account-wide access, collaborators are scoped to a single partnership and cannot view or action anything outside of it.
+Collaborators are users invited to access a specific partnership. Collaborator status grants edit access on that partnership beyond the view-only access every user already has.
+
+All users at either company automatically have view-only access to the partnerships their company is connected to. On the partnerships list, each partnership shows a Collaborator badge if the user has edit access, or a View only badge if they do not. A view-only user can open the partnership and see all of its content, but the actions are disabled until they are added as a collaborator.
 
 Collaborators are invited from the partnership page. Each collaborator is assigned one of the following roles:
 
-- **Owner**: Full control over the partnership including managing other collaborators. There can only be one owner per campaign.
-- **Admin**: Can edit campaigns and manage partnership settings.
-- **Campaign Manager**: Can create and edit campaigns within the partnership.
-- **Marketing**: Read access to the partnership for visibility into campaign performance.
+- **Owner**: Full control over the partnership, including managing all other collaborators and transferring ownership. There is only one Owner per partnership, and the creator of the partnership is the Owner by default.
+- **Admin**: Edit anything in the partnership and manage collaborators, except the Owner. Cannot transfer ownership.
+- **Campaign Manager**: Create, edit, and launch campaigns. Cannot manage collaborators.
+- **Marketing**: Edit partnership components and landing pages. Cannot create or edit campaigns.
+
+Assigning the Owner role to another collaborator transfers ownership. The current Owner becomes an Admin, and the change requires an explicit confirmation.
 
 **Collaborator Actions**
 
@@ -72,6 +78,10 @@ Clicking View on a member opens their detailed profile, which includes:
 **User Details**
 
 Displays the member's basic information including name, loyalty program member number, status, and email.
+
+**Custom Attributes**
+
+Displays the member's custom attribute values that are visible to this partner. Values are populated through the Benji API. You can manually edit a value directly on the profile, mainly for support cases. A manually edited value is marked as overridden and is no longer updated by API refreshes until the override is cleared. The profile shows whether each value is synced from the API or manually overridden.
 
 **Connections**
 

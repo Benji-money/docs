@@ -1,0 +1,140 @@
+---
+title: "Experiences"
+description: "Build and publish your Redemption Portal"
+---
+
+Experiences is where you build and publish your Redemption Portal, the branded marketplace where members redeem points with your partners. You assemble the portal from your perk redemption campaigns, style every page, preview it live, and publish it when it is ready. Experiences is a top-level section in Pilot, in the left nav.
+
+## The Redemption Portal
+
+The portal is made up of:
+
+- A **home page** with your branding, a hero, a promotional banner, and the lineup of partner offers.
+- A **partner page** for each perk redemption campaign in the lineup, where a member chooses an offer and redeems.
+- Member-facing pages that come with the portal: cart and checkout, order history and the post-purchase screen, and the support pages (FAQ, Contact Us, User Agreement, and a 404 page).
+
+You configure the home page, the partner pages, and the support pages in the editor. Cart, checkout, and order history render automatically.
+
+## Experiences list and versions
+
+Open Experiences to see your portal with a live preview of the active version and your list of versions. The list is split into two parts:
+
+- **Current Version**: the version that is live, marked Active
+- **Inactive Versions**: every other version, with the latest shown first
+
+Each version shows a name, a status, and timestamps. Only one version is Active at a time. New Version creates one, and the Analytics tab on this page opens the portal's performance data.
+
+Each version bundles the home page and every partner page together, so its actions act on the whole bundle:
+
+- **View**: open the version. The active version opens at its live URL. An inactive version opens through a time-limited preview link, so you can see it without publishing
+- **Customize**: open the version in the editor
+- **Duplicate**: copy the version, with all its pages, into a new inactive version
+- **Make Active**: publish this version and take it live now. The previously active version becomes inactive
+- **Delete**: remove the version. Not available for the active version
+
+Make Active and Delete confirm before they run.
+
+### Scheduling a version
+
+Instead of activating a version by hand, you can schedule an inactive version to go live at a future date and time, from the calendar control on its row. When that time arrives, the scheduled version becomes active and the previously active version becomes inactive, with nothing further from you.
+
+- Only an **inactive** version can be scheduled, and the time must be in the future
+- A portal has **one scheduled version at a time**
+- You can **reschedule or clear** a schedule any time before it fires
+
+<Note>
+  Saving an inactive version only updates that version. It does not go live. Saving the active version publishes your changes, so the editor confirms before it does. All write actions follow your permissions: without edit access you can view versions but not change them.
+</Note>
+
+## The editor
+
+Customize or add a version to open the editor: a section sidebar on the left, a live preview on the right, and a Web and Mobile toggle to check both viewports. Edits appear in the preview as you make them. View As lets you preview the portal as a specific member account, which is useful for checking personalized content and eligibility.
+
+The home page sections are below. Opening a partner from Partner Campaign Setup switches the editor to that partner's page, with its own sections, covered under Partner pages.
+
+## Home page sections
+
+**Settings**
+
+The portal's branding and hero. Hero Text and Hero Sub-Text each have a pre-login and a post-login variant, and the post-login variants accept a `{{first_name}}` token that fills in the member's name. Also here: the hero image, button colors, the logged-out button text, the favicon, the SEO site title and description, and the social preview image.
+
+**Partner Campaign Setup**
+
+The lineup of partner offers on the home page, drawn from your perk redemption campaigns. Each partner row can be reordered by dragging, and set to Visible or Limited Visibility (see Targeted URLs). Tile Text sets the line shown on offer tiles to logged-out visitors, and is hidden when left blank. Add Partner Campaign brings a partner into the lineup.
+
+**Header**
+
+The logo (SVG, PNG, or JPG), a logo link, and the partner program link shown in the header.
+
+**Promo Banner**
+
+A promotional banner on the home page: banner image, header title, subcopy, button colors, and a button URL.
+
+**Footer**
+
+The footer logo, a background image, and the footer links, which you add, edit, reorder, and remove.
+
+**Messaging**
+
+Attaches the portal's abandoned cart email. Add Messaging, choose the Abandoned Cart type, and select a template. Messaging applies to the partner across every version of the portal, not just the version you are editing.
+
+**Support Pages**
+
+The configurable support pages, each with its own editor:
+
+- **FAQ Page**: the portal-wide FAQ. See FAQ page below
+- **User Agreement**: a user agreement page hosted inside the portal
+- **404 Page**: the page shown for an unknown URL
+
+FAQ Page and User Agreement each have a visibility toggle. Contact Us is also part of the portal, but it is set up by Benji rather than in the editor.
+
+**Danger**
+
+Custom domain settings and a password toggle that gates the whole portal behind a username and password.
+
+## Partner pages
+
+A partner page is the detail page for one perk redemption campaign. Open it from Partner Campaign Setup. Its sidebar has these sections.
+
+**Settings**
+
+The page title (the campaign name), the partner logo, the hero image, and button colors and text.
+
+**Offers**
+
+The offers shown on the page. Reorder them by dragging, show or hide each one, and edit any offer. Create New Offer adds an offer directly from here.
+
+**Details**
+
+The member-facing content: the description, a "What You Get" list, "How to Redeem" steps, and a link to full terms. The three section headers are editable, so you can rename them to match your program's language. Import Template fills the page from a saved content template.
+
+**FAQs**
+
+Questions and answers specific to this partner, which you can add, edit, reorder, and remove. These are separate from the portal-wide FAQ page.
+
+**Related Partner Offers**
+
+Cross-sell rows that point members to other partners.
+
+## FAQ page
+
+The portal-wide FAQ page is configured under Support Pages, separate from the per-partner FAQs. Its editor has two parts, FAQ Page Settings and FAQs.
+
+In **FAQ Page Settings** you set the page title, the button colors, the Contact CTA text shown below the questions, and the text and URL for its button, which typically points to Contact Us.
+
+In **FAQs** you build the content from categories:
+
+- **Add a category, then add questions inside it.** Nothing is preset
+- **Reorder** categories by dragging, and **hide** any category with its visibility toggle
+- **Answers support HTML**, so you can include links
+
+## Targeted URLs
+
+You can keep a partner off the public portal and show it only to members who arrive through a specific link.
+
+- Set a partner to **Limited Visibility** in Partner Campaign Setup to keep it off the public portal
+- The partner then appears only to someone arriving through a **targeted URL** carrying a valid token
+- **Tokens are not generated in Pilot.** Ask your Benji contact and we will produce them
+- **Without a valid token the offer does not appear** and its page is unavailable
+- **Once a member signs in through a targeted URL they stay eligible**, so the offer is there on later visits without the link
+- Each token is **claimed by a single member**

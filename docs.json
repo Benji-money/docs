@@ -36,6 +36,7 @@
                   "pilot/campaign"
                 ]
               },
+              "experiences",
               "pilot/analytics",
               "pilot/customer_activity",
               "pilot/developer",

@@ -80,6 +80,35 @@ Click New Trigger to create a custom trigger:
 
 Click "Instructions to Send Events" to view the JSON payload format for sending custom trigger events via the Benji API. The payload shows the trigger\_name and user\_id fields required to activate campaigns using this trigger.
 
+### Coupons
+
+The Coupons tab lets you create reusable coupon codes that reduce the points price of eligible redemption offers. Members apply a code at marketplace checkout.
+
+**Coupon groups**
+
+A coupon group defines the discount and what it applies to. Create a group with:
+
+- A display name
+- An optional start and end date
+- A discount type: fixed value or percentage
+- A discount value
+- Eligible partnerships. Leave empty to apply to all of your partnerships
+- Eligible products or offers. Leave empty to apply to all products
+
+**Coupon codes**
+
+Within a group, add codes in three ways:
+
+- Generate a number of random six-character codes
+- Create one code manually with your own text
+- Upload a file of codes in bulk
+
+Codes are unique within your account, case-insensitive, and shown in uppercase. A duplicate manual code is rejected. Bulk uploads process in the background; Pilot confirms processing started and refreshes the list. You can search codes and review each one's availability and claim details.
+
+**Status**
+
+A code is Available until it is used. Applying a code at checkout validates it but does not reserve it. When a redemption is completed with the code, it becomes Used, recording the claim date, the member, and the transaction. Reversing that transaction returns the code to Available.
+
 ### Redemption Codes
 
 The Redemption Codes tab lets you manage a pool of pre-generated codes for a partner. It appears only for partners that have an eligible product. If you do not see the tab, the partner has no eligible product associated.

@@ -142,3 +142,19 @@ You can keep a partner off the public portal and show it only to members who arr
 - **Without a valid token the offer does not appear** and its page is unavailable
 - **Once a member signs in through a targeted URL they stay eligible**, so the offer is there on later visits without the link
 - Each token is **claimed by a single member**
+
+## Member checkout
+
+The portal's cart and checkout pages render automatically and are not configured in the editor. Two behaviors on checkout are worth knowing, because each is set up elsewhere in Pilot.
+
+### Coupons
+
+Members can apply a coupon code in the checkout price summary, on desktop and mobile. A valid coupon updates the points total for eligible items: a percentage coupon reduces the eligible price by that percentage, and a fixed coupon subtracts its value without going below zero. Coupon discounts apply after any campaign discounts.
+
+One coupon applies per checkout. If a code is invalid or matches no item in the cart, the member sees an error and the price is unchanged. Coupon codes are created under Partner Settings. See the Coupons section on the Partner Settings page.
+
+### Gifting
+
+A member can redeem a giftable offer as a gift for someone else. On a giftable offer they choose to send it as a gift and enter the recipient's name and email, which they can edit, or switch back to a personal redemption, before checking out.
+
+The redemption code for a gift goes to the recipient, not the purchaser, so the purchaser's order history shows the item as a gift with the recipient's details but without the code. Whether an offer can be gifted is set on its redemption campaign, not in the portal editor.

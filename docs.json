@@ -41,7 +41,6 @@
               "pilot/customer_activity",
               "pilot/developer",
               "pilot/users",
-              "pilot/finance",
               "pilot/settings"
             ]
           }
